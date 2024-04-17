@@ -22,7 +22,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("TEST GITHUB 5");
+        System.out.println("TEST GITHUB USB");
         label.setText("Hello World!");
     }
     
