@@ -7,6 +7,8 @@ package schorndorf_invaders;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -18,7 +20,7 @@ import javafx.scene.shape.Circle;
 public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent>
 {
     private static final long INTERVAL = 10_000_000l;
-    //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
+//                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
 //                                       100_000_000l;   -> 1/10  Sekunde
 //                                       1_000_000_000l; -> 1     Sekunde
     private Circle circle = null;
@@ -105,5 +107,13 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             }
             lastCall = now;
         }
+    }
+    private final String URLTOWALL = FXMLDocumentController.class.getResource("/res/spaceship.png").toString();
+    public void addWall()
+    {
+        ImageView iView = new ImageView(new Image(URLTOWALL));
+        iView.setX(350);
+        iView.setY(350);
+        canvas.getChildren().add(iView);
     }
 }
