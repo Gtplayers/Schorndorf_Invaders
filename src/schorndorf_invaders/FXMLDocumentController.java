@@ -10,6 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import util.Zufall;
+
 
 /**
  *
@@ -18,12 +25,35 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private Pane canvas;
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("TEST GITHUB USB");
-        label.setText("Hello World!");
+    private Circle circle;
+
+    private MyAnimationTimer meinAniTimer = null;
+    public void handleMoveAction(ActionEvent event)
+    {
+        // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
+        if (meinAniTimer == null)
+        {
+            meinAniTimer = new MyAnimationTimer(circle, canvas);
+            canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
+        }
+
+        // timer starten
+        meinAniTimer.start();
+    }
+
+    public void handleStoppAction(ActionEvent event)
+    {
+        meinAniTimer.stop();
+    }
+
+    public void handleColorAction(ActionEvent event)
+    {
+        circle.setFill(Color.rgb(
+                Zufall.zweihundertFuenfUndFuenfzig(),
+                Zufall.zweihundertFuenfUndFuenfzig(),
+                Zufall.zweihundertFuenfUndFuenfzig()));
     }
     
     @Override
