@@ -29,7 +29,19 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     private long lastCall = 0;
 
     private Direction direction;
-
+    
+    private final String URLTOWALL = FXMLDocumentController.class.getResource("/res/spaceship.png").toString();
+    public void addWall()
+    {
+        ImageView iView = new ImageView(new Image(URLTOWALL));
+        iView.setFitHeight(75);
+        iView.setFitWidth(75);
+        iView.setSmooth(true);
+        iView.setX(350);
+        iView.setY(350);
+        canvas.getChildren().add(iView);
+    }
+    
     public MyAnimationTimer(Circle circle, Pane canvas)
     {
         this.circle = circle;
@@ -61,6 +73,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     {
         if (now > lastCall+INTERVAL)
         {
+            addWall();
             if(direction == Direction.UP)
             {
                 if (canvas.getHeight() - circle.getRadius() - circle.getCenterY() < canvas.getHeight())
@@ -107,13 +120,5 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             }
             lastCall = now;
         }
-    }
-    private final String URLTOWALL = FXMLDocumentController.class.getResource("/res/spaceship.png").toString();
-    public void addWall()
-    {
-        ImageView iView = new ImageView(new Image(URLTOWALL));
-        iView.setX(350);
-        iView.setY(350);
-        canvas.getChildren().add(iView);
     }
 }
