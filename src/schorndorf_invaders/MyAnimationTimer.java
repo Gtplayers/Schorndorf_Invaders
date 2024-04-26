@@ -6,7 +6,6 @@ package schorndorf_invaders;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -30,16 +29,17 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     private Direction direction;
     
-    private final String URLTOWALL = FXMLDocumentController.class.getResource("/res/spaceship.png").toString();
+    
+    
     public void addWall()
     {
-        ImageView iView = new ImageView(new Image(URLTOWALL));
-        iView.setFitHeight(75);
-        iView.setFitWidth(75);
-        iView.setSmooth(true);
-        iView.setX(350);
-        iView.setY(350);
-        canvas.getChildren().add(iView);
+        Spaceship spaceship = new Spaceship("/res/spaceship.png");
+        spaceship.setFitHeight(150);
+        spaceship.setFitWidth(150);
+        spaceship.setY(350);
+        spaceship.setX(350);
+        spaceship.setSmooth(true);
+        canvas.getChildren().add(spaceship);
     }
     
     public MyAnimationTimer(Circle circle, Pane canvas)
@@ -71,9 +71,9 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     @Override
     public void handle(long now)
     {
+        addWall();
         if (now > lastCall+INTERVAL)
         {
-            addWall();
             if(direction == Direction.UP)
             {
                 if (canvas.getHeight() - circle.getRadius() - circle.getCenterY() < canvas.getHeight())
