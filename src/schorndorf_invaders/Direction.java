@@ -9,5 +9,5 @@ package schorndorf_invaders;
  * @author TrogrlicLeon
  */
 public enum Direction {
-    UP, DOWN, RIGHT, LEFT
+    UP, DOWN, RIGHT, LEFT, NONE
 }

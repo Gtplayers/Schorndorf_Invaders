@@ -4,7 +4,6 @@
  */
 package schorndorf_invaders;
 
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -42,11 +41,21 @@ public class Spaceship extends ImageView
         {
             direction = Direction.LEFT;
         }
+        else
+        {
+            direction = Direction.NONE;
+        }
     }
     
     public void moveShip(Spaceship spaceship, Pane canvas)
     {
-        if(direction == Direction.UP)
+        if (direction == Direction.NONE)
+        {
+            spaceship.setY(spaceship.getY());
+            spaceship.setX(spaceship.getX());
+            System.out.println("STOP");
+        }
+        else if(direction == Direction.UP)
             {
                 if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
                 {
@@ -56,6 +65,7 @@ public class Spaceship extends ImageView
                 {
                     spaceship.setY(canvas.getHeight() + 100);
                 }
+                System.out.println("UP");
             }
             else if(direction == Direction.DOWN)
             {
@@ -67,6 +77,7 @@ public class Spaceship extends ImageView
                 {
                     spaceship.setY(-100);
                 }
+                System.out.println("DOWN");
             }
             else if(direction == Direction.RIGHT)
             {
@@ -78,6 +89,7 @@ public class Spaceship extends ImageView
                 {
                     spaceship.setX(-100);
                 }
+                System.out.println("RIGHT");
             }
             else if(direction == Direction.LEFT)
             {
@@ -89,6 +101,7 @@ public class Spaceship extends ImageView
                 {
                     spaceship.setX(canvas.getWidth() + 100);
                 }
+                System.out.println("LEFT");
             }
     }
 }

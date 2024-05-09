@@ -23,16 +23,26 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Pane canvas;
-    @FXML
-    private Circle circle;
+    Spaceship spaceship = new Spaceship("/res/spaceship.png");
     
     private MyAnimationTimer meinAniTimer = null;
+    
+    public Pane getCanvas() {
+        return canvas;
+    }
+    
     public void handleMoveAction(ActionEvent event)
     {
+        spaceship.setFitHeight(150);
+        spaceship.setFitWidth(150);
+        spaceship.setY(350);
+        spaceship.setX(350);
+        spaceship.setSmooth(true);
+        canvas.getChildren().add(spaceship);
         // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
         if (meinAniTimer == null)
         {
-            meinAniTimer = new MyAnimationTimer(circle, canvas);
+            meinAniTimer = new MyAnimationTimer(canvas, spaceship);
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
         }
 
@@ -45,13 +55,6 @@ public class FXMLDocumentController implements Initializable {
         meinAniTimer.stop();
     }
 
-    public void handleColorAction(ActionEvent event)
-    {
-        circle.setFill(Color.rgb(
-                Zufall.zweihundertFuenfUndFuenfzig(),
-                Zufall.zweihundertFuenfUndFuenfzig(),
-                Zufall.zweihundertFuenfUndFuenfzig()));
-    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

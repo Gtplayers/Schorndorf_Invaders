@@ -22,102 +22,35 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
 //                                       100_000_000l;   -> 1/10  Sekunde
 //                                       1_000_000_000l; -> 1     Sekunde
-    private Circle circle = null;
     private Pane   canvas = null;
 
     private long lastCall = 0;
 
     private Direction direction;
     
+    Spaceship spaceship = new Spaceship("/res/spaceship.png");
     
     
-    public void addWall()
+    public MyAnimationTimer(Pane canvas, Spaceship spaceship)
     {
-        Spaceship spaceship = new Spaceship("/res/spaceship.png");
-        spaceship.setFitHeight(150);
-        spaceship.setFitWidth(150);
-        spaceship.setY(350);
-        spaceship.setX(350);
-        spaceship.setSmooth(true);
-        canvas.getChildren().add(spaceship);
-    }
-    
-    public MyAnimationTimer(Circle circle, Pane canvas)
-    {
-        this.circle = circle;
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
+        this.spaceship = spaceship;
     }
+
     @Override
     public void handle(KeyEvent event)
     {
-        if(event.getCode() == KeyCode.W)
-        {
-            direction = Direction.UP;
-        }
-        else if(event.getCode() == KeyCode.S)
-        {
-            direction = Direction.DOWN;
-        }
-        else if(event.getCode() == KeyCode.D)
-        {
-            direction = Direction.RIGHT;
-        }
-        else if(event.getCode() == KeyCode.A)
-        {
-            direction = Direction.LEFT;
-        }
+
+        spaceship.checkDirection(event);
     }
     @Override
     public void handle(long now)
     {
-        addWall();
         if (now > lastCall+INTERVAL)
         {
-            if(direction == Direction.UP)
-            {
-                if (canvas.getHeight() - circle.getRadius() - circle.getCenterY() < canvas.getHeight())
-                {
-                    circle.setCenterY(circle.getCenterY() - 1);
-                }
-                else
-                {
-                    circle.setCenterY(canvas.getHeight() + circle.getRadius());
-                }
-            }
-            else if(direction == Direction.DOWN)
-            {
-                if (canvas.getHeight() + circle.getRadius() - circle.getCenterY() > 0)
-                {
-                    circle.setCenterY(circle.getCenterY() + 1);
-                }
-                else
-                {
-                    circle.setCenterY(-circle.getRadius());
-                }
-            }
-            else if(direction == Direction.RIGHT)
-            {
-                if (canvas.getWidth() + circle.getRadius() - circle.getCenterX() > 0)
-                {
-                    circle.setCenterX(circle.getCenterX() + 1);
-                }
-                else
-                {
-                    circle.setCenterX(-circle.getRadius());
-                }
-            }
-            else if(direction == Direction.LEFT)
-            {
-                if (canvas.getWidth() - circle.getRadius() - circle.getCenterX() < canvas.getWidth())
-                {
-                    circle.setCenterX(circle.getCenterX() - 1);
-                }
-                else
-                {
-                    circle.setCenterX(canvas.getWidth() + circle.getRadius());
-                }
-            }
+            spaceship.moveShip(spaceship, canvas);
+            
             lastCall = now;
         }
     }
