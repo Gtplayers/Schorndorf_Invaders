@@ -24,6 +24,8 @@ public class Spaceship extends ImageView
     }
 
     public void checkDirection(KeyEvent event)
+{
+    if(event.getEventType() == KeyEvent.KEY_PRESSED)
     {
         if(event.getCode() == KeyCode.W)
         {
@@ -41,11 +43,12 @@ public class Spaceship extends ImageView
         {
             direction = Direction.LEFT;
         }
-        else
-        {
-            direction = Direction.NONE;
-        }
     }
+    else if(event.getEventType() == KeyEvent.KEY_RELEASED)
+    {
+        direction = Direction.NONE;
+    }
+}
     
     public void moveShip(Spaceship spaceship, Pane canvas)
     {
@@ -54,6 +57,7 @@ public class Spaceship extends ImageView
             spaceship.setY(spaceship.getY());
             spaceship.setX(spaceship.getX());
             System.out.println("STOP");
+            direction = Direction.NONE;
         }
         else if(direction == Direction.UP)
             {

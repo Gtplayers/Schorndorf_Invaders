@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -26,7 +27,6 @@ public class FXMLDocumentController implements Initializable {
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
     
     private MyAnimationTimer meinAniTimer = null;
-    
     public Pane getCanvas() {
         return canvas;
     }
@@ -44,6 +44,7 @@ public class FXMLDocumentController implements Initializable {
         {
             meinAniTimer = new MyAnimationTimer(canvas, spaceship);
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
+            canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
 
         // timer starten

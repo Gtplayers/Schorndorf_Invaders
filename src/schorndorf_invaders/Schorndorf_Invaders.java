@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -26,6 +27,7 @@ import javafx.scene.layout.Pane;
 public class Schorndorf_Invaders extends Application {
     @FXML
     private Pane canvas;
+    
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -48,6 +50,7 @@ public class Schorndorf_Invaders extends Application {
         controller.getCanvas().setBackground(new Background(backgroundImage));
         
         Scene scene = new Scene(root);
+
         
         stage.setScene(scene);
         stage.setFullScreen(true);
