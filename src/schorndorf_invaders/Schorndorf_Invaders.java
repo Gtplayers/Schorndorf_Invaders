@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -26,7 +28,9 @@ import javafx.scene.layout.Pane;
  */
 public class Schorndorf_Invaders extends Application {
     @FXML
-    private Pane canvas;
+    private AnchorPane canvas;
+    @FXML
+    private Button startGame;
     
     
     @Override

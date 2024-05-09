@@ -9,7 +9,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,7 +25,9 @@ import util.Zufall;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Pane canvas;
+    private AnchorPane canvas;
+    @FXML
+    private Button startGame;
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
     
     private MyAnimationTimer meinAniTimer = null;
@@ -35,8 +39,8 @@ public class FXMLDocumentController implements Initializable {
     {
         spaceship.setFitHeight(150);
         spaceship.setFitWidth(150);
-        spaceship.setY(350);
-        spaceship.setX(350);
+        spaceship.setY(canvas.getHeight() - 130);
+        spaceship.setX(canvas.getWidth() - canvas.getWidth()/1.87);
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
         // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
@@ -46,7 +50,7 @@ public class FXMLDocumentController implements Initializable {
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
             canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
-
+        startGame.setVisible(false);
         // timer starten
         meinAniTimer.start();
     }

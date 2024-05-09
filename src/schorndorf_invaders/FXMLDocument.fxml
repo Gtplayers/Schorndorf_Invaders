@@ -2,17 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
-    <children>
-        <Pane fx:id="canvas" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="400.0" spacing="5.0">
-            <children>
-                <Button id="button" onAction="#handleMoveAction" text="Move" />
-                <Button mnemonicParsing="false" onAction="#handleStoppAction" text="Stopp" />
-            </children>
-        </HBox>
-    </children>
+<AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
+   <children>
+      <Button layoutX="920.0" layoutY="946.0" mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Stop" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button id="button" fx:id="startGame" onAction="#handleMoveAction" prefHeight="296.0" prefWidth="524.0" text="PLAY" textAlignment="CENTER">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Button>
+         </children>
+      </StackPane>
+   </children>
 </AnchorPane>

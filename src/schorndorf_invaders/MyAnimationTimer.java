@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 /**
@@ -22,16 +23,14 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
 //                                       100_000_000l;   -> 1/10  Sekunde
 //                                       1_000_000_000l; -> 1     Sekunde
-    private Pane   canvas = null;
+    private AnchorPane canvas = null;
 
     private long lastCall = 0;
-
-    private Direction direction;
     
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
     
     
-    public MyAnimationTimer(Pane canvas, Spaceship spaceship)
+    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
