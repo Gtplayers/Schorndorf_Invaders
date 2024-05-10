@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import util.Zufall;
+import schorndorf_invaders.util.Zufall;
 
 
 /**
@@ -29,6 +29,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button startGame;
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
+    Alien alien1 = new Alien("/res/alien1.png");
+    Alien alien2 = new Alien("/res/alien2.png");
     
     private MyAnimationTimer meinAniTimer = null;
     public Pane getCanvas() {
@@ -43,10 +45,24 @@ public class FXMLDocumentController implements Initializable {
         spaceship.setX(canvas.getWidth() - canvas.getWidth()/1.87);
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
+        
+        alien1.setFitHeight(100);
+        alien1.setFitWidth(100);
+        alien1.setY(canvas.getHeight() - 1200);
+        alien1.setX(canvas.getWidth() - canvas.getWidth()/1.87);
+        alien1.setSmooth(true);
+        canvas.getChildren().add(alien1);
+        
+        alien2.setFitHeight(100);
+        alien2.setFitWidth(100);
+        alien2.setY(canvas.getHeight() - 1200);
+        alien2.setX(canvas.getWidth() - canvas.getWidth()/1.5);
+        alien2.setSmooth(true);
+        canvas.getChildren().add(alien2);
         // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
         if (meinAniTimer == null)
         {
-            meinAniTimer = new MyAnimationTimer(canvas, spaceship);
+            meinAniTimer = new MyAnimationTimer(canvas, spaceship, alien1);
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
             canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }

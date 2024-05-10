@@ -3,17 +3,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
    <children>
-      <Button layoutX="920.0" layoutY="946.0" mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Stop" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button layoutX="920.0" layoutY="946.0" mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button id="button" fx:id="startGame" onAction="#handleMoveAction" prefHeight="296.0" prefWidth="524.0" text="PLAY" textAlignment="CENTER">
                <font>
-                  <Font size="96.0" />
+                  <Font name="System Bold" size="96.0" />
                </font>
+               <textFill>
+                  <LinearGradient endX="0.5606060822804768" endY="0.969696971503171" startX="0.4659090981338963">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
             </Button>
          </children>
       </StackPane>

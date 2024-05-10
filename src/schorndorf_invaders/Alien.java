@@ -4,56 +4,24 @@
  */
 package schorndorf_invaders;
 
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import schorndorf_invaders.util.Zufall;
 
 /**
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class Spaceship extends ImageView
+public class Alien extends ImageView
 {
-    @FXML
-    private AnchorPane canvas;
-    
     private Direction direction;
-    Laser laser = new Laser("/res/placeholderLaser.png");
     
-    public Spaceship(String url)
+    public Alien(String url)
     {
         super(new Image(url));
-    }
-
-    public void checkDirection(KeyEvent event)
-    {
-        if(event.getEventType() == KeyEvent.KEY_PRESSED)
-        {
-            if(event.getCode() == KeyCode.W)
-            {
-                direction = Direction.UP;
-            }
-            else if(event.getCode() == KeyCode.S)
-            {
-                direction = Direction.DOWN;
-            }
-            else if(event.getCode() == KeyCode.D)
-            {
-                direction = Direction.RIGHT;
-            }
-            else if(event.getCode() == KeyCode.A)
-            {
-                direction = Direction.LEFT;
-            }
-        }
-        else if(event.getEventType() == KeyEvent.KEY_RELEASED)
-        {
-            direction = Direction.NONE;
-        }
     }
     
     public void moveShip(Spaceship spaceship, Pane canvas)
@@ -115,23 +83,11 @@ public class Spaceship extends ImageView
         }
     }
     
-    public void shootLaser(KeyEvent event, Laser laser, AnchorPane canvas, Spaceship spaceship)
+    public void checkCollision(Alien alien, Laser laser)
     {
-        if(event.getEventType() == KeyEvent.KEY_PRESSED)
+        if(alien.getBoundsInParent().intersects(laser.getBoundsInParent()))
         {
-            if(event.getCode() == KeyCode.J)
-            {
-                this.laser = laser;
-                this.canvas = canvas;
-                laser.setFitHeight(100);
-                laser.setFitWidth(100);
-                laser.setY(spaceship.getY());
-                laser.setX(spaceship.getX());
-                laser.setSmooth(true);
-                canvas.getChildren().add(laser);
-                System.out.println("LASER SHOT");
-            }
-            
+            alien.setVisible(false);
         }
     }
 }

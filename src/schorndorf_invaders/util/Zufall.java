@@ -1,4 +1,4 @@
-package util;
+package schorndorf_invaders.util;
 
 /**
  * @author km
@@ -34,5 +34,12 @@ public class Zufall
     public static int zweihundertFuenfUndFuenfzig()
     {
         return  (int)(Math.random()*256);
+    }
+    /**
+     * @return   Eine Zufallszahl von 0 bis 4 
+     */
+    public static int movement()
+    {
+        return  (int)(Math.random()*5);
     }
 }

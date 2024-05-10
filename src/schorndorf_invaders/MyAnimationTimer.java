@@ -19,7 +19,7 @@ import javafx.scene.shape.Circle;
  */
 public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent>
 {
-    private static final long INTERVAL = 10_000_000l;
+    private static final long INTERVAL = 1l;
 //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
 //                                       100_000_000l;   -> 1/10  Sekunde
 //                                       1_000_000_000l; -> 1     Sekunde
@@ -27,21 +27,26 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     private long lastCall = 0;
     
+    Laser laser = new Laser("/res/placeholderLaser.png");
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
+    Alien alien = new Alien("/res/alien1.png");
     
     
-    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship)
+    
+    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, Alien alien)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
         this.spaceship = spaceship;
+        this.alien = alien;
     }
 
     @Override
     public void handle(KeyEvent event)
     {
-
+        spaceship.shootLaser(event, laser, canvas, spaceship);
         spaceship.checkDirection(event);
+        alien.checkCollision(alien, laser);
     }
     @Override
     public void handle(long now)
@@ -49,7 +54,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         if (now > lastCall+INTERVAL)
         {
             spaceship.moveShip(spaceship, canvas);
-            
+            laser.moveLaser(laser);
             lastCall = now;
         }
     }
