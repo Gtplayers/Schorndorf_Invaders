@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -115,23 +116,19 @@ public class Spaceship extends ImageView
         }
     }
     
-    public void shootLaser(KeyEvent event, Laser laser, AnchorPane canvas, Spaceship spaceship)
+    public void shootLaser(MouseEvent event, Laser laser, AnchorPane canvas, Spaceship spaceship)
     {
-        if(event.getEventType() == KeyEvent.KEY_PRESSED)
+        if(event.getEventType() == MouseEvent.MOUSE_CLICKED)
         {
-            if(event.getCode() == KeyCode.J)
-            {
-                this.laser = laser;
-                this.canvas = canvas;
-                laser.setFitHeight(100);
-                laser.setFitWidth(100);
-                laser.setY(spaceship.getY());
-                laser.setX(spaceship.getX());
-                laser.setSmooth(true);
-                canvas.getChildren().add(laser);
-                System.out.println("LASER SHOT");
-            }
-            
+            this.laser = laser;
+            this.canvas = canvas;
+            laser.setFitHeight(100);
+            laser.setFitWidth(100);
+            laser.setY(spaceship.getY());
+            laser.setX(spaceship.getX());
+            laser.setSmooth(true);
+            canvas.getChildren().add(laser);
+            System.out.println("LASER SHOT");  
         }
     }
 }

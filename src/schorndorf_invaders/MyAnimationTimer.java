@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -17,7 +18,7 @@ import javafx.scene.shape.Circle;
  *
  * @author TrogrlicLeon
  */
-public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent>
+public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent> 
 {
     private static final long INTERVAL = 1l;
 //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
@@ -44,9 +45,13 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     @Override
     public void handle(KeyEvent event)
     {
-        spaceship.shootLaser(event, laser, canvas, spaceship);
         spaceship.checkDirection(event);
         alien.checkCollision(alien, laser);
+    }
+
+    public void handle(MouseEvent event)
+    {
+        spaceship.shootLaser(event, laser, canvas, spaceship);
     }
     @Override
     public void handle(long now)

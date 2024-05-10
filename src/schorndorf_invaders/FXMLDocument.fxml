@@ -8,9 +8,8 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
+<AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleLaserShot" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
    <children>
-      <Button layoutX="920.0" layoutY="946.0" mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button id="button" fx:id="startGame" onAction="#handleMoveAction" prefHeight="296.0" prefWidth="524.0" text="PLAY" textAlignment="CENTER">
@@ -36,5 +35,6 @@
             </Button>
          </children>
       </StackPane>
+      <Button mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

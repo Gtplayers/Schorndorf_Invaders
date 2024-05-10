@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -76,7 +77,11 @@ public class FXMLDocumentController implements Initializable {
         meinAniTimer.stop();
     }
 
-    
+    public void handleLaserShot(MouseEvent event)
+    {
+        meinAniTimer.handle(event);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
