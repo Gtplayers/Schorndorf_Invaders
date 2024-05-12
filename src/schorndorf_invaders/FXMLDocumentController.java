@@ -75,7 +75,7 @@ public class FXMLDocumentController implements Initializable {
             aliens[i].setFitHeight(100);
             aliens[i].setFitWidth(100);
             aliens[i].setY(150);
-            aliens[i].setX(i*100 + 100);
+            aliens[i].setX(i*200 + 100);
             aliens[i].setSmooth(true);
             if (aliens[i] != null) 
             {

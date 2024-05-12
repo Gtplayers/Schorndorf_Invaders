@@ -78,7 +78,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
             {
-                spaceship.setY(spaceship.getY() - 1);
+                spaceship.setY(spaceship.getY() - 2);
             }
             else
             {
@@ -89,7 +89,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() + 100 - spaceship.getY() > 0)
             {
-                spaceship.setY(spaceship.getY() + 1);
+                spaceship.setY(spaceship.getY() + 2);
             }
             else
             {
@@ -100,7 +100,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() + 100 - spaceship.getX() > 0)
             {
-                spaceship.setX(spaceship.getX() + 1);
+                spaceship.setX(spaceship.getX() + 2);
             }
             else
             {
@@ -111,7 +111,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() - 100 - spaceship.getX() < canvas.getWidth())
             {
-                spaceship.setX(spaceship.getX() - 1);
+                spaceship.setX(spaceship.getX() - 2);
             }
             else
             {
