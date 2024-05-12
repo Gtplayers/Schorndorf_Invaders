@@ -30,7 +30,7 @@ public class Alien extends ImageView
     {
         super(new Image(url));
         this.controller = controller;
-        //direction = Direction.DOWN;
+        direction = Direction.DOWN;
     }
     
     public void moveShip(Pane canvas)
