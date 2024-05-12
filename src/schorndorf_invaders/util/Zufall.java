@@ -1,4 +1,4 @@
-package schorndorf_invaders.util;
+package util;
 
 /**
  * @author km
@@ -40,6 +40,6 @@ public class Zufall
      */
     public static int movement()
     {
-        return  (int)(Math.random()*5);
+        return  (int)(Math.random()*4);
     }
 }

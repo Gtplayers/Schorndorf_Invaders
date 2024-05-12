@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import schorndorf_invaders.util.Zufall;
 
 /**
  *
@@ -30,7 +29,26 @@ public class Alien extends ImageView
     {
         super(new Image(url));
         this.controller = controller;
-        direction = Direction.DOWN;
+    }
+    
+    public void checkDirection(int movement)
+    {
+        if(movement == 0)
+        {
+            direction = Direction.UP;
+        }
+        else if(movement == 1)
+        {
+            direction = Direction.DOWN;
+        }
+        else if(movement == 2)
+        {
+            direction = Direction.RIGHT;
+        }
+        else if(movement == 3)
+        {
+            direction = Direction.LEFT;
+        }
     }
     
     public void moveShip(Pane canvas)
