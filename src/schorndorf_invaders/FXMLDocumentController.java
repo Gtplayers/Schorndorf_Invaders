@@ -42,7 +42,7 @@ public class FXMLDocumentController implements Initializable {
     private Text scoreText = new Text();
     private int score = 0;
     
-    private int movement;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,8 +73,6 @@ public class FXMLDocumentController implements Initializable {
         aliens = meinAniTimer.getAliens();
         for (int i = 0; i < MAX_ALIENS; i++) 
         {
-            movement = util.Zufall.movement();
-            aliens[i].checkDirection(movement);
             aliens[i].setFitHeight(100);
             aliens[i].setFitWidth(100);
             aliens[i].setY(150);

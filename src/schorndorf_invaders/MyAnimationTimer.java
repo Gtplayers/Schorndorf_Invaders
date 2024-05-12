@@ -38,6 +38,10 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     
     Alien[] aliens = new Alien[MAX_ALIENS];
     
+    private int movement;
+    
+    private static final int MOVEMENT_CHANGE_DELAY = 1000;
+    private int movementCounter;
     
     public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, FXMLDocumentController controller)
     {
@@ -79,6 +83,17 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             
             for (Alien alien : aliens) 
             {
+                if(movementCounter == MOVEMENT_CHANGE_DELAY)
+                {
+                    movementCounter = 0;
+                    movement = util.Zufall.movement();
+                    alien.checkDirection(movement);
+                }
+                else
+                {
+                    movementCounter++;
+                    System.out.println(movementCounter);
+                }
                 alien.moveShip(canvas);
                 alien.checkCollision(alien, lasers);
             }
