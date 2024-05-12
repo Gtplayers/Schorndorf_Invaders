@@ -36,5 +36,6 @@
          </children>
       </StackPane>
       <Button mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button mnemonicParsing="false" onAction="#handleResumeAction" prefHeight="40.0" prefWidth="88.0" text="Resume" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

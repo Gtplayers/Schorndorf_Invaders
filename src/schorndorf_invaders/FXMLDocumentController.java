@@ -85,8 +85,8 @@ public class FXMLDocumentController implements Initializable {
                 }
             }
         }
-        scoreText.setX(canvas.getWidth() -  150); // Adjust the X position as needed
-        scoreText.setY(50); // Adjust the Y position as needed
+        scoreText.setX(canvas.getWidth() -  150); 
+        scoreText.setY(60); 
         scoreText.setFill(Color.WHITE); // Set the text color
         scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
         canvas.getChildren().add(scoreText);
@@ -101,6 +101,11 @@ public class FXMLDocumentController implements Initializable {
     public void handleStoppAction(ActionEvent event)
     {
         meinAniTimer.stop();
+    }
+    
+    public void handleResumeAction(ActionEvent event)
+    {
+        meinAniTimer.start();
     }
 
     public void handleLaserShot(MouseEvent event)
