@@ -145,12 +145,12 @@ public class Spaceship extends ImageView
                     canvas.getChildren().add(lasers[i]);
                 }
                 lasers[i].moveLaser();
-                /*if (lasers[i].getY() < 0) 
+                if (lasers[i].getY() < 0) 
                 {
                     // If the laser has disappeared (e.g., off-screen), mark its slot as available
                     canvas.getChildren().remove(lasers[i]);
                     lasers[i] = null;
-                }*/
+                }
             }
         }
     }
