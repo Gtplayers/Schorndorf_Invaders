@@ -4,10 +4,12 @@
  */
 package schorndorf_invaders;
 
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import schorndorf_invaders.util.Zufall;
 
@@ -19,75 +21,90 @@ public class Alien extends ImageView
 {
     private Direction direction;
     
-    public Alien(String url)
+    FXMLDocumentController controller;
+    
+    Parent parent;
+    
+    
+    public Alien(String url, FXMLDocumentController controller)
     {
         super(new Image(url));
+        this.controller = controller;
+        //direction = Direction.DOWN;
     }
     
-    public void moveShip(Spaceship spaceship, Pane canvas)
+    public void moveShip(Pane canvas)
     {
         if (direction == Direction.NONE)
         {
-            spaceship.setY(spaceship.getY());
-            spaceship.setX(spaceship.getX());
+            setY(getY());
+            setX(getX());
             System.out.println("STOP");
             direction = Direction.NONE;
         }
         else if(direction == Direction.UP)
         {
-            if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
+            if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                spaceship.setY(spaceship.getY() - 1);
+                setY(getY() - 1);
             }
             else
             {
-                spaceship.setY(canvas.getHeight() + 100);
+                setY(canvas.getHeight() + 100);
             }
             System.out.println("UP");
         }
         else if(direction == Direction.DOWN)
         {
-            if (canvas.getHeight() + 100 - spaceship.getY() > 0)
+            if (canvas.getHeight() + 100 - getY() > 0)
             {
-                spaceship.setY(spaceship.getY() + 1);
+                setY(getY() + 1);
             }
             else
             {
-                spaceship.setY(-100);
+                setY(-100);
             }
             System.out.println("DOWN");
         }
         else if(direction == Direction.RIGHT)
         {
-            if (canvas.getWidth() + 100 - spaceship.getX() > 0)
+            if (canvas.getWidth() + 100 - getX() > 0)
             {
-                spaceship.setX(spaceship.getX() + 1);
+                setX(getX() + 1);
             }
             else
             {
-                spaceship.setX(-100);
+                setX(-100);
             }
             System.out.println("RIGHT");
         }
         else if(direction == Direction.LEFT)
         {
-            if (canvas.getWidth() - 100 - spaceship.getX() < canvas.getWidth())
+            if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                spaceship.setX(spaceship.getX() - 1);
+                setX(getX() - 1);
             }
             else
             {
-                spaceship.setX(canvas.getWidth() + 100);
+                setX(canvas.getWidth() + 100);
             }
             System.out.println("LEFT");
         }
     }
     
-    public void checkCollision(Alien alien, Laser laser)
+    public void checkCollision(Alien alien, Laser[] lasers)
     {
-        if(alien.getBoundsInParent().intersects(laser.getBoundsInParent()))
-        {
-            alien.setVisible(false);
-        }
+        parent = getParent();
+        for (Laser laser : lasers) {
+            if (parent != null && alien != null && laser != null && alien.getBoundsInParent().intersects(laser.getBoundsInParent())) {
+                // Laser intersects with the alien, handle collision
+                alien.setVisible(false); // Example: Set the alien to be invisible
+                laser.setVisible(false); // Example: Set the laser to be invisible
+                ((Pane) parent).getChildren().removeAll(laser, alien);
+                System.out.println("Alien removed");
+                controller.updateScore();
+                break; // Exit the loop after handling collision with one laser
+             }
+         }
     }
 }

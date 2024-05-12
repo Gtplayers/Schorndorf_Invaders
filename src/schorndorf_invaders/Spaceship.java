@@ -129,7 +129,6 @@ public class Spaceship extends ImageView
             lasers[laserCount].setY(getY() - 50);
             lasers[laserCount].setX(getX() + 27);
             lasers[laserCount].setSmooth(true);
-            System.out.println(laserCount);
             laserCount++;
         }
     }
@@ -146,13 +145,18 @@ public class Spaceship extends ImageView
                     canvas.getChildren().add(lasers[i]);
                 }
                 lasers[i].moveLaser();
-                if (lasers[i].getY() < 0) 
+                /*if (lasers[i].getY() < 0) 
                 {
                     // If the laser has disappeared (e.g., off-screen), mark its slot as available
                     canvas.getChildren().remove(lasers[i]);
                     lasers[i] = null;
-                }
+                }*/
             }
         }
     }
+
+    public Laser[] getLasers() {
+        return lasers;
+    }
+    
 }

@@ -16,6 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import schorndorf_invaders.util.Zufall;
 
 
@@ -30,10 +33,21 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button startGame;
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
-    Alien alien1 = new Alien("/res/alien1.png");
-    Alien alien2 = new Alien("/res/alien2.png");
+    
     
     private MyAnimationTimer meinAniTimer = null;
+    
+    private static final int MAX_ALIENS = 10;
+    Alien[] aliens = new Alien[MAX_ALIENS];
+    
+    private Text scoreText = new Text();
+    private int score = 0;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
     public Pane getCanvas() {
         return canvas;
     }
@@ -47,26 +61,38 @@ public class FXMLDocumentController implements Initializable {
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
         
-        alien1.setFitHeight(100);
-        alien1.setFitWidth(100);
-        alien1.setY(canvas.getHeight() - 1200);
-        alien1.setX(canvas.getWidth() - canvas.getWidth()/1.87);
-        alien1.setSmooth(true);
-        canvas.getChildren().add(alien1);
-        
-        alien2.setFitHeight(100);
-        alien2.setFitWidth(100);
-        alien2.setY(canvas.getHeight() - 1200);
-        alien2.setX(canvas.getWidth() - canvas.getWidth()/1.5);
-        alien2.setSmooth(true);
-        canvas.getChildren().add(alien2);
         // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
         if (meinAniTimer == null)
         {
-            meinAniTimer = new MyAnimationTimer(canvas, spaceship, alien1);
+            meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
             canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
+        
+        aliens = meinAniTimer.getAliens();
+        for (int i = 0; i < MAX_ALIENS; i++) 
+        {
+            aliens[i].setFitHeight(100);
+            aliens[i].setFitWidth(100);
+            aliens[i].setY(150);
+            aliens[i].setX(i*100 + 100);
+            aliens[i].setSmooth(true);
+            if (aliens[i] != null) 
+            {
+                if (!canvas.getChildren().contains(aliens[i])) 
+                {
+                    canvas.getChildren().add(aliens[i]);
+                }
+            }
+        }
+        scoreText.setX(canvas.getWidth() -  150); // Adjust the X position as needed
+        scoreText.setY(50); // Adjust the Y position as needed
+        scoreText.setFill(Color.WHITE); // Set the text color
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
+        canvas.getChildren().add(scoreText);
+        scoreText.setText("Score: 0");
+        
+        canvas.getChildren().remove(startGame);
         startGame.setVisible(false);
         // timer starten
         meinAniTimer.start();
@@ -81,10 +107,11 @@ public class FXMLDocumentController implements Initializable {
     {
         meinAniTimer.handle(event);
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    
+    public void updateScore() {
+        score++;
+        scoreText.setText("Score: " + score);
+    }
+    
     
 }

@@ -20,34 +20,47 @@ import javafx.scene.shape.Circle;
  */
 public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent> 
 {
-    private static final long INTERVAL = 1l;
+    private static final long INTERVAL = 1l; 
 //                                       1l; -> schellste Bewegung
-//                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
+//                                       10_000_000l;    -> 1/100 Sekunde
 //                                       100_000_000l;   -> 1/10  Sekunde
-//                                       1_000_000_000l; -> 1     Sekunde
+//                                       1_000_a000_000l; -> 1     Sekunde
     private AnchorPane canvas = null;
 
     private long lastCall = 0;
     
+    private static final int MAX_ALIENS = 10;
+    FXMLDocumentController controller;
+    
     Laser laser = new Laser("/res/placeholderLaser.png");
     Spaceship spaceship = new Spaceship("/res/spaceship.png");
-    Alien alien = new Alien("/res/alien1.png");
+    Alien alien = new Alien("/res/alien1.png", controller);
+    
+    Alien[] aliens = new Alien[MAX_ALIENS];
     
     
-    
-    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, Alien alien)
+    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, FXMLDocumentController controller)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
         this.spaceship = spaceship;
-        this.alien = alien;
+        this.controller = controller;
+        aliens[0] = new Alien("/res/alien1.png", controller);
+        aliens[1] = new Alien("/res/alien2.png", controller);
+        aliens[2] = new Alien("/res/alien1.png", controller);
+        aliens[3] = new Alien("/res/alien2.png", controller);
+        aliens[4] = new Alien("/res/alien1.png", controller);
+        aliens[5] = new Alien("/res/alien1.png", controller);
+        aliens[6] = new Alien("/res/alien2.png", controller);
+        aliens[7] = new Alien("/res/alien1.png", controller);
+        aliens[8] = new Alien("/res/alien2.png", controller);
+        aliens[9] = new Alien("/res/alien1.png", controller);
     }
 
     @Override
     public void handle(KeyEvent event)
     {
-        spaceship.checkDirection(event);
-        alien.checkCollision(alien, laser);
+        spaceship.checkDirection(event);       
     }
 
     public void handle(MouseEvent event)
@@ -61,7 +74,22 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         {
             spaceship.moveShip(spaceship, canvas);
             spaceship.updateLasers(canvas);
+            
+            Laser[] lasers = spaceship.getLasers();
+            
+            for (Alien alien : aliens) 
+            {
+                alien.moveShip(canvas);
+                alien.checkCollision(alien, lasers);
+            }
+            canvas.getChildren().removeIf(node -> !node.isVisible());
+            
             lastCall = now;
         }
     }
+
+    public Alien[] getAliens() {
+        return aliens;
+    }
+    
 }
