@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent> 
 {
     private static final long INTERVAL = 1l;
+//                                       1l; -> schellste Bewegung
 //                                       10_000_000l;    -> 1/100 Sekunde  (schnellste Bewegung)
 //                                       100_000_000l;   -> 1/10  Sekunde
 //                                       1_000_000_000l; -> 1     Sekunde
@@ -51,7 +52,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     public void handle(MouseEvent event)
     {
-        spaceship.shootLaser(event, laser, canvas, spaceship);
+        spaceship.shootLaser(event, canvas);
     }
     @Override
     public void handle(long now)
@@ -59,7 +60,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         if (now > lastCall+INTERVAL)
         {
             spaceship.moveShip(spaceship, canvas);
-            laser.moveLaser(laser);
+            spaceship.updateLasers(canvas);
             lastCall = now;
         }
     }

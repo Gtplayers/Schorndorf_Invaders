@@ -23,11 +23,20 @@ public class Spaceship extends ImageView
     private AnchorPane canvas;
     
     private Direction direction;
-    Laser laser = new Laser("/res/placeholderLaser.png");
+    
+    private static final int MAX_LASERS = 1000;
+    
+    private int laserCount = 0;
+    
+    Laser[] lasers = new Laser[MAX_LASERS];
     
     public Spaceship(String url)
     {
         super(new Image(url));
+        for (int i = 0; i < MAX_LASERS; i++) 
+        {
+            lasers[i] = new Laser("/res/placeholderLaser.png");
+        }
     }
 
     public void checkDirection(KeyEvent event)
@@ -63,7 +72,6 @@ public class Spaceship extends ImageView
         {
             spaceship.setY(spaceship.getY());
             spaceship.setX(spaceship.getX());
-            System.out.println("STOP");
             direction = Direction.NONE;
         }
         else if(direction == Direction.UP)
@@ -76,7 +84,6 @@ public class Spaceship extends ImageView
             {
                 spaceship.setY(canvas.getHeight() + 100);
             }
-            System.out.println("UP");
         }
         else if(direction == Direction.DOWN)
         {
@@ -88,7 +95,6 @@ public class Spaceship extends ImageView
             {
                 spaceship.setY(-100);
             }
-            System.out.println("DOWN");
         }
         else if(direction == Direction.RIGHT)
         {
@@ -100,7 +106,6 @@ public class Spaceship extends ImageView
             {
                 spaceship.setX(-100);
             }
-            System.out.println("RIGHT");
         }
         else if(direction == Direction.LEFT)
         {
@@ -112,23 +117,42 @@ public class Spaceship extends ImageView
             {
                 spaceship.setX(canvas.getWidth() + 100);
             }
-            System.out.println("LEFT");
         }
     }
     
-    public void shootLaser(MouseEvent event, Laser laser, AnchorPane canvas, Spaceship spaceship)
+    public void shootLaser(MouseEvent event, AnchorPane canvas) 
     {
-        if(event.getEventType() == MouseEvent.MOUSE_CLICKED)
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) 
         {
-            this.laser = laser;
-            this.canvas = canvas;
-            laser.setFitHeight(100);
-            laser.setFitWidth(100);
-            laser.setY(spaceship.getY());
-            laser.setX(spaceship.getX());
-            laser.setSmooth(true);
-            canvas.getChildren().add(laser);
-            System.out.println("LASER SHOT");  
+            lasers[laserCount].setFitHeight(100);
+            lasers[laserCount].setFitWidth(100);
+            lasers[laserCount].setY(getY() - 50);
+            lasers[laserCount].setX(getX() + 27);
+            lasers[laserCount].setSmooth(true);
+            System.out.println(laserCount);
+            laserCount++;
+        }
+    }
+    
+    public void updateLasers(AnchorPane canvas) 
+    {
+        this.canvas = canvas;
+        for (int i = 0; i < laserCount; i++) 
+        {
+            if (lasers[i] != null) 
+            {
+                if (!canvas.getChildren().contains(lasers[i])) 
+                {
+                    canvas.getChildren().add(lasers[i]);
+                }
+                lasers[i].moveLaser();
+                if (lasers[i].getY() < 0) 
+                {
+                    // If the laser has disappeared (e.g., off-screen), mark its slot as available
+                    canvas.getChildren().remove(lasers[i]);
+                    lasers[i] = null;
+                }
+            }
         }
     }
 }

@@ -23,10 +23,9 @@ public class Laser extends ImageView{
         super(new Image(url));
     }
     
-    public void moveLaser(Laser laser)
+    public void moveLaser()
     {
-        laser.setY(laser.getY() - 1);
-        System.out.println("LASER FLYING");
+        setY(getY() - 2);
     }
     
 }
