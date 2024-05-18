@@ -4,13 +4,16 @@
  */
 package schorndorf_invaders;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -19,6 +22,7 @@ import javafx.scene.layout.Pane;
 public class Alien extends ImageView
 {
     private Direction direction;
+    private boolean dead;
     
     FXMLDocumentController controller;
     
@@ -30,6 +34,7 @@ public class Alien extends ImageView
         super(new Image(url));
         this.controller = controller;
     }
+
     
     public void checkDirection(int movement)
     {
@@ -57,56 +62,51 @@ public class Alien extends ImageView
         {
             setY(getY());
             setX(getX());
-            System.out.println("STOP");
             direction = Direction.NONE;
         }
         else if(direction == Direction.UP)
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 1);
+                setY(getY() - 5);
             }
             else
             {
                 setY(canvas.getHeight() + 100);
             }
-            System.out.println("UP");
         }
         else if(direction == Direction.DOWN)
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 1);
+                setY(getY() + 5);
             }
             else
             {
                 setY(-100);
             }
-            System.out.println("DOWN");
         }
         else if(direction == Direction.RIGHT)
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 1);
+                setX(getX() + 5);
             }
             else
             {
                 setX(-100);
             }
-            System.out.println("RIGHT");
         }
         else if(direction == Direction.LEFT)
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 1);
+                setX(getX() - 5);
             }
             else
             {
                 setX(canvas.getWidth() + 100);
             }
-            System.out.println("LEFT");
         }
     }
     
@@ -119,10 +119,23 @@ public class Alien extends ImageView
                 alien.setVisible(false); // Example: Set the alien to be invisible
                 laser.setVisible(false); // Example: Set the laser to be invisible
                 ((Pane) parent).getChildren().removeAll(laser, alien);
-                System.out.println("Alien removed");
                 controller.updateScore();
                 break; // Exit the loop after handling collision with one laser
              }
          }
+    }
+    
+    public boolean checkCollisionSpaceship(Alien alien, Spaceship spaceship)
+    {
+        parent = getParent();
+        if (parent != null && alien != null && spaceship != null && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+            // Laser intersects with the alien, handle collision
+            alien.setVisible(false); // Example: Set the alien to be invisible
+            spaceship.setVisible(false); // Example: Set the laser to be invisible
+            ((Pane) parent).getChildren().removeAll(spaceship, alien);
+            controller.updateScore();
+            dead = true;
+        }
+        return dead;
     }
 }

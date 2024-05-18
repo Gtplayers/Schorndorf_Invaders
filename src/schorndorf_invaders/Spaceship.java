@@ -35,7 +35,7 @@ public class Spaceship extends ImageView
         super(new Image(url));
         for (int i = 0; i < MAX_LASERS; i++) 
         {
-            lasers[i] = new Laser("/res/placeholderLaser.png");
+            lasers[i] = new Laser("/res/lasers/laserGreen.png");
         }
     }
 
@@ -124,10 +124,10 @@ public class Spaceship extends ImageView
     {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) 
         {
-            lasers[laserCount].setFitHeight(100);
-            lasers[laserCount].setFitWidth(100);
-            lasers[laserCount].setY(getY() - 50);
-            lasers[laserCount].setX(getX() + 27);
+            //lasers[laserCount].setFitHeight(20);
+            //lasers[laserCount].setFitWidth(20);
+            lasers[laserCount].setY(getY() + 5);
+            lasers[laserCount].setX(getX() + 80);
             lasers[laserCount].setSmooth(true);
             laserCount++;
         }

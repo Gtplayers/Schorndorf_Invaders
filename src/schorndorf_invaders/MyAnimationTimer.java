@@ -4,7 +4,9 @@
  */
 package schorndorf_invaders;
 
+import java.io.File;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 /**
  *
  * @author TrogrlicLeon
@@ -29,12 +32,18 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     private long lastCall = 0;
     
+    private boolean dead = false;
+    private boolean deathScreenAdded = false;
+    
     private static final int MAX_ALIENS = 10;
     FXMLDocumentController controller;
     
-    Laser laser = new Laser("/res/placeholderLaser.png");
-    Spaceship spaceship = new Spaceship("/res/spaceship.png");
-    Alien alien = new Alien("/res/alien1.png", controller);
+    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
+    
+    Image image = new Image("/res/youDied.jpg");
+    ImageView deathScreen = new ImageView(image);
+    
+    //Image i = new Image(new File("/res/giphy.gif").toURI().toString());
     
     Alien[] aliens = new Alien[MAX_ALIENS];
     
@@ -49,16 +58,16 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         this.lastCall = System.nanoTime();
         this.spaceship = spaceship;
         this.controller = controller;
-        aliens[0] = new Alien("/res/alien1.png", controller);
-        aliens[1] = new Alien("/res/alien2.png", controller);
-        aliens[2] = new Alien("/res/alien1.png", controller);
-        aliens[3] = new Alien("/res/alien2.png", controller);
-        aliens[4] = new Alien("/res/alien1.png", controller);
-        aliens[5] = new Alien("/res/alien1.png", controller);
-        aliens[6] = new Alien("/res/alien2.png", controller);
-        aliens[7] = new Alien("/res/alien1.png", controller);
-        aliens[8] = new Alien("/res/alien2.png", controller);
-        aliens[9] = new Alien("/res/alien1.png", controller);
+        aliens[0] = new Alien("/res/sprites/meteor1.png", controller);
+        aliens[1] = new Alien("/res/sprites/meteor2.png", controller);
+        aliens[2] = new Alien("/res/sprites/meteor1.png", controller);
+        aliens[3] = new Alien("/res/sprites/meteor2.png", controller);
+        aliens[4] = new Alien("/res/sprites/meteor2.png", controller);
+        aliens[5] = new Alien("/res/sprites/meteor1.png", controller);
+        aliens[6] = new Alien("/res/sprites/meteor1.png", controller);
+        aliens[7] = new Alien("/res/sprites/meteor2.png", controller);
+        aliens[8] = new Alien("/res/sprites/meteor1.png", controller);
+        aliens[9] = new Alien("/res/sprites/meteor2.png", controller);
     }
 
     @Override
@@ -92,13 +101,33 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                 else
                 {
                     movementCounter++;
-                    System.out.println(movementCounter);
                 }
                 alien.moveShip(canvas);
                 alien.checkCollision(alien, lasers);
+                if(dead == false)
+                {
+                    dead = alien.checkCollisionSpaceship(alien, spaceship);
+                }     
             }
             canvas.getChildren().removeIf(node -> !node.isVisible());
             
+            if(dead == true && deathScreenAdded == false)
+            {
+                deathScreen.setOpacity(0.0);
+                        
+                FadeTransition fadeInTransition = new FadeTransition(Duration.millis(1000), deathScreen);
+                fadeInTransition.setFromValue(0.0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.play();
+                
+                deathScreen.setFitHeight(canvas.getHeight());
+                deathScreen.setFitWidth(canvas.getWidth());
+                //deathScreen.setSmooth(true);
+                //deathScreen.setX(canvas.getWidth() / 2 - deathScreen.getImage().getWidth() / 2);
+                //deathScreen.setY(canvas.getHeight() / 2 - deathScreen.getImage().getHeight() / 2);
+                canvas.getChildren().add(deathScreen);
+                deathScreenAdded = true;
+            }
             lastCall = now;
         }
     }

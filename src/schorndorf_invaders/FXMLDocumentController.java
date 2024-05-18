@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -31,7 +32,7 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane canvas;
     @FXML
     private Button startGame;
-    Spaceship spaceship = new Spaceship("/res/spaceship.png");
+    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
     
     private MyAnimationTimer meinAniTimer = null;
@@ -55,8 +56,8 @@ public class FXMLDocumentController implements Initializable {
     
     public void handleMoveAction(ActionEvent event)
     {
-        spaceship.setFitHeight(150);
-        spaceship.setFitWidth(150);
+        spaceship.setFitHeight(112.5);
+        spaceship.setFitWidth(88.5);
         spaceship.setY(canvas.getHeight() - 130);
         spaceship.setX(canvas.getWidth() - canvas.getWidth()/1.87);
         spaceship.setSmooth(true);
@@ -73,8 +74,8 @@ public class FXMLDocumentController implements Initializable {
         aliens = meinAniTimer.getAliens();
         for (int i = 0; i < MAX_ALIENS; i++) 
         {
-            aliens[i].setFitHeight(100);
-            aliens[i].setFitWidth(100);
+            //aliens[i].setFitHeight(50);
+            //aliens[i].setFitWidth(50);
             aliens[i].setY(150);
             aliens[i].setX(i*200 + 100);
             aliens[i].setSmooth(true);
