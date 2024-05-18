@@ -68,7 +68,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 5);
+                setY(getY() - 2);
             }
             else
             {
@@ -79,7 +79,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 5);
+                setY(getY() + 2);
             }
             else
             {
@@ -90,7 +90,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 5);
+                setX(getX() + 2);
             }
             else
             {
@@ -101,7 +101,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 5);
+                setX(getX() - 2);
             }
             else
             {
@@ -125,17 +125,5 @@ public class Alien extends ImageView
          }
     }
     
-    public boolean checkCollisionSpaceship(Alien alien, Spaceship spaceship)
-    {
-        parent = getParent();
-        if (parent != null && alien != null && spaceship != null && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
-            // Laser intersects with the alien, handle collision
-            alien.setVisible(false); // Example: Set the alien to be invisible
-            spaceship.setVisible(false); // Example: Set the laser to be invisible
-            ((Pane) parent).getChildren().removeAll(spaceship, alien);
-            controller.updateScore();
-            dead = true;
-        }
-        return dead;
-    }
+    
 }

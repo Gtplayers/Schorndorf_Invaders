@@ -5,12 +5,18 @@
 package schorndorf_invaders;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +26,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
 /**
@@ -32,7 +39,11 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane canvas;
     @FXML
     private Button startGame;
-    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
+    @FXML
+    private Button pauseButton;
+    @FXML
+    private Button resumeButton;
+    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png", this);
     
     
     private MyAnimationTimer meinAniTimer = null;
@@ -43,12 +54,7 @@ public class FXMLDocumentController implements Initializable {
     private Text scoreText = new Text();
     private int score = 0;
     
-    
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    private boolean resetDone = true;
     
     public Pane getCanvas() {
         return canvas;
@@ -56,47 +62,43 @@ public class FXMLDocumentController implements Initializable {
     
     public void handleMoveAction(ActionEvent event)
     {
+        resetDone = false;
+        canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
         spaceship.setFitWidth(88.5);
         spaceship.setY(canvas.getHeight() - 130);
-        spaceship.setX(canvas.getWidth() - canvas.getWidth()/1.87);
+        spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
-        
-        // falls noch nicht vorhanden meinAniTimer-Objekt erzeugen
-        if (meinAniTimer == null)
-        {
+
+        if (meinAniTimer == null) {
             meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
             canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
             canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
-        
+
         aliens = meinAniTimer.getAliens();
-        for (int i = 0; i < MAX_ALIENS; i++) 
-        {
-            //aliens[i].setFitHeight(50);
-            //aliens[i].setFitWidth(50);
+        for (int i = 0; i < MAX_ALIENS; i++) {
             aliens[i].setY(150);
-            aliens[i].setX(i*200 + 100);
+            aliens[i].setX(i * 200 + 100);
             aliens[i].setSmooth(true);
-            if (aliens[i] != null) 
-            {
-                if (!canvas.getChildren().contains(aliens[i])) 
-                {
-                    canvas.getChildren().add(aliens[i]);
-                }
+            if (!canvas.getChildren().contains(aliens[i])) {
+                canvas.getChildren().add(aliens[i]);
             }
         }
-        scoreText.setX(canvas.getWidth() -  150); 
-        scoreText.setY(60); 
-        scoreText.setFill(Color.WHITE); // Set the text color
-        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
+
+        scoreText.setX(canvas.getWidth() - 150);
+        scoreText.setY(60);
+        scoreText.setFill(Color.WHITE);
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         canvas.getChildren().add(scoreText);
         scoreText.setText("Score: 0");
-        
-        canvas.getChildren().remove(startGame);
+
         startGame.setVisible(false);
-        // timer starten
+        if (canvas != null) {
+            canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
+        }
+        meinAniTimer.setResetDone(resetDone);
         meinAniTimer.start();
     }
 
@@ -106,19 +108,54 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void handleResumeAction(ActionEvent event)
-    {
+    {      
         meinAniTimer.start();
     }
 
     public void handleLaserShot(MouseEvent event)
     {
-        meinAniTimer.handle(event);
+        meinAniTimer.handle(event);  
     }
     
-    public void updateScore() {
+    public void updateScore() 
+    {
         score++;
         scoreText.setText("Score: " + score);
     }
     
+    private void resetGame() 
+    {    
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+        canvas.getChildren().clear(); // Clear the canvas of any existing game elements
+        resetDone = true;
+        startGame.setVisible(true); // Show the start button again
+        canvas.getChildren().add(startGame);
+        canvas.getChildren().add(pauseButton);
+        canvas.getChildren().add(resumeButton);
+        spaceship.reset();
+        if (meinAniTimer != null) {
+            meinAniTimer.stop(); // Stop the animation timer if it's running
+            meinAniTimer.setDead(false);
+            meinAniTimer.setDeathScreenAdded(false);
+            meinAniTimer.setResetDone(resetDone); 
+            meinAniTimer.initializeAliens(this);
+        }
+
+        score = 0; // Reset the score
+        scoreText.setText("Score: 0"); // Update the score display
+    }
     
+    @FXML
+    public void handleResetKeyPressed(KeyEvent event) 
+    {
+        if (event.getCode() == KeyCode.R) { // Check if the pressed key is 'R' for reset
+        resetGame(); // Call the resetGame method to reset the game
+        }     
+    } 
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+         resetDone = true;
+        // TODO
+    } 
 }

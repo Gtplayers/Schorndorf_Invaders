@@ -5,6 +5,7 @@
 package schorndorf_invaders;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -30,13 +31,20 @@ public class Spaceship extends ImageView
     
     Laser[] lasers = new Laser[MAX_LASERS];
     
-    public Spaceship(String url)
+    Parent parent;
+    
+    private boolean dead;
+    
+    FXMLDocumentController controller;
+    
+    public Spaceship(String url, FXMLDocumentController controller)
     {
         super(new Image(url));
+        this.controller = controller;
         for (int i = 0; i < MAX_LASERS; i++) 
         {
             lasers[i] = new Laser("/res/lasers/laserGreen.png");
-        }
+        } 
     }
 
     public void checkDirection(KeyEvent event)
@@ -155,6 +163,26 @@ public class Spaceship extends ImageView
         }
     }
 
+    public boolean checkCollision(Alien alien, Spaceship spaceship)
+    {
+        parent = getParent();
+        if (parent != null && alien != null && spaceship != null && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+            // Laser intersects with the alien, handle collision
+            alien.setVisible(false); // Example: Set the alien to be invisible
+            spaceship.setVisible(false); // Example: Set the laser to be invisible
+            ((Pane) parent).getChildren().removeAll(spaceship, alien);
+            controller.updateScore();
+            dead = true;
+        }
+        return dead;
+    }
+    
+    public void reset() 
+    {
+        dead = false; // Reset the dead flag
+        setVisible(true); // Make the spaceship visible again
+    }
+    
     public Laser[] getLasers() {
         return lasers;
     }

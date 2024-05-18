@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleLaserShot" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
+<AnchorPane fx:id="canvas" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleResetKeyPressed" onMouseClicked="#handleLaserShot" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schorndorf_invaders.FXMLDocumentController">
    <children>
       <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,7 +35,7 @@
             </Button>
          </children>
       </StackPane>
-      <Button mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Button mnemonicParsing="false" onAction="#handleResumeAction" prefHeight="40.0" prefWidth="88.0" text="Resume" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="pauseButton" mnemonicParsing="false" onAction="#handleStoppAction" prefHeight="40.0" prefWidth="66.0" text="Pause" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="resumeButton" mnemonicParsing="false" onAction="#handleResumeAction" prefHeight="40.0" prefWidth="88.0" text="Resume" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
