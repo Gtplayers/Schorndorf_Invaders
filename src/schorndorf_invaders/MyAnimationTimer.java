@@ -4,9 +4,12 @@
  */
 package schorndorf_invaders;
 
-import java.io.File;
+import javafx.scene.media.AudioClip;
+import java.net.URL;
+import java.util.HashSet;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,7 +30,7 @@ import javafx.util.Duration;
  */
 public class MyAnimationTimer extends AnimationTimer implements EventHandler<KeyEvent> 
 {
-    private static final long INTERVAL = 1l; 
+    private static final long INTERVAL = 1l;
 //                                       1l; -> schellste Bewegung
 //                                       10_000_000l;    -> 1/100 Sekunde
 //                                       100_000_000l;   -> 1/10  Sekunde
@@ -53,6 +56,14 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     private int movementCounter;
     
     private Text resetText = new Text();
+    
+    URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion3.wav");
+    AudioClip deathSound = new AudioClip(resource.toString());
+    
+    URL explosionGifResource = getClass().getResource("/res/gif/playerExplosion.gif");
+    Image explosionGif = new Image(explosionGifResource.toString());
+    ImageView explosionImageView = new ImageView(explosionGif);
+    
     
     public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, FXMLDocumentController controller)
     {
@@ -108,9 +119,22 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             
                 if(dead == true && deathScreenAdded == false)
                 {
+                    deathSound.setVolume(0.5);
+                    deathSound.play();
+                    explosionImageView.setFitHeight(150); // Set size as needed
+                    explosionImageView.setFitWidth(195);  // Set size as needed
+                    explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
+                    explosionImageView.setY(spaceship.getY()); // Position at spaceship's location
+                    explosionImageView.setSmooth(true);
+                    canvas.getChildren().add(explosionImageView);
+                    
                     deathScreen.setOpacity(0.0);
+                    
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
+                    pause.setOnFinished(event -> canvas.getChildren().remove(explosionImageView));
+                    pause.play();
                         
-                    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(1000), deathScreen);
+                    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(2500), deathScreen);
                     fadeInTransition.setFromValue(0.0);
                     fadeInTransition.setToValue(1.0);
                     fadeInTransition.play();

@@ -4,6 +4,7 @@
  */
 package schorndorf_invaders;
 
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
@@ -13,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 
 /**
  *
@@ -37,10 +39,14 @@ public class Spaceship extends ImageView
     
     FXMLDocumentController controller;
     
+    URL resource = getClass().getResource("/res/sounds/laserSounds/laserShot.wav");
+    AudioClip laserShot = new AudioClip(resource.toString());
+    
     public Spaceship(String url, FXMLDocumentController controller)
     {
         super(new Image(url));
         this.controller = controller;
+        laserShot.setVolume(0.1);
         for (int i = 0; i < MAX_LASERS; i++) 
         {
             lasers[i] = new Laser("/res/lasers/laserGreen.png");
@@ -86,7 +92,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
             {
-                spaceship.setY(spaceship.getY() - 2);
+                spaceship.setY(spaceship.getY() - 3);
             }
             else
             {
@@ -97,7 +103,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() + 100 - spaceship.getY() > 0)
             {
-                spaceship.setY(spaceship.getY() + 2);
+                spaceship.setY(spaceship.getY() + 3);
             }
             else
             {
@@ -108,7 +114,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() + 100 - spaceship.getX() > 0)
             {
-                spaceship.setX(spaceship.getX() + 2);
+                spaceship.setX(spaceship.getX() + 3);
             }
             else
             {
@@ -119,7 +125,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() - 100 - spaceship.getX() < canvas.getWidth())
             {
-                spaceship.setX(spaceship.getX() - 2);
+                spaceship.setX(spaceship.getX() - 3);
             }
             else
             {
@@ -132,10 +138,11 @@ public class Spaceship extends ImageView
     {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) 
         {
+            laserShot.play();
             //lasers[laserCount].setFitHeight(20);
             //lasers[laserCount].setFitWidth(20);
-            lasers[laserCount].setY(getY() + 5);
-            lasers[laserCount].setX(getX() + 80);
+            lasers[laserCount].setY(getY() + 10);
+            lasers[laserCount].setX(getX() + 42);
             lasers[laserCount].setSmooth(true);
             laserCount++;
         }
@@ -163,19 +170,21 @@ public class Spaceship extends ImageView
         }
     }
 
-    public boolean checkCollision(Alien alien, Spaceship spaceship)
-    {
-        parent = getParent();
-        if (parent != null && alien != null && spaceship != null && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
-            // Laser intersects with the alien, handle collision
-            alien.setVisible(false); // Example: Set the alien to be invisible
-            spaceship.setVisible(false); // Example: Set the laser to be invisible
-            ((Pane) parent).getChildren().removeAll(spaceship, alien);
-            controller.updateScore();
-            dead = true;
-        }
-        return dead;
+    public boolean checkCollision(Alien alien, Spaceship spaceship) {
+    Pane currentParent = (Pane) getParent();
+    if (currentParent == null || alien == null || spaceship == null) return false;
+
+    if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+        // Handle spaceship and alien collision
+        alien.setVisible(false);
+        spaceship.setVisible(false);
+        currentParent.getChildren().removeAll(spaceship, alien);
+        controller.updateScore();
+        dead = true;
     }
+
+    return dead;
+}
     
     public void reset() 
     {

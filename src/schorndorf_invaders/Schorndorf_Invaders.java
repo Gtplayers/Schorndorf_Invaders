@@ -42,7 +42,7 @@ public class Schorndorf_Invaders extends Application {
         FXMLDocumentController controller = loader.getController();
 
         // Load the image
-        Image image = new Image("/res/spaceBackground.png");
+        Image image = new Image("/res/backgrounds/spaceBackground.png");
         
         // Create a BackgroundSize object
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);  

@@ -4,6 +4,12 @@
  */
 package schorndorf_invaders;
 
+import java.net.URL;
+import java.util.Set;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
@@ -13,7 +19,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 /**
  *
@@ -22,17 +33,25 @@ import javafx.scene.paint.Color;
 public class Alien extends ImageView
 {
     private Direction direction;
-    private boolean dead;
     
     FXMLDocumentController controller;
-    
+
     Parent parent;
     
+    URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
+    AudioClip alienExplosion = new AudioClip(resource.toString());
+    
+    URL explosionGifResource = getClass().getResource("/res/gif/enemyExplosion.gif");
+    Image explosionGif = new Image(explosionGifResource.toString());
+    ImageView explosionImageView = new ImageView(explosionGif);
+       
+    PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
     
     public Alien(String url, FXMLDocumentController controller)
-    {
+    { 
         super(new Image(url));
         this.controller = controller;
+        alienExplosion.setVolume(0.2);
     }
 
     
@@ -68,7 +87,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 2);
+                setY(getY() - 4);
             }
             else
             {
@@ -79,7 +98,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 2);
+                setY(getY() + 4);
             }
             else
             {
@@ -90,7 +109,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 2);
+                setX(getX() + 4);
             }
             else
             {
@@ -101,7 +120,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 2);
+                setX(getX() - 4);
             }
             else
             {
@@ -109,21 +128,37 @@ public class Alien extends ImageView
             }
         }
     }
-    
+
     public void checkCollision(Alien alien, Laser[] lasers)
     {
-        parent = getParent();
+        Pane currentParent = (Pane) getParent();
         for (Laser laser : lasers) {
-            if (parent != null && alien != null && laser != null && alien.getBoundsInParent().intersects(laser.getBoundsInParent())) {
-                // Laser intersects with the alien, handle collision
-                alien.setVisible(false); // Example: Set the alien to be invisible
-                laser.setVisible(false); // Example: Set the laser to be invisible
-                ((Pane) parent).getChildren().removeAll(laser, alien);
+            if (currentParent != null && alien != null && laser != null && alien.getBoundsInParent().intersects(laser.getBoundsInParent())) 
+            {
+                alien.setVisible(false); 
+                laser.setVisible(false);
+                currentParent.getChildren().removeIf(node -> !node.isVisible());
+                currentParent.getChildren().removeAll(alien, laser);
+                alienExplosion.play();
+                explosionImageView.setFitHeight(150); // Set size as needed
+                explosionImageView.setFitWidth(150);  // Set size as needed
+                explosionImageView.setX(alien.getX()); // Position at spaceship's location
+                explosionImageView.setY(alien.getY()); // Position at spaceship's location
+                explosionImageView.setSmooth(true);
+                if (!currentParent.getChildren().contains(explosionImageView)) 
+                {
+                    currentParent.getChildren().add(explosionImageView);
+                }            
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.34)); // Duration of the explosion 
+                pause.setOnFinished(event -> 
+                {
+                    currentParent.getChildren().remove(explosionImageView);
+                    currentParent.getChildren().removeIf(node -> !node.isVisible());
+                });
+                pause.play();
                 controller.updateScore();
                 break; // Exit the loop after handling collision with one laser
-             }
-         }
-    }
-    
-    
+            }
+        }
+    } 
 }
