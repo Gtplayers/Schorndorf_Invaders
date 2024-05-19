@@ -119,8 +119,6 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             
                 if(dead == true && deathScreenAdded == false)
                 {
-                    deathSound.setVolume(0.5);
-                    deathSound.play();
                     explosionImageView.setFitHeight(150); // Set size as needed
                     explosionImageView.setFitWidth(195);  // Set size as needed
                     explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
@@ -128,11 +126,15 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     explosionImageView.setSmooth(true);
                     canvas.getChildren().add(explosionImageView);
                     
+                   
+                    
                     deathScreen.setOpacity(0.0);
                     
                     PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
                     pause.setOnFinished(event -> canvas.getChildren().remove(explosionImageView));
                     pause.play();
+                     deathSound.setVolume(0.5);
+                    deathSound.play();
                         
                     FadeTransition fadeInTransition = new FadeTransition(Duration.millis(2500), deathScreen);
                     fadeInTransition.setFromValue(0.0);
