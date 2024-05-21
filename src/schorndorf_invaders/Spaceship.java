@@ -37,6 +37,8 @@ public class Spaceship extends ImageView
     
     private boolean dead;
     
+    private boolean deadLaser;
+    
     FXMLDocumentController controller;
     
     URL resource = getClass().getResource("/res/sounds/laserSounds/laserShot.wav");
@@ -162,7 +164,6 @@ public class Spaceship extends ImageView
                 lasers[i].moveLaser();
                 if (lasers[i].getY() < 0) 
                 {
-                    // If the laser has disappeared (e.g., off-screen), mark its slot as available
                     canvas.getChildren().remove(lasers[i]);
                     lasers[i] = null;
                 }
@@ -170,25 +171,42 @@ public class Spaceship extends ImageView
         }
     }
 
-    public boolean checkCollision(Alien alien, Spaceship spaceship) {
-    Pane currentParent = (Pane) getParent();
-    if (currentParent == null || alien == null || spaceship == null) return false;
+    public boolean checkAlienCollision(Alien alien, Spaceship spaceship) 
+    {
+        Pane currentParent = (Pane) getParent();
+        if (currentParent == null || alien == null || spaceship == null) return false;
 
-    if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
-        // Handle spaceship and alien collision
-        alien.setVisible(false);
-        spaceship.setVisible(false);
-        currentParent.getChildren().removeAll(spaceship, alien);
-        controller.updateScore();
-        dead = true;
+        if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+            // Handle spaceship and alien collision
+            alien.setVisible(false);
+            spaceship.setVisible(false);
+            currentParent.getChildren().removeAll(spaceship, alien);
+            controller.updateScore();
+            dead = true;
+        }
+    return dead;
     }
 
-    return dead;
+    public boolean checkLaserCollision(Laser[] alienLasers, Spaceship spaceship) 
+    {
+    Pane currentParent = (Pane) getParent();
+    for (Laser laser : alienLasers) {
+        if (currentParent == null || laser == null || spaceship == null) return false;
+        if (laser.isVisible() && getBoundsInParent().intersects(laser.getBoundsInParent())) {
+            laser.setVisible(false);
+            spaceship.setVisible(false);
+            currentParent.getChildren().removeAll(spaceship, laser);
+            deadLaser = true;
+            break;
+        }
+    }
+    return deadLaser;
 }
     
     public void reset() 
     {
         dead = false; // Reset the dead flag
+        deadLaser = false;
         setVisible(true); // Make the spaceship visible again
     }
     

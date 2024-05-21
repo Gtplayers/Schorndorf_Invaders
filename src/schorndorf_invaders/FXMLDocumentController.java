@@ -136,6 +136,7 @@ public class FXMLDocumentController implements Initializable {
         if (meinAniTimer != null) {
             meinAniTimer.stop(); // Stop the animation timer if it's running
             meinAniTimer.setDead(false);
+            meinAniTimer.setDeadLaser(false);
             meinAniTimer.setDeathScreenAdded(false);
             meinAniTimer.setResetDone(resetDone); 
             meinAniTimer.initializeAliens(this);

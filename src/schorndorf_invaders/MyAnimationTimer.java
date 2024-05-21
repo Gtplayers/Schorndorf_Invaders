@@ -40,6 +40,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     private long lastCall = 0;
     
     private boolean dead = false;
+    private boolean deadLaser = false;
     private boolean deathScreenAdded = false;
     private boolean resetDone = true;
     
@@ -54,6 +55,9 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     private int movement;
     private static final int MOVEMENT_CHANGE_DELAY = 1000;
     private int movementCounter;
+    
+    private static final int LASER_SHOT_DELAY = 300;
+    private int laserCounter;
     
     private Text resetText = new Text();
     
@@ -98,6 +102,21 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             
                 for (Alien alien : aliens) 
                 {
+                    Laser[] alienLasers = alien.getLasers();
+                    if(alien != null  && alien.isAlive())
+                    {  
+                        alien.updateLasers(canvas);
+                        if(laserCounter == LASER_SHOT_DELAY)
+                        {
+                            laserCounter = 0;
+                            alien.shootLaser(canvas);
+                            alien.checkDirection(movement);
+                        }
+                        else
+                        {
+                            laserCounter++;
+                        }
+                    }
                     if(movementCounter == MOVEMENT_CHANGE_DELAY)
                     {
                         movementCounter = 0;
@@ -110,14 +129,15 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     }
                     alien.moveShip(canvas);
                     alien.checkCollision(alien, lasers);
-                    if(dead == false)
+                    if(dead == false && deadLaser == false)
                     {
-                        dead = spaceship.checkCollision(alien, spaceship);
+                        //deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
+                        dead = spaceship.checkAlienCollision(alien, spaceship);
                     }     
                 }
                 canvas.getChildren().removeIf(node -> !node.isVisible());
             
-                if(dead == true && deathScreenAdded == false)
+                if((dead || deadLaser) && !deathScreenAdded)
                 {
                     explosionImageView.setFitHeight(150); // Set size as needed
                     explosionImageView.setFitWidth(195);  // Set size as needed
@@ -133,7 +153,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
                     pause.setOnFinished(event -> canvas.getChildren().remove(explosionImageView));
                     pause.play();
-                     deathSound.setVolume(0.5);
+                    deathSound.setVolume(0.5);
                     deathSound.play();
                         
                     FadeTransition fadeInTransition = new FadeTransition(Duration.millis(2500), deathScreen);
@@ -179,4 +199,10 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     public void setResetDone(boolean resetDone) {
         this.resetDone = resetDone;
     }
+
+    public void setDeadLaser(boolean deadLaser) {
+        this.deadLaser = deadLaser;
+    }
+    
+    
 }

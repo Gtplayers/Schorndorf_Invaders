@@ -38,20 +38,39 @@ public class Alien extends ImageView
 
     Parent parent;
     
-    URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
-    AudioClip alienExplosion = new AudioClip(resource.toString());
+    @FXML
+    private AnchorPane canvas;
+    
+    URL explosionResource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
+    AudioClip alienExplosion = new AudioClip(explosionResource.toString());
+    
+    URL laserResource = getClass().getResource("/res/sounds/laserSounds/alienShot1.wav");
+    AudioClip laserShot = new AudioClip(laserResource.toString());
     
     URL explosionGifResource = getClass().getResource("/res/gif/enemyExplosion.gif");
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
        
-    PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
+    PauseTransition pause = new PauseTransition(Duration.seconds(1)); 
+    
+    private static final int MAX_LASERS = 1000;
+    
+    private int laserCount = 0;
+    
+    Laser[] lasers = new Laser[MAX_LASERS];
+    
+    private boolean alive = true;
     
     public Alien(String url, FXMLDocumentController controller)
     { 
         super(new Image(url));
         this.controller = controller;
         alienExplosion.setVolume(0.2);
+        laserShot.setVolume(0.1);
+        for (int i = 0; i < MAX_LASERS; i++) 
+        {
+            lasers[i] = new Laser("/res/lasers/laserRed.png");
+        } 
     }
 
     
@@ -87,7 +106,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 4);
+                setY(getY() - 3);
             }
             else
             {
@@ -98,7 +117,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 4);
+                setY(getY() + 3);
             }
             else
             {
@@ -109,7 +128,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 4);
+                setX(getX() + 3);
             }
             else
             {
@@ -120,7 +139,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 4);
+                setX(getX() - 3);
             }
             else
             {
@@ -135,6 +154,8 @@ public class Alien extends ImageView
         for (Laser laser : lasers) {
             if (currentParent != null && alien != null && laser != null && alien.getBoundsInParent().intersects(laser.getBoundsInParent())) 
             {
+                alive = false;
+                removeAlienLasers(currentParent, this);
                 alien.setVisible(false); 
                 laser.setVisible(false);
                 currentParent.getChildren().removeIf(node -> !node.isVisible());
@@ -160,5 +181,53 @@ public class Alien extends ImageView
                 break; // Exit the loop after handling collision with one laser
             }
         }
-    } 
+    }
+
+    private void removeAlienLasers(Pane currentParent, Alien alien) 
+    {
+        for (Laser laser : alien.lasers) {
+            if (laser != null) {
+                laser.setVisible(false);
+                currentParent.getChildren().remove(laser);
+            }
+        }
+    }
+    
+    public void shootLaser(AnchorPane canvas) {
+        if (!alive) return; // Only shoot if the alien is alive
+        if (laserCount < MAX_LASERS) {
+            lasers[laserCount].setY(getY() + 10);
+            lasers[laserCount].setX(getX() + 42);
+            lasers[laserCount].setSmooth(true);
+            laserCount++;
+            laserShot.play();
+        }
+    }
+    
+    public void updateLasers(AnchorPane canvas) {
+        if (!alive) return; // Only update lasers if the alien is alive
+        this.canvas = canvas;
+        for (int i = 0; i < laserCount; i++) {
+            if (lasers[i] != null) {
+                if (!canvas.getChildren().contains(lasers[i])) {
+                    canvas.getChildren().add(lasers[i]);
+                }
+                lasers[i].alienMoveLaser();
+                if (lasers[i].getY() > canvas.getHeight()) {
+                    canvas.getChildren().remove(lasers[i]);
+                    lasers[i] = null;
+                }
+            }
+        }
+    }
+
+    public Laser[] getLasers() 
+    {
+        return lasers;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
 }
+

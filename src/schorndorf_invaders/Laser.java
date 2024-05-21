@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
  */
 public class Laser extends ImageView{
     
+    
     public Laser(String url)
     {
         super(new Image(url));
@@ -24,7 +25,11 @@ public class Laser extends ImageView{
     
     public void moveLaser()
     {
-        setY(getY() - 5);
+        setY(getY() - 6);
     }
     
+    public void alienMoveLaser()
+    {
+        setY(getY() + 6);
+    } 
 }
