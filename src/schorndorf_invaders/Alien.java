@@ -12,6 +12,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -40,6 +41,9 @@ public class Alien extends ImageView
     
     @FXML
     private AnchorPane canvas;
+    
+    @FXML
+    private Button pauseButton;
     
     URL explosionResource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
     AudioClip alienExplosion = new AudioClip(explosionResource.toString());
@@ -201,6 +205,7 @@ public class Alien extends ImageView
             lasers[laserCount].setSmooth(true);
             laserCount++;
             laserShot.play();
+            System.out.println(laserCount);
         }
     }
     
@@ -215,7 +220,6 @@ public class Alien extends ImageView
                 lasers[i].alienMoveLaser();
                 if (lasers[i].getY() > canvas.getHeight()) {
                     canvas.getChildren().remove(lasers[i]);
-                    lasers[i] = null;
                 }
             }
         }

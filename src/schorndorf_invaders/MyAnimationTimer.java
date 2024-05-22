@@ -103,7 +103,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                 for (Alien alien : aliens) 
                 {
                     Laser[] alienLasers = alien.getLasers();
-                    if(alien != null  && alien.isAlive())
+                    if(alien.isAlive())
                     {  
                         alien.updateLasers(canvas);
                         if(laserCounter == LASER_SHOT_DELAY)
@@ -131,7 +131,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     alien.checkCollision(alien, lasers);
                     if(dead == false && deadLaser == false)
                     {
-                        //deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
+                        deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
                         dead = spaceship.checkAlienCollision(alien, spaceship);
                     }     
                 }

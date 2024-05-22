@@ -123,28 +123,29 @@ public class FXMLDocumentController implements Initializable {
         scoreText.setText("Score: " + score);
     }
     
-    private void resetGame() 
-    {    
-        canvas.getChildren().removeIf(node -> !node.isVisible());
-        canvas.getChildren().clear(); // Clear the canvas of any existing game elements
-        resetDone = true;
-        startGame.setVisible(true); // Show the start button again
-        canvas.getChildren().add(startGame);
-        canvas.getChildren().add(pauseButton);
-        canvas.getChildren().add(resumeButton);
-        spaceship.reset();
-        if (meinAniTimer != null) {
-            meinAniTimer.stop(); // Stop the animation timer if it's running
-            meinAniTimer.setDead(false);
-            meinAniTimer.setDeadLaser(false);
-            meinAniTimer.setDeathScreenAdded(false);
-            meinAniTimer.setResetDone(resetDone); 
-            meinAniTimer.initializeAliens(this);
-        }
+    private void resetGame() {
+    canvas.getChildren().removeIf(node -> !node.isVisible());
+    canvas.getChildren().clear(); // Clear the canvas of any existing game elements
+    resetDone = true;
+    startGame.setVisible(true); // Show the start button again
+    canvas.getChildren().add(startGame);
+    canvas.getChildren().add(pauseButton);
+    canvas.getChildren().add(resumeButton);
 
-        score = 0; // Reset the score
-        scoreText.setText("Score: 0"); // Update the score display
+    spaceship.reset(); // Reset spaceship state
+
+    if (meinAniTimer != null) {
+        meinAniTimer.stop(); // Stop the animation timer if it's running
+        meinAniTimer.setDead(false); // Reset dead flag in animation timer
+        meinAniTimer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+        meinAniTimer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+        meinAniTimer.setResetDone(resetDone); 
+        meinAniTimer.initializeAliens(this); // Reinitialize aliens
     }
+
+    score = 0; // Reset the score
+    scoreText.setText("Score: 0"); // Update the score display
+}
     
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 

@@ -5,8 +5,10 @@
 package schorndorf_invaders;
 
 import java.net.URL;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -24,6 +26,9 @@ public class Spaceship extends ImageView
 {
     @FXML
     private AnchorPane canvas;
+    
+    @FXML
+    private Button pauseButton;
     
     private Direction direction;
     
@@ -176,7 +181,7 @@ public class Spaceship extends ImageView
         Pane currentParent = (Pane) getParent();
         if (currentParent == null || alien == null || spaceship == null) return false;
 
-        if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+        if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())&& !spaceship.equals(pauseButton)) {
             // Handle spaceship and alien collision
             alien.setVisible(false);
             spaceship.setVisible(false);
@@ -192,7 +197,8 @@ public class Spaceship extends ImageView
     Pane currentParent = (Pane) getParent();
     for (Laser laser : alienLasers) {
         if (currentParent == null || laser == null || spaceship == null) return false;
-        if (laser.isVisible() && getBoundsInParent().intersects(laser.getBoundsInParent())) {
+        if (laser.isVisible() && this.getBoundsInParent().intersects(laser.getBoundsInParent()))
+        {
             laser.setVisible(false);
             spaceship.setVisible(false);
             currentParent.getChildren().removeAll(spaceship, laser);
