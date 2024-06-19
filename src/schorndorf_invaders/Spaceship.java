@@ -99,7 +99,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
             {
-                spaceship.setY(spaceship.getY() - 3);
+                spaceship.setY(spaceship.getY() - 10);
             }
             else
             {
@@ -110,7 +110,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() + 100 - spaceship.getY() > 0)
             {
-                spaceship.setY(spaceship.getY() + 3);
+                spaceship.setY(spaceship.getY() + 10);
             }
             else
             {
@@ -121,7 +121,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() + 100 - spaceship.getX() > 0)
             {
-                spaceship.setX(spaceship.getX() + 3);
+                spaceship.setX(spaceship.getX() + 10);
             }
             else
             {
@@ -132,7 +132,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() - 100 - spaceship.getX() < canvas.getWidth())
             {
-                spaceship.setX(spaceship.getX() - 3);
+                spaceship.setX(spaceship.getX() - 10);
             }
             else
             {
@@ -181,7 +181,7 @@ public class Spaceship extends ImageView
         Pane currentParent = (Pane) getParent();
         if (currentParent == null || alien == null || spaceship == null) return false;
 
-        if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())&& !spaceship.equals(pauseButton)) {
+        if (alien.isVisible() && alien.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
             // Handle spaceship and alien collision
             alien.setVisible(false);
             spaceship.setVisible(false);

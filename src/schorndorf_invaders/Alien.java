@@ -110,7 +110,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 3);
+                setY(getY() - 8.5);
             }
             else
             {
@@ -121,7 +121,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 3);
+                setY(getY() + 8.5);
             }
             else
             {
@@ -132,7 +132,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 3);
+                setX(getX() + 8.5);
             }
             else
             {
@@ -143,7 +143,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 3);
+                setX(getX() - 8.5);
             }
             else
             {
@@ -205,7 +205,6 @@ public class Alien extends ImageView
             lasers[laserCount].setSmooth(true);
             laserCount++;
             laserShot.play();
-            System.out.println(laserCount);
         }
     }
     
@@ -234,4 +233,3 @@ public class Alien extends ImageView
         return alive;
     }
 }
-

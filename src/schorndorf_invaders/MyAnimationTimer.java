@@ -56,9 +56,13 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     private static final int MOVEMENT_CHANGE_DELAY = 1000;
     private int movementCounter;
     
-    private static final int LASER_SHOT_DELAY = 300;
-    private int laserCounter;
+    private static final int ALIEN_SHOT_DELAY = 300;
+    private int alienLaserCounter;
     
+    private static final int LASER_SHOT_DELAY = 25;             //Change with powerups
+    private int laserCounter;
+    //private boolean laserShot;
+       
     private Text resetText = new Text();
     
     URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion3.wav");
@@ -68,6 +72,10 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
     
+    private int score;
+    
+    FXMLDocumentController controller;
+    
     
     public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, FXMLDocumentController controller)
     {
@@ -75,7 +83,8 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         this.lastCall = System.nanoTime();
         this.spaceship = spaceship;
         this.aliens = new Alien[MAX_ALIENS];
-        initializeAliens(controller);
+        this.controller = controller;
+        initializeAliens(this.controller);
     }
 
     @Override
@@ -86,15 +95,21 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     public void handle(MouseEvent event)
     {
-        spaceship.shootLaser(event, canvas);
+        if (laserCounter >= LASER_SHOT_DELAY)
+        {
+            spaceship.shootLaser(event, canvas);
+            laserCounter = 0;
+        }
+        System.out.println(laserCounter);
     }
     @Override
     public void handle(long now)
     {  
         if (now > lastCall+INTERVAL)
-        {
+        {     
             if(resetDone == false)
             {
+                laserCounter++;          
                 spaceship.moveShip(spaceship, canvas);
                 spaceship.updateLasers(canvas);
             
@@ -106,15 +121,15 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     if(alien.isAlive())
                     {  
                         alien.updateLasers(canvas);
-                        if(laserCounter == LASER_SHOT_DELAY)
+                        if(alienLaserCounter == ALIEN_SHOT_DELAY)
                         {
-                            laserCounter = 0;
+                            alienLaserCounter = 0;
                             alien.shootLaser(canvas);
                             alien.checkDirection(movement);
                         }
                         else
                         {
-                            laserCounter++;
+                            alienLaserCounter++;
                         }
                     }
                     if(movementCounter == MOVEMENT_CHANGE_DELAY)
@@ -136,43 +151,11 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
                     }     
                 }
                 canvas.getChildren().removeIf(node -> !node.isVisible());
-            
-                if((dead || deadLaser) && !deathScreenAdded)
+                if(score == 10)
                 {
-                    explosionImageView.setFitHeight(150); // Set size as needed
-                    explosionImageView.setFitWidth(195);  // Set size as needed
-                    explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
-                    explosionImageView.setY(spaceship.getY()); // Position at spaceship's location
-                    explosionImageView.setSmooth(true);
-                    canvas.getChildren().add(explosionImageView);
-                    
-                   
-                    
-                    deathScreen.setOpacity(0.0);
-                    
-                    PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
-                    pause.setOnFinished(event -> canvas.getChildren().remove(explosionImageView));
-                    pause.play();
-                    deathSound.setVolume(0.5);
-                    deathSound.play();
-                        
-                    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(2500), deathScreen);
-                    fadeInTransition.setFromValue(0.0);
-                    fadeInTransition.setToValue(1.0);
-                    fadeInTransition.play();
-                
-                    deathScreen.setFitHeight(canvas.getHeight());
-                    deathScreen.setFitWidth(canvas.getWidth());
-                    canvas.getChildren().add(deathScreen);
-                    deathScreenAdded = true;
-                
-                    resetText.setX(canvas.getWidth() -  150); 
-                    resetText.setY(60); 
-                    resetText.setFill(Color.WHITE); // Set the text color
-                    resetText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
-                    canvas.getChildren().add(resetText);
-                    resetText.setText("Score: 0");
+                    //initializeAliens(controller);
                 }
+                checkDeath();
                 lastCall = now;
             }
         }
@@ -181,6 +164,46 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     public void initializeAliens(FXMLDocumentController controller) {
         for (int i = 0; i < MAX_ALIENS; i++) {
             aliens[i] = new Alien("/res/sprites/meteor1.png", controller);
+        }
+    }
+    
+    public void checkDeath()
+    {
+        if((dead || deadLaser) && !deathScreenAdded)
+        {
+            explosionImageView.setFitHeight(150); // Set size as needed
+            explosionImageView.setFitWidth(195);  // Set size as needed
+            explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
+            explosionImageView.setY(spaceship.getY()); // Position at spaceship's location
+            explosionImageView.setSmooth(true);
+            canvas.getChildren().add(explosionImageView);
+                    
+                   
+                    
+            deathScreen.setOpacity(0.0);
+                    
+            PauseTransition pause = new PauseTransition(Duration.seconds(1)); // Duration of the explosion
+            pause.setOnFinished(event -> canvas.getChildren().remove(explosionImageView));
+            pause.play();
+            deathSound.setVolume(0.5);
+            deathSound.play();
+                        
+            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(2500), deathScreen);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+                
+            deathScreen.setFitHeight(canvas.getHeight());
+            deathScreen.setFitWidth(canvas.getWidth());
+            canvas.getChildren().add(deathScreen);
+            deathScreenAdded = true;
+                
+            resetText.setX(canvas.getWidth() -  150); 
+            resetText.setY(60); 
+            resetText.setFill(Color.WHITE); // Set the text color
+            resetText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
+            canvas.getChildren().add(resetText);
+            resetText.setText("Score: 0");
         }
     }
     
@@ -202,6 +225,10 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
 
     public void setDeadLaser(boolean deadLaser) {
         this.deadLaser = deadLaser;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
     
     

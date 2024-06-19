@@ -77,16 +77,6 @@ public class FXMLDocumentController implements Initializable {
             canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
 
-        aliens = meinAniTimer.getAliens();
-        for (int i = 0; i < MAX_ALIENS; i++) {
-            aliens[i].setY(150);
-            aliens[i].setX(i * 200 + 100);
-            aliens[i].setSmooth(true);
-            if (!canvas.getChildren().contains(aliens[i])) {
-                canvas.getChildren().add(aliens[i]);
-            }
-        }
-
         scoreText.setX(canvas.getWidth() - 150);
         scoreText.setY(60);
         scoreText.setFill(Color.WHITE);
@@ -94,6 +84,8 @@ public class FXMLDocumentController implements Initializable {
         canvas.getChildren().add(scoreText);
         scoreText.setText("Score: 0");
 
+        showAliens();
+        
         startGame.setVisible(false);
         if (canvas != null) {
             canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
@@ -121,9 +113,32 @@ public class FXMLDocumentController implements Initializable {
     {
         score++;
         scoreText.setText("Score: " + score);
+        meinAniTimer.setScore(score);
+        if(score == 10)
+        {
+            showAliens();
+        }
+        else if(score == 11)
+        {
+            score = 1;
+        }
     }
     
-    private void resetGame() {
+    public void showAliens()
+    {
+        aliens = meinAniTimer.getAliens();
+        for (int i = 0; i < MAX_ALIENS; i++) {
+            aliens[i].setY(150);
+            aliens[i].setX(i * 200 + 100);
+            aliens[i].setSmooth(true);
+            if (!canvas.getChildren().contains(aliens[i])) {
+                canvas.getChildren().add(aliens[i]);
+            }
+        }
+        System.out.println("GENERATED ALIENS");
+    }
+    
+    public void resetGame() {
     canvas.getChildren().removeIf(node -> !node.isVisible());
     canvas.getChildren().clear(); // Clear the canvas of any existing game elements
     resetDone = true;
@@ -160,4 +175,10 @@ public class FXMLDocumentController implements Initializable {
          resetDone = true;
         // TODO
     } 
+
+    public int getScore() {
+        return score;
+    }
+    
+    
 }
