@@ -35,7 +35,7 @@ public class Alien extends ImageView
 {
     private Direction direction;
     
-    FXMLDocumentController controller;
+    LevelOneController controller;
 
     Parent parent;
     
@@ -65,7 +65,7 @@ public class Alien extends ImageView
     
     private boolean alive = true;
     
-    public Alien(String url, FXMLDocumentController controller)
+    public Alien(String url, LevelOneController controller)
     { 
         super(new Image(url));
         this.controller = controller;

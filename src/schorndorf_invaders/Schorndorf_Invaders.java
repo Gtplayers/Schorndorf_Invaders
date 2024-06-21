@@ -32,14 +32,15 @@ public class Schorndorf_Invaders extends Application {
     @FXML
     private Button startGame;
     
+    private static Schorndorf_Invaders application;
     
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LevelOne.fxml"));
         Parent root = loader.load();
         
         // Get the controller
-        FXMLDocumentController controller = loader.getController();
+        LevelOneController controller = loader.getController();
 
         // Load the image
         Image image = new Image("/res/backgrounds/spaceBackground.png");

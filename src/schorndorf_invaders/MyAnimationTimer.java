@@ -61,7 +61,6 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     
     private static final int LASER_SHOT_DELAY = 25;             //Change with powerups
     private int laserCounter;
-    //private boolean laserShot;
        
     private Text resetText = new Text();
     
@@ -74,10 +73,10 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
     
     private int score;
     
-    FXMLDocumentController controller;
+    LevelOneController controller;
     
     
-    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, FXMLDocumentController controller)
+    public MyAnimationTimer(AnchorPane canvas, Spaceship spaceship, LevelOneController controller)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
@@ -100,7 +99,6 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             spaceship.shootLaser(event, canvas);
             laserCounter = 0;
         }
-        System.out.println(laserCounter);
     }
     @Override
     public void handle(long now)
@@ -109,6 +107,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         {     
             if(resetDone == false)
             {
+                //System.out.println(alienLaserCounter);
                 laserCounter++;          
                 spaceship.moveShip(spaceship, canvas);
                 spaceship.updateLasers(canvas);
@@ -161,7 +160,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
         }
     }
 
-    public void initializeAliens(FXMLDocumentController controller) {
+    public void initializeAliens(LevelOneController controller) {
         for (int i = 0; i < MAX_ALIENS; i++) {
             aliens[i] = new Alien("/res/sprites/meteor1.png", controller);
         }
@@ -176,9 +175,7 @@ public class MyAnimationTimer extends AnimationTimer implements EventHandler<Key
             explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
             explosionImageView.setY(spaceship.getY()); // Position at spaceship's location
             explosionImageView.setSmooth(true);
-            canvas.getChildren().add(explosionImageView);
-                    
-                   
+            canvas.getChildren().add(explosionImageView);      
                     
             deathScreen.setOpacity(0.0);
                     

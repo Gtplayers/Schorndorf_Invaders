@@ -33,7 +33,7 @@ import javafx.util.Duration;
  *
  * @author TrogrlicLeon
  */
-public class FXMLDocumentController implements Initializable {
+public class LevelOneController implements Initializable {
     
     @FXML
     private AnchorPane canvas;
@@ -66,6 +66,8 @@ public class FXMLDocumentController implements Initializable {
         canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
         spaceship.setFitWidth(88.5);
+        //spaceship.setFitWidth(1600);          TITLE SIZE
+        //spaceship.setFitHeight(89);           TITLE SIZE
         spaceship.setY(canvas.getHeight() - 130);
         spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
         spaceship.setSmooth(true);

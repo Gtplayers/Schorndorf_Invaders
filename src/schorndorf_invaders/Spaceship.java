@@ -44,12 +44,12 @@ public class Spaceship extends ImageView
     
     private boolean deadLaser;
     
-    FXMLDocumentController controller;
+    LevelOneController controller;
     
     URL resource = getClass().getResource("/res/sounds/laserSounds/laserShot.wav");
     AudioClip laserShot = new AudioClip(resource.toString());
     
-    public Spaceship(String url, FXMLDocumentController controller)
+    public Spaceship(String url, LevelOneController controller)
     {
         super(new Image(url));
         this.controller = controller;
