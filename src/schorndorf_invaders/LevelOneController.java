@@ -33,12 +33,12 @@ import javafx.util.Duration;
  *
  * @author TrogrlicLeon
  */
-public class LevelOneController implements Initializable {
+public class LevelOneController implements Initializable  {
     
     @FXML
     private AnchorPane canvas;
     @FXML
-    private Button startGame;
+    private Button startGameButton;
     @FXML
     private Button pauseButton;
     @FXML
@@ -62,40 +62,9 @@ public class LevelOneController implements Initializable {
     
     public void handleMoveAction(ActionEvent event)
     {
-        resetDone = false;
-        canvas.getChildren().removeIf(node -> !node.isVisible());
-        spaceship.setFitHeight(112.5);
-        spaceship.setFitWidth(88.5);
-        //spaceship.setFitWidth(1600);          TITLE SIZE
-        //spaceship.setFitHeight(89);           TITLE SIZE
-        spaceship.setY(canvas.getHeight() - 130);
-        spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
-        spaceship.setSmooth(true);
-        canvas.getChildren().add(spaceship);
-
-        if (meinAniTimer == null) {
-            meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
-            canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
-            canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
-        }
-
-        scoreText.setX(canvas.getWidth() - 150);
-        scoreText.setY(60);
-        scoreText.setFill(Color.WHITE);
-        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        canvas.getChildren().add(scoreText);
-        scoreText.setText("Score: 0");
-
-        showAliens();
-        
-        startGame.setVisible(false);
-        if (canvas != null) {
-            canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
-        }
-        meinAniTimer.setResetDone(resetDone);
-        meinAniTimer.start();
+        startGame();
     }
-
+    
     public void handleStoppAction(ActionEvent event)
     {
         meinAniTimer.stop();
@@ -108,7 +77,11 @@ public class LevelOneController implements Initializable {
 
     public void handleLaserShot(MouseEvent event)
     {
-        meinAniTimer.handle(event);  
+        if(meinAniTimer != null)
+        {
+            meinAniTimer.handle(event); 
+        }
+               
     }
     
     public void updateScore() 
@@ -144,10 +117,11 @@ public class LevelOneController implements Initializable {
     canvas.getChildren().removeIf(node -> !node.isVisible());
     canvas.getChildren().clear(); // Clear the canvas of any existing game elements
     resetDone = true;
-    startGame.setVisible(true); // Show the start button again
-    canvas.getChildren().add(startGame);
+    startGameButton.setVisible(true); // Show the start button again
+    canvas.getChildren().add(startGameButton);
     canvas.getChildren().add(pauseButton);
     canvas.getChildren().add(resumeButton);
+    startGameButton.requestFocus();
 
     spaceship.reset(); // Reset spaceship state
 
@@ -163,7 +137,41 @@ public class LevelOneController implements Initializable {
     score = 0; // Reset the score
     scoreText.setText("Score: 0"); // Update the score display
 }
-    
+    public void startGame()
+    {
+        resetDone = false;
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+        spaceship.setFitHeight(112.5);
+        spaceship.setFitWidth(88.5);
+        //spaceship.setFitWidth(1600);          TITLE SIZE
+        //spaceship.setFitHeight(89);           TITLE SIZE
+        spaceship.setY(canvas.getHeight() - 130);
+        spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
+        spaceship.setSmooth(true);
+        canvas.getChildren().add(spaceship);
+
+        if (meinAniTimer == null) {
+            meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
+            canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
+            canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
+        }
+
+        scoreText.setX(canvas.getWidth() - 150);
+        scoreText.setY(60);
+        scoreText.setFill(Color.WHITE);
+        scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        canvas.getChildren().add(scoreText);
+        scoreText.setText("Score: 0");
+
+        showAliens();
+        
+        startGameButton.setVisible(false);
+        if (canvas != null) {
+            canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
+        }
+        meinAniTimer.setResetDone(resetDone);
+        meinAniTimer.start();
+    }
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
     {
@@ -174,7 +182,8 @@ public class LevelOneController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         resetDone = true;
+        startGameButton.requestFocus();
+        resetDone = true;
         // TODO
     } 
 
