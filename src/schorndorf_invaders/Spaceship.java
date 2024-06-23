@@ -34,6 +34,8 @@ public class Spaceship extends ImageView
     
     private static final int MAX_LASERS = 1000;
     
+    private static final int MOVEMENT_SPEED = 5;
+    
     private int laserCount = 0;
     
     Laser[] lasers = new Laser[MAX_LASERS];
@@ -99,7 +101,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() - 100 - spaceship.getY() < canvas.getHeight())
             {
-                spaceship.setY(spaceship.getY() - 10);
+                spaceship.setY(spaceship.getY() - MOVEMENT_SPEED);
             }
             else
             {
@@ -110,7 +112,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getHeight() + 100 - spaceship.getY() > 0)
             {
-                spaceship.setY(spaceship.getY() + 10);
+                spaceship.setY(spaceship.getY() + MOVEMENT_SPEED);
             }
             else
             {
@@ -121,7 +123,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() + 100 - spaceship.getX() > 0)
             {
-                spaceship.setX(spaceship.getX() + 10);
+                spaceship.setX(spaceship.getX() + MOVEMENT_SPEED);
             }
             else
             {
@@ -132,7 +134,7 @@ public class Spaceship extends ImageView
         {
             if (canvas.getWidth() - 100 - spaceship.getX() < canvas.getWidth())
             {
-                spaceship.setX(spaceship.getX() - 10);
+                spaceship.setX(spaceship.getX() - MOVEMENT_SPEED);
             }
             else
             {

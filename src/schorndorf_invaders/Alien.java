@@ -34,8 +34,6 @@ import javafx.util.Duration;
 public class Alien extends ImageView
 {
     private Direction direction;
-    
-    LevelOneController controller;
 
     Parent parent;
     
@@ -59,16 +57,17 @@ public class Alien extends ImageView
     
     private static final int MAX_LASERS = 1000;
     
+    private static final int MOVEMENT_SPEED = 5;
+    
     private int laserCount = 0;
     
     Laser[] lasers = new Laser[MAX_LASERS];
     
     private boolean alive = true;
     
-    public Alien(String url, LevelOneController controller)
+    public Alien(String url)
     { 
         super(new Image(url));
-        this.controller = controller;
         alienExplosion.setVolume(0.2);
         laserShot.setVolume(0.1);
         for (int i = 0; i < MAX_LASERS; i++) 
@@ -110,7 +109,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() - 100 - getY() < canvas.getHeight())
             {
-                setY(getY() - 8.5);
+                setY(getY() - MOVEMENT_SPEED);
             }
             else
             {
@@ -121,7 +120,7 @@ public class Alien extends ImageView
         {
             if (canvas.getHeight() + 100 - getY() > 0)
             {
-                setY(getY() + 8.5);
+                setY(getY() + MOVEMENT_SPEED);
             }
             else
             {
@@ -132,7 +131,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() + 100 - getX() > 0)
             {
-                setX(getX() + 8.5);
+                setX(getX() + MOVEMENT_SPEED);
             }
             else
             {
@@ -143,7 +142,7 @@ public class Alien extends ImageView
         {
             if (canvas.getWidth() - 100 - getX() < canvas.getWidth())
             {
-                setX(getX() - 8.5);
+                setX(getX() - MOVEMENT_SPEED);
             }
             else
             {
@@ -152,7 +151,7 @@ public class Alien extends ImageView
         }
     }
 
-    public void checkCollision(Alien alien, Laser[] lasers)
+    public boolean checkCollision(Alien alien, Laser[] lasers)
     {
         Pane currentParent = (Pane) getParent();
         for (Laser laser : lasers) {
@@ -181,10 +180,14 @@ public class Alien extends ImageView
                     currentParent.getChildren().removeIf(node -> !node.isVisible());
                 });
                 pause.play();
-                controller.updateScore();
                 break; // Exit the loop after handling collision with one laser
             }
+            else
+            {
+                alive = true;
+            }
         }
+        return alive;
     }
 
     private void removeAlienLasers(Pane currentParent, Alien alien) 

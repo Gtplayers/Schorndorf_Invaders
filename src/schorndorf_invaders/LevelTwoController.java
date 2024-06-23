@@ -1,40 +1,32 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package schorndorf_invaders;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-
 
 /**
+ * FXML Controller class
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class LevelOneController implements Initializable  {
-    
+public class LevelTwoController implements Initializable {
+
     @FXML
     private AnchorPane canvas;
     @FXML
@@ -43,10 +35,10 @@ public class LevelOneController implements Initializable  {
     private Button pauseButton;
     @FXML
     private Button resumeButton;
-    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png", this);
+    //Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png", this);
     
     
-    private LevelOneTimer timer = null;
+    private LevelOneTimer meinAniTimer = null;
     
     private static final int MAX_ALIENS = 10;
     Alien[] aliens = new Alien[MAX_ALIENS];
@@ -62,33 +54,33 @@ public class LevelOneController implements Initializable  {
     
     public void handleMoveAction(ActionEvent event)
     {
-        startGame();
+        //startGame();
     }
     
     public void handleStoppAction(ActionEvent event)
     {
-        timer.stop();
+        meinAniTimer.stop();
     }
     
     public void handleResumeAction(ActionEvent event)
     {      
-        timer.start();
+        meinAniTimer.start();
     }
 
     public void handleLaserShot(MouseEvent event)
     {
-        if(timer != null)
+        if(meinAniTimer != null)
         {
-            timer.handle(event); 
+            meinAniTimer.handle(event); 
         }
                
     }
     
-    public void updateScore() 
+    /*public void updateScore() 
     {
         score++;
         scoreText.setText("Score: " + score);
-        timer.setScore(score);
+        meinAniTimer.setScore(score);
         if(score == 10)
         {
             showAliens();
@@ -101,7 +93,7 @@ public class LevelOneController implements Initializable  {
     
     public void showAliens()
     {
-        aliens = timer.getAliens();
+        aliens = meinAniTimer.getAliens();
         for (int i = 0; i < MAX_ALIENS; i++) {
             aliens[i].setY(150);
             aliens[i].setX(i * 200 + 100);
@@ -125,13 +117,13 @@ public class LevelOneController implements Initializable  {
 
     spaceship.reset(); // Reset spaceship state
 
-    if (timer != null) {
-        timer.stop(); // Stop the animation timer if it's running
-        timer.setDead(false); // Reset dead flag in animation timer
-        timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
-        timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
-        timer.setResetDone(resetDone); 
-        timer.initializeAliens(this); // Reinitialize aliens
+    if (meinAniTimer != null) {
+        meinAniTimer.stop(); // Stop the animation timer if it's running
+        meinAniTimer.setDead(false); // Reset dead flag in animation timer
+        meinAniTimer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+        meinAniTimer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+        meinAniTimer.setResetDone(resetDone); 
+        meinAniTimer.initializeAliens(this); // Reinitialize aliens
     }
 
     score = 0; // Reset the score
@@ -150,10 +142,10 @@ public class LevelOneController implements Initializable  {
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
 
-        if (timer == null) {
-            timer = new LevelOneTimer(canvas, spaceship, this);
-            canvas.getScene().getRoot().setOnKeyPressed(timer);
-            canvas.getScene().getRoot().setOnKeyReleased(timer);
+        if (meinAniTimer == null) {
+            meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
+            canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
+            canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
         }
 
         scoreText.setX(canvas.getWidth() - 150);
@@ -169,8 +161,8 @@ public class LevelOneController implements Initializable  {
         if (canvas != null) {
             canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
         }
-        timer.setResetDone(resetDone);
-        timer.start();
+        meinAniTimer.setResetDone(resetDone);
+        meinAniTimer.start();
     }
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
@@ -179,7 +171,7 @@ public class LevelOneController implements Initializable  {
         resetGame(); // Call the resetGame method to reset the game
         }     
     } 
-    
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
@@ -187,13 +179,7 @@ public class LevelOneController implements Initializable  {
         // TODO
     } 
 
-    public int getScore() {
+    /*public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-    
-    
+    }  */
 }

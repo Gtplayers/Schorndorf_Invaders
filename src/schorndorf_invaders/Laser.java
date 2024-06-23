@@ -25,11 +25,11 @@ public class Laser extends ImageView{
     
     public void moveLaser()
     {
-        setY(getY() - 15);
+        setY(getY() - 10);
     }
     
     public void alienMoveLaser()
     {
-        setY(getY() + 15);
+        setY(getY() + 10);
     } 
 }
