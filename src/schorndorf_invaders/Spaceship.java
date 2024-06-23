@@ -46,19 +46,20 @@ public class Spaceship extends ImageView
     
     private boolean deadLaser;
     
-    LevelOneController controller;
     
     URL resource = getClass().getResource("/res/sounds/laserSounds/laserShot.wav");
     AudioClip laserShot = new AudioClip(resource.toString());
     
-    public Spaceship(String url, LevelOneController controller)
+    public Spaceship(String url)
     {
         super(new Image(url));
-        this.controller = controller;
         laserShot.setVolume(0.1);
         for (int i = 0; i < MAX_LASERS; i++) 
         {
             lasers[i] = new Laser("/res/lasers/laserGreen.png");
+            lasers[i].setFitHeight(15.4);
+            lasers[i].setFitWidth(7);
+            lasers[i].setSmooth(true);
         } 
     }
 
@@ -147,7 +148,7 @@ public class Spaceship extends ImageView
     {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) 
         {
-            laserShot.play();
+            laserShot.play();                                             //ENABLE AFTER TESTING OVER
             //lasers[laserCount].setFitHeight(20);
             //lasers[laserCount].setFitWidth(20);
             lasers[laserCount].setY(getY() + 10);
@@ -188,7 +189,19 @@ public class Spaceship extends ImageView
             alien.setVisible(false);
             spaceship.setVisible(false);
             currentParent.getChildren().removeAll(spaceship, alien);
-            controller.updateScore();
+            dead = true;
+        }
+    return dead;
+    }
+    
+    public boolean checkBossCollision(MonkeySoup monkeySoup, Spaceship spaceship) 
+    {
+        Pane currentParent = (Pane) getParent();
+        if (currentParent == null || monkeySoup == null || spaceship == null) return false;
+
+        if (monkeySoup.isVisible() && monkeySoup.getBoundsInParent().intersects(spaceship.getBoundsInParent())) {
+            spaceship.setVisible(false);
+            currentParent.getChildren().remove(spaceship);
             dead = true;
         }
     return dead;

@@ -5,37 +5,23 @@
 package schorndorf_invaders;
 
 import java.net.URL;
-import java.util.Set;
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
  *
  * @author Leon
  */
-public class Alien extends ImageView
-{
-    private Direction direction;
+public class MonkeySoup  extends ImageView{
+     private Direction direction;
 
     Parent parent;
     
@@ -57,45 +43,33 @@ public class Alien extends ImageView
        
     PauseTransition pause = new PauseTransition(Duration.seconds(1)); 
     
-    private static final int MAX_LASERS = 2000;
+    private static final int MAX_LASERS = 1000;
     
     private static final int MOVEMENT_SPEED = 5;
     
-    private static int laserCount = 0; // Make laserCount static
+    private int laserCount = 0;
     
     Laser[] lasers = new Laser[MAX_LASERS];
     
-    private boolean alive = true;
+    private int health = 2000;
     
     Schorndorf_Invaders app = Schorndorf_Invaders.getApplication();
     String currentFxmlFile = app.getCurrentFxml();
     
-    public Alien(String url)
+    public MonkeySoup(String url)
     { 
         super(new Image(url));
         alienExplosion.setVolume(0.2);
         laserShot.setVolume(0.1);
         for (int i = 0; i < MAX_LASERS; i++) 
         {
-            if(currentFxmlFile.equals("LevelTwo.fxml"))
-            {
-                lasers[i] = new Laser("/res/lasers/laserRed.png");
-                lasers[i].setFitHeight(15.4);   //14.3
-                lasers[i].setFitWidth(7);     //6.5
-                lasers[i].setSmooth(true);
-            }
-            else if(currentFxmlFile.equals("LevelThree.fxml"))
-            {
-                lasers[i] = new Laser("/res/lasers/lightning.png");
-                lasers[i].setFitHeight(23.8);   //22.1
-                lasers[i].setFitWidth(7);     //6.5
-                lasers[i].setSmooth(true);
-            }
+            lasers[i] = new Laser("/res/lasers/laserRed.png");
+            lasers[i].setFitHeight(15.4);   //14.3
+            lasers[i].setFitWidth(7);     //6.5
+            lasers[i].setSmooth(true);
         } 
     }
-    
-    
-    
+
     
     public void checkDirection(int movement)
     {
@@ -170,24 +144,27 @@ public class Alien extends ImageView
             }
         }
     }
+    
+    public void startingAnimation()
+    {
+       setY(getY() + 2); 
+    }
 
-    public boolean checkCollision(Alien alien, Laser[] lasers)
+    
+    public int checkCollision(MonkeySoup monkeySoup, Laser[] lasers) 
     {
         Pane currentParent = (Pane) getParent();
         for (Laser laser : lasers) {
-            if (currentParent != null && alien != null && laser != null && alien.getBoundsInParent().intersects(laser.getBoundsInParent())) 
-            {
-                alive = false;
-                removeAlienLasers(currentParent, this);
-                alien.setVisible(false); 
+            if (currentParent != null && monkeySoup != null && laser != null && !laser.isProcessed() && monkeySoup.getBoundsInParent().intersects(laser.getBoundsInParent())) {
+                health--;
                 laser.setVisible(false);
-                currentParent.getChildren().removeIf(node -> !node.isVisible());
-                currentParent.getChildren().removeAll(alien, laser);
+                laser.setProcessed(true); // Mark the laser as processed
+                currentParent.getChildren().remove(laser);  
                 alienExplosion.play();
                 explosionImageView.setFitHeight(150); // Set size as needed
                 explosionImageView.setFitWidth(150);  // Set size as needed
-                explosionImageView.setX(alien.getX()); // Position at spaceship's location
-                explosionImageView.setY(alien.getY()); // Position at spaceship's location
+                explosionImageView.setX(this.getX()); // Position at spaceship's location
+                explosionImageView.setY(this.getY()); // Position at spaceship's location
                 explosionImageView.setSmooth(true);
                 if (!currentParent.getChildren().contains(explosionImageView)) 
                 {
@@ -200,46 +177,26 @@ public class Alien extends ImageView
                     currentParent.getChildren().removeIf(node -> !node.isVisible());
                 });
                 pause.play();
-                break; // Exit the loop after handling collision with one laser
-            }
-            else
-            {
-                alive = true;
-            }
-        }
-        return alive;
-    }
-
-    private void removeAlienLasers(Pane currentParent, Alien alien) 
-    {
-        for (Laser laser : alien.lasers) {
-            if (laser != null) {
-                laser.setVisible(false);
-                currentParent.getChildren().remove(laser);
-            }
+        break; // Exit the loop after handling collision with one laser
         }
     }
+    return health;
+    } 
     
     public void shootLaser(AnchorPane canvas) {
-    if (alive && this.getParent() != null) { // Check if alien is alive and part of the scene
-        if (laserCount < MAX_LASERS) {
-            laserCount++;
-            System.out.println(laserCount);
-            lasers[laserCount - 1].setY(getY() + 10);
-            lasers[laserCount - 1].setX(getX() + 42);
-            lasers[laserCount - 1].setSmooth(true);
-            if (!canvas.getChildren().contains(lasers[laserCount - 1])) {
-                canvas.getChildren().add(lasers[laserCount - 1]);
+        if (health != 0){ // Only shoot if the boss is alive
+            if (laserCount < MAX_LASERS) {
+                lasers[laserCount].setY(getY() + 10);
+                lasers[laserCount].setX(getX() + 42);
+                lasers[laserCount].setSmooth(true);
+                laserCount++;
+                laserShot.play();
             }
-            laserShot.play();
-            System.out.println(laserCount);
         }
     }
-}
-
     
     public void updateLasers(AnchorPane canvas) {
-        if (alive){// Only update lasers if the alien is alive
+        if (health != 0){ // Only update lasers if the boss is alive
             this.canvas = canvas;
             for (int i = 0; i < laserCount; i++) {
                 if (lasers[i] != null) {
@@ -255,16 +212,18 @@ public class Alien extends ImageView
         }
     }
 
-    public static int getLaserCount() {
-        return laserCount;
-    }
-    
     public Laser[] getLasers() 
     {
         return lasers;
     }
 
-    public boolean isAlive() {
-        return alive;
+    public int getHealth() {
+        return health;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    
+    
 }

@@ -5,34 +5,30 @@
 package schorndorf_invaders;
 
 import java.io.IOException;
-import javafx.scene.media.AudioClip;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 /**
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEvent> 
-{
-    private static final long INTERVAL = 1l;
+public class LevelThreeTimer extends AnimationTimer implements EventHandler<KeyEvent>{
+    
+        private static final long INTERVAL = 1l;
 //                                       1l; -> schellste Bewegung
 //                                       10_000_000l;    -> 1/100 Sekunde
 //                                       100_000_000l;   -> 1/10  Sekunde
@@ -78,10 +74,10 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
     
     private int score;
     
-    LevelOneController controller;
+    LevelThreeController controller;
     
     
-    public LevelOneTimer(AnchorPane canvas, Spaceship spaceship, LevelOneController controller)
+    public LevelThreeTimer(AnchorPane canvas, Spaceship spaceship, LevelThreeController controller)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
@@ -131,7 +127,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
                     System.err.println("IOException occurred in checkScore: " + e.getMessage());
                     e.printStackTrace();
                 }
-                System.out.println("TIMER 1 RUNNING");
+                System.out.println("TIMER 3 RUNNING");
                 lastCall = now;
             }
         }
@@ -139,10 +135,16 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
 
     public void initializeAliens() {
         for (int i = 0; i < MAX_ALIENS/2; i++) {
-            aliens[i] = new Alien("/res/sprites/meteor1.png");
+            aliens[i] = new Alien("/res/sprites/eel.png");
+            //aliens[i].setFitHeight(62.4);
+            //aliens[i].setFitWidth(68.9);
+            aliens[i].setSmooth(true);
         }
         for (int i = MAX_ALIENS/2; i < MAX_ALIENS; i++) {
-            aliens[i] = new Alien("/res/sprites/meteor2.png");
+            aliens[i] = new Alien("/res/sprites/jellyfish.png");
+            //aliens[i].setFitWidth(68.9);
+            //aliens[i].setFitHeight(76.7);
+            aliens[i].setSmooth(true);
         }
     }
     
@@ -192,7 +194,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
                     if(alien.isAlive())
                     {  
                         alien.updateLasers(canvas);
-                        /*if(alienLaserCounter == ALIEN_SHOT_DELAY)
+                        if(alienLaserCounter == ALIEN_SHOT_DELAY)
                         {
                             alienLaserCounter = 0;
                             alien.shootLaser(canvas);
@@ -201,7 +203,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
                         else
                         {
                             alienLaserCounter++;
-                        }*/
+                        }
                     }
                     if(movementCounter == MOVEMENT_CHANGE_DELAY)
                     {
@@ -217,6 +219,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
                     alienAlive = alien.checkCollision(alien, lasers);
                     if(alienAlive == false)
                     {
+                        System.out.println("ALIEN DEAD");
                         controller.updateScore(); 
                     }
                     if(dead == false && deadLaser == false)
@@ -232,7 +235,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
         if(score == 10)
         {
             score = 0;
-            Schorndorf_Invaders.getApplication().setScene("LevelTwo.fxml");
+            Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
             controller.stopTimer();
             System.out.println("SWITCHED SCENES");
         }

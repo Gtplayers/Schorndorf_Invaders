@@ -1,40 +1,32 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package schorndorf_invaders;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-
 
 /**
+ * FXML Controller class
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class LevelOneController implements Initializable  {
-    
+public class LevelThreeController implements Initializable {
+
     @FXML
     private AnchorPane canvas;
     @FXML
@@ -46,7 +38,7 @@ public class LevelOneController implements Initializable  {
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
     
-    private LevelOneTimer timer = null;
+    private LevelThreeTimer timer = null;
     
     private static final int MAX_ALIENS = 10;
     Alien[] aliens = new Alien[MAX_ALIENS];
@@ -107,7 +99,7 @@ public class LevelOneController implements Initializable  {
     public void showAliens()
     {
         aliens = timer.getAliens();
-        for (int i = 0; i < MAX_ALIENS; i++) {
+        for (int i = 0; i < MAX_ALIENS; i++) {       
             aliens[i].setY(150);
             aliens[i].setX(i * 200 + 100);
             aliens[i].setSmooth(true);
@@ -156,7 +148,7 @@ public class LevelOneController implements Initializable  {
         canvas.getChildren().add(spaceship);
 
         if (timer == null) {
-            timer = new LevelOneTimer(canvas, spaceship, this);
+            timer = new LevelThreeTimer(canvas, spaceship, this);
             canvas.getScene().getRoot().setOnKeyPressed(timer);
             canvas.getScene().getRoot().setOnKeyReleased(timer);
         }
@@ -198,7 +190,6 @@ public class LevelOneController implements Initializable  {
 
     public void setScore(int score) {
         this.score = score;
-    }
-    
+    }  
     
 }

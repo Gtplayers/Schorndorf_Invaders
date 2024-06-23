@@ -20,6 +20,7 @@ public class Schorndorf_Invaders extends Application {
     private Stage stage;
     
     ImageView title = new ImageView("/res/startText1.png");
+    private String currentFxml;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -30,24 +31,39 @@ public class Schorndorf_Invaders extends Application {
         setScene("StartScreen.fxml");
     }
 
-    public void setScene(String fxml) throws IOException {
+    public void setScene(String fxml) throws IOException 
+    {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent root = loader.load();
         Scene scene = new Scene(root);
+        Object controller = loader.getController();
+        
+        this.currentFxml = fxml;
 
-        // Check the FXML file and set the background for the start screen
-        if (fxml.equals("StartScreen.fxml")) {
-            StartScreenController controller = loader.getController();
-            setStartScreenBackground(controller);
+        // Check the actual type of the controller and set the background accordingly
+        if (controller instanceof StartScreenController) 
+        {
+            setStartScreenBackground((StartScreenController) controller);
+        } 
+        else if (controller instanceof LevelOneController) 
+        {
+            setLevelOneBackground((LevelOneController) controller);
+        } 
+        else if (controller instanceof LevelTwoController)     
+        {
+            setLevelTwoBackground((LevelTwoController) controller);
         }
-        else if (fxml.equals("LevelOne.fxml")) {
-            LevelOneController controller = loader.getController();
-            setLevelOneBackground(controller);
+        else if (controller instanceof LevelThreeController)     
+        {
+            setLevelThreeBackground((LevelThreeController) controller);
         }
-
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        else if (controller instanceof FinalBossController)     
+        {
+            setFinalBossBackground((FinalBossController) controller);
+        }
+    stage.setScene(scene);
+    stage.setFullScreen(true);
+    stage.show();
     }
 
     private void setStartScreenBackground(StartScreenController controller) {
@@ -86,11 +102,58 @@ public class Schorndorf_Invaders extends Application {
         // Set the background of the pane
         controller.getCanvas().setBackground(new Background(backgroundImage));
     }
+    
+     private void setLevelTwoBackground(LevelTwoController controller) {
+        // Load the image
+        Image image = new Image("/res/backgrounds/moonBackground.png");
+
+        // Create a BackgroundSize object
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+
+        // Create a BackgroundImage object
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+
+        // Set the background of the pane
+        controller.getCanvas().setBackground(new Background(backgroundImage));
+    }
+     
+     private void setLevelThreeBackground(LevelThreeController controller) {
+        // Load the image
+        Image image = new Image("/res/backgrounds/oceanBackground.png");
+
+        // Create a BackgroundSize object
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+
+        // Create a BackgroundImage object
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+
+        // Set the background of the pane
+        controller.getCanvas().setBackground(new Background(backgroundImage));
+    }
+     
+      private void setFinalBossBackground(FinalBossController controller) {
+        // Load the image
+        Image image = new Image("/res/backgrounds/spaceBackground.png");
+
+        // Create a BackgroundSize object
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+
+        // Create a BackgroundImage object
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+
+        // Set the background of the pane
+        controller.getCanvas().setBackground(new Background(backgroundImage));
+    }
 
     public static Schorndorf_Invaders getApplication() {
         return application;
     }
 
+    public String getCurrentFxml() {
+        return currentFxml;
+    }
+
+    
     public static void main(String[] args) {
         launch(args);
     }

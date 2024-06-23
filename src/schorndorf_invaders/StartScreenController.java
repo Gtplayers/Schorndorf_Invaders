@@ -26,7 +26,7 @@ public class StartScreenController implements Initializable {
      */
     @FXML
     private AnchorPane canvas;
-    
+     
     ImageView image = new ImageView("/res/startText1.png");
 
     public AnchorPane getCanvas() {
@@ -35,7 +35,7 @@ public class StartScreenController implements Initializable {
 
      public void handlePlay(ActionEvent event) throws IOException
     {
-        Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
+        Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
     }
      
       public void handleControls(ActionEvent event)

@@ -5,33 +5,29 @@
 package schorndorf_invaders;
 
 import java.io.IOException;
-import javafx.scene.media.AudioClip;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 /**
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEvent> 
-{
+public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEvent>{
+    
     private static final long INTERVAL = 1l;
 //                                       1l; -> schellste Bewegung
 //                                       10_000_000l;    -> 1/100 Sekunde
@@ -46,9 +42,6 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
     private boolean deathScreenAdded = false;
     private boolean resetDone = true;
     
-    private static final int MAX_ALIENS = 10;
-    Alien[] aliens = new Alien[MAX_ALIENS];
-    
     Laser[] lasers;
     
     Spaceship spaceship;
@@ -60,14 +53,27 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
     private static final int MOVEMENT_CHANGE_DELAY = 1000;
     private int movementCounter;
     
-    private boolean alienAlive;
-    private static final int ALIEN_SHOT_DELAY = 300;
+    private static final int STARTING_ANIMATION_LENGTH = 200;
+    private int startingAnimationCounter;
+    
+    private static final int ALIEN_SHOT_DELAY = 50;
     private int alienLaserCounter;
     
     private static final int LASER_SHOT_DELAY = 25;
     private int laserCounter;
+    
+    private int bossHealth = 2000;
        
     private Text resetText = new Text();
+    private Text bossHealthText = new Text();
+    
+    boolean textShown;
+    
+    private boolean laughPlayed;
+    URL laughResource = getClass().getResource("/res/sounds/laughSounds/evilLaugh2.mp3");
+    AudioClip evilLaugh = new AudioClip(laughResource.toString());
+    
+    MonkeySoup monkeySoup = new MonkeySoup("/res/sprites/monkeySoupBoss.png");  
     
     URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion3.wav");
     AudioClip deathSound = new AudioClip(resource.toString());
@@ -76,19 +82,17 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
     
-    private int score;
     
-    LevelOneController controller;
+    FinalBossController controller;
     
     
-    public LevelOneTimer(AnchorPane canvas, Spaceship spaceship, LevelOneController controller)
+    public FinalBossTimer(AnchorPane canvas, Spaceship spaceship, FinalBossController controller)
     {
         this.canvas = canvas;
         this.lastCall = System.nanoTime();
         this.spaceship = spaceship;
-        this.aliens = new Alien[MAX_ALIENS];
         this.controller = controller;
-        initializeAliens();
+        initializeBoss();
     }
 
     @Override
@@ -112,38 +116,55 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
         {     
             if(resetDone == false)
             {
-                //System.out.println(alienLaserCounter);
-                laserCounter++;          
-                spaceship.moveShip(spaceship, canvas);
-                spaceship.updateLasers(canvas);
-            
-                lasers = spaceship.getLasers();
-            
-                checkAlienStatus();
-                canvas.getChildren().removeIf(node -> !node.isVisible());
-                checkDeath();
-                try 
+                if(startingAnimationCounter == STARTING_ANIMATION_LENGTH)
                 {
-                    checkScore();     
-                } catch (IOException e) 
-                {
-                    // Handle the IOException
-                    System.err.println("IOException occurred in checkScore: " + e.getMessage());
-                    e.printStackTrace();
+                    //System.out.println(alienLaserCounter);
+                    laserCounter++;          
+                    spaceship.moveShip(spaceship, canvas);
+                    spaceship.updateLasers(canvas);
+            
+                    lasers = spaceship.getLasers();
+                    updateBossHealthText();
+                    checkAlienStatus();
+                    canvas.getChildren().removeIf(node -> !node.isVisible());
+                    checkDeath();
+                    try 
+                    {
+                        checkWin();     
+                    } catch (IOException e) 
+                    {
+                        // Handle the IOException
+                        System.err.println("IOException occurred in checkScore: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                    System.out.println("TIMER 3 RUNNING");
+                    lastCall = now;
                 }
-                System.out.println("TIMER 1 RUNNING");
-                lastCall = now;
+                else
+                {
+                    showBossHealthText();
+                    playEvilLaugh();
+                    monkeySoup.startingAnimation();
+                    startingAnimationCounter++;
+                }
             }
         }
     }
 
-    public void initializeAliens() {
-        for (int i = 0; i < MAX_ALIENS/2; i++) {
-            aliens[i] = new Alien("/res/sprites/meteor1.png");
+    public void playEvilLaugh()
+    {
+        if(laughPlayed == false)
+        {
+            laughPlayed = true;
+            evilLaugh.play();
         }
-        for (int i = MAX_ALIENS/2; i < MAX_ALIENS; i++) {
-            aliens[i] = new Alien("/res/sprites/meteor2.png");
-        }
+    }
+    
+    public void initializeBoss() { 
+        if(monkeySoup == null)
+        {
+            monkeySoup = new MonkeySoup("/res/sprites/monkeySoupBoss.png");
+        }       
     }
     
     public void checkDeath()
@@ -184,65 +205,84 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
         }
     }
     
-    public void checkAlienStatus()
-    {
-        for (Alien alien : aliens) 
-                {
-                    Laser[] alienLasers = alien.getLasers();
-                    if(alien.isAlive())
-                    {  
-                        alien.updateLasers(canvas);
-                        /*if(alienLaserCounter == ALIEN_SHOT_DELAY)
-                        {
-                            alienLaserCounter = 0;
-                            alien.shootLaser(canvas);
-                            alien.checkDirection(movement);
-                        }
-                        else
-                        {
-                            alienLaserCounter++;
-                        }*/
-                    }
-                    if(movementCounter == MOVEMENT_CHANGE_DELAY)
-                    {
-                        movementCounter = 0;
-                        movement = util.Zufall.movement();
-                        alien.checkDirection(movement);
-                    }
-                    else
-                    {
-                        movementCounter++;
-                    }
-                    alien.moveShip(canvas);
-                    alienAlive = alien.checkCollision(alien, lasers);
-                    if(alienAlive == false)
-                    {
-                        controller.updateScore(); 
-                    }
-                    if(dead == false && deadLaser == false)
-                    {
-                        deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
-                        dead = spaceship.checkAlienCollision(alien, spaceship);
-                    }     
-                }
+    public void showBossHealthText()
+    { 
+        if(textShown == false)
+        {
+            bossHealthText.setX(canvas.getWidth()/2.1); 
+            bossHealthText.setY(100); 
+            bossHealthText.setFill(Color.RED); // Set the text color
+            bossHealthText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
+            canvas.getChildren().add(bossHealthText);
+            bossHealthText.setText("Boss Health: " +  bossHealth);
+        }
+        textShown = true;
     }
     
-    public void checkScore() throws IOException
+    public void updateBossHealthText()
     {
-        if(score == 10)
+        bossHealthText.setText("Boss Health: " +  bossHealth);
+    }
+    
+    public void checkAlienStatus()
+    {
+        Laser[] alienLasers = monkeySoup.getLasers();
+        monkeySoup.updateLasers(canvas);
+        if(alienLaserCounter == ALIEN_SHOT_DELAY)
         {
-            score = 0;
-            Schorndorf_Invaders.getApplication().setScene("LevelTwo.fxml");
+            alienLaserCounter = 0;
+            monkeySoup.shootLaser(canvas);
+            monkeySoup.checkDirection(movement);
+        }
+        else
+        {
+        alienLaserCounter++;
+        }
+        if(movementCounter == MOVEMENT_CHANGE_DELAY)
+        {
+            movementCounter = 0;
+            movement = util.Zufall.movement();
+            monkeySoup.checkDirection(movement);
+        }
+            else
+        {
+             movementCounter++;
+        }
+        monkeySoup.moveShip(canvas);
+        bossHealth = monkeySoup.checkCollision(monkeySoup, lasers);
+        if(dead == false && deadLaser == false)
+        {
+            deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
+            dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
+        }
+    }
+    
+    public void checkWin() throws IOException
+    {
+        if(bossHealth == 0)
+        {
+            bossHealth = 1;
+            Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
             controller.stopTimer();
             System.out.println("SWITCHED SCENES");
         }
     }
-    
-    public Alien[] getAliens() {
-        return aliens;
+
+    public MonkeySoup getMonkeySoup() {
+        return monkeySoup;
     }
 
-    public void setDead(boolean dead) {
+    public void setStartingAnimationCounter(int startingAnimationCounter) {
+        this.startingAnimationCounter = startingAnimationCounter;
+    }
+  
+    
+    public void setLaughPlayed(boolean laughPlayed) {
+        this.laughPlayed = laughPlayed;
+    }
+    
+
+        public void setDead(boolean dead) {
         this.dead = dead;
     }
 
@@ -258,9 +298,14 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
         this.deadLaser = deadLaser;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setTextShown(boolean textShown) {
+        this.textShown = textShown;
     }
+
+    public void setBossHealth(int bossHealth) {
+        this.bossHealth = bossHealth;
+    }
+    
     
     
 }

@@ -17,6 +17,16 @@ import javafx.scene.layout.Pane;
  */
 public class Laser extends ImageView{
     
+    private static final int MOVEMENT_SPEED = 10;
+    private boolean processed = false;
+    
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
     
     public Laser(String url)
     {
@@ -25,11 +35,11 @@ public class Laser extends ImageView{
     
     public void moveLaser()
     {
-        setY(getY() - 10);
+        setY(getY() - MOVEMENT_SPEED);
     }
     
     public void alienMoveLaser()
     {
-        setY(getY() + 10);
+        setY(getY() + MOVEMENT_SPEED);
     } 
 }

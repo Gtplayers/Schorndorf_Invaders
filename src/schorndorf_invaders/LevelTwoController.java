@@ -35,10 +35,10 @@ public class LevelTwoController implements Initializable {
     private Button pauseButton;
     @FXML
     private Button resumeButton;
-    //Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png", this);
+    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
     
-    private LevelOneTimer meinAniTimer = null;
+    private LevelTwoTimer timer = null;
     
     private static final int MAX_ALIENS = 10;
     Alien[] aliens = new Alien[MAX_ALIENS];
@@ -54,33 +54,38 @@ public class LevelTwoController implements Initializable {
     
     public void handleMoveAction(ActionEvent event)
     {
-        //startGame();
+        startGame();
     }
     
     public void handleStoppAction(ActionEvent event)
     {
-        meinAniTimer.stop();
+        timer.stop();
     }
     
     public void handleResumeAction(ActionEvent event)
     {      
-        meinAniTimer.start();
+        timer.start();
     }
 
     public void handleLaserShot(MouseEvent event)
     {
-        if(meinAniTimer != null)
+        if(timer != null)
         {
-            meinAniTimer.handle(event); 
+            timer.handle(event); 
         }
                
     }
     
-    /*public void updateScore() 
+    public void stopTimer()
+    {
+        timer.stop();
+    }
+    
+    public void updateScore() 
     {
         score++;
         scoreText.setText("Score: " + score);
-        meinAniTimer.setScore(score);
+        timer.setScore(score);
         if(score == 10)
         {
             showAliens();
@@ -93,10 +98,10 @@ public class LevelTwoController implements Initializable {
     
     public void showAliens()
     {
-        aliens = meinAniTimer.getAliens();
-        for (int i = 0; i < MAX_ALIENS; i++) {
+        aliens = timer.getAliens();
+        for (int i = 0; i < MAX_ALIENS; i++) {       
             aliens[i].setY(150);
-            aliens[i].setX(i * 200 + 100);
+            aliens[i].setX(i * 200 + 200);
             aliens[i].setSmooth(true);
             if (!canvas.getChildren().contains(aliens[i])) {
                 canvas.getChildren().add(aliens[i]);
@@ -117,13 +122,13 @@ public class LevelTwoController implements Initializable {
 
     spaceship.reset(); // Reset spaceship state
 
-    if (meinAniTimer != null) {
-        meinAniTimer.stop(); // Stop the animation timer if it's running
-        meinAniTimer.setDead(false); // Reset dead flag in animation timer
-        meinAniTimer.setDeadLaser(false); // Reset deadLaser flag in animation timer
-        meinAniTimer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
-        meinAniTimer.setResetDone(resetDone); 
-        meinAniTimer.initializeAliens(this); // Reinitialize aliens
+    if (timer != null) {
+        timer.stop(); // Stop the animation timer if it's running
+        timer.setDead(false); // Reset dead flag in animation timer
+        timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+        timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+        timer.setResetDone(resetDone); 
+        timer.initializeAliens(); // Reinitialize aliens
     }
 
     score = 0; // Reset the score
@@ -142,10 +147,10 @@ public class LevelTwoController implements Initializable {
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
 
-        if (meinAniTimer == null) {
-            meinAniTimer = new MyAnimationTimer(canvas, spaceship, this);
-            canvas.getScene().getRoot().setOnKeyPressed(meinAniTimer);
-            canvas.getScene().getRoot().setOnKeyReleased(meinAniTimer);
+        if (timer == null) {
+            timer = new LevelTwoTimer(canvas, spaceship, this);
+            canvas.getScene().getRoot().setOnKeyPressed(timer);
+            canvas.getScene().getRoot().setOnKeyReleased(timer);
         }
 
         scoreText.setX(canvas.getWidth() - 150);
@@ -161,8 +166,8 @@ public class LevelTwoController implements Initializable {
         if (canvas != null) {
             canvas.getScene().setOnKeyPressed(this::handleResetKeyPressed);
         }
-        meinAniTimer.setResetDone(resetDone);
-        meinAniTimer.start();
+        timer.setResetDone(resetDone);
+        timer.start();
     }
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
@@ -171,7 +176,7 @@ public class LevelTwoController implements Initializable {
         resetGame(); // Call the resetGame method to reset the game
         }     
     } 
-    */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
@@ -179,7 +184,12 @@ public class LevelTwoController implements Initializable {
         // TODO
     } 
 
-    /*public int getScore() {
+    public int getScore() {
         return score;
-    }  */
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+     
 }
