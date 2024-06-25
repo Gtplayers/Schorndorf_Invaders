@@ -40,6 +40,10 @@ public class MonkeySoup  extends ImageView{
     URL explosionGifResource = getClass().getResource("/res/gif/enemyExplosion.gif");
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
+    
+     URL bossExplosionGifResource = getClass().getResource("/res/gif/bossExplosion6.gif");
+    Image bossExplosionGif = new Image(bossExplosionGifResource.toString());
+    ImageView bossExplosionImageView = new ImageView(bossExplosionGif);
        
     PauseTransition pause = new PauseTransition(Duration.seconds(1)); 
     
@@ -49,9 +53,9 @@ public class MonkeySoup  extends ImageView{
     
     private int laserCount = 0;
     
-    Laser[] lasers = new Laser[MAX_LASERS];
+    Laser[] lasers1 = new Laser[MAX_LASERS];
     
-    private int health = 2000;
+    private int health = 2;
     
     Schorndorf_Invaders app = Schorndorf_Invaders.getApplication();
     String currentFxmlFile = app.getCurrentFxml();
@@ -63,10 +67,10 @@ public class MonkeySoup  extends ImageView{
         laserShot.setVolume(0.1);
         for (int i = 0; i < MAX_LASERS; i++) 
         {
-            lasers[i] = new Laser("/res/lasers/laserRed.png");
-            lasers[i].setFitHeight(15.4);   //14.3
-            lasers[i].setFitWidth(7);     //6.5
-            lasers[i].setSmooth(true);
+            lasers1[i] = new Laser("/res/lasers/laserRed.png");
+            lasers1[i].setFitHeight(15.4);   //14.3
+            lasers1[i].setFitWidth(7);     //6.5
+            lasers1[i].setSmooth(true);
         } 
     }
 
@@ -107,12 +111,12 @@ public class MonkeySoup  extends ImageView{
             }
             else
             {
-                setY(canvas.getHeight() + 100);
+                setY(canvas.getHeight() - 100);
             }
         }
         else if(direction == Direction.DOWN)
         {
-            if (canvas.getHeight() + 100 - getY() > 0)
+            if (canvas.getHeight() + getFitHeight() - getY() > 0)
             {
                 setY(getY() + MOVEMENT_SPEED);
             }
@@ -147,7 +151,7 @@ public class MonkeySoup  extends ImageView{
     
     public void startingAnimation()
     {
-       setY(getY() + 2); 
+       setY(getY() + 1); 
     }
 
     
@@ -186,9 +190,9 @@ public class MonkeySoup  extends ImageView{
     public void shootLaser(AnchorPane canvas) {
         if (health != 0){ // Only shoot if the boss is alive
             if (laserCount < MAX_LASERS) {
-                lasers[laserCount].setY(getY() + 10);
-                lasers[laserCount].setX(getX() + 42);
-                lasers[laserCount].setSmooth(true);
+                lasers1[laserCount].setY(getY() + 100);
+                lasers1[laserCount].setX(getX() + 100);
+                lasers1[laserCount].setSmooth(true);
                 laserCount++;
                 laserShot.play();
             }
@@ -199,22 +203,46 @@ public class MonkeySoup  extends ImageView{
         if (health != 0){ // Only update lasers if the boss is alive
             this.canvas = canvas;
             for (int i = 0; i < laserCount; i++) {
-                if (lasers[i] != null) {
-                    if (!canvas.getChildren().contains(lasers[i])) {
-                        canvas.getChildren().add(lasers[i]);
+                if (lasers1[i] != null) {
+                    if (!canvas.getChildren().contains(lasers1[i])) {
+                        canvas.getChildren().add(lasers1[i]);
                     }
-                    lasers[i].alienMoveLaser();
-                    if (lasers[i].getY() > canvas.getHeight()) {
-                        canvas.getChildren().remove(lasers[i]);
+                    lasers1[i].alienMoveLaser();
+                    if (lasers1[i].getY() > canvas.getHeight()) {
+                        canvas.getChildren().remove(lasers1[i]);
                     }
                 }
             }
         }
     }
+    
+    public void bossDeath()
+    {
+        System.out.println("BOSS DEAD");
+        //bossExplosionImageView.setFitHeight(150); // Set size as needed
+        //bossExplosionImageView.setFitWidth(150);  // Set size as needed
+        bossExplosionImageView.setX(this.getX()); // Position at spaceship's location
+        bossExplosionImageView.setY(this.getY()); // Position at spaceship's location
+        bossExplosionImageView.setSmooth(true);
+        if (!canvas.getChildren().contains(bossExplosionImageView)) 
+        {
+            canvas.getChildren().add(bossExplosionImageView);
+        }            
+        PauseTransition pause = new PauseTransition(Duration.seconds(4)); // Duration of the explosion 
+        pause.setOnFinished(event -> 
+        {
+            canvas.getChildren().remove(bossExplosionImageView);
+            canvas.getChildren().removeIf(node -> !node.isVisible());
+        });
+        pause.play();
+        this.setVisible(false);
+        canvas.getChildren().remove(this);
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+    }
 
     public Laser[] getLasers() 
     {
-        return lasers;
+        return lasers1;
     }
 
     public int getHealth() {

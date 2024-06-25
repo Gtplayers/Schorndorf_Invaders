@@ -41,5 +41,17 @@ public class Laser extends ImageView{
     public void alienMoveLaser()
     {
         setY(getY() + MOVEMENT_SPEED);
+    }
+    
+    public void bossMoveLeftLaser()
+    {
+        setY(getY() + MOVEMENT_SPEED);
+        setX(getX() - MOVEMENT_SPEED);
+    } 
+    
+    public void bossMoveRightLaser()
+    {
+        setY(getY() + MOVEMENT_SPEED);
+        setX(getX() + MOVEMENT_SPEED);
     } 
 }

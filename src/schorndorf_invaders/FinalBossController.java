@@ -98,6 +98,7 @@ public class FinalBossController implements Initializable {
         if (musicFileUrl != null) {
             Media media = new Media(musicFileUrl.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(0.3);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music indefinitely
             mediaPlayer.play();
         } else {
@@ -138,6 +139,9 @@ public class FinalBossController implements Initializable {
     }
     
     public void resetGame() {
+    stopMusic(); // Ensure the music is stopped during game reset
+    mediaPlayer = null; // Nullify the mediaPlayer to force reinitialization
+
     canvas.getChildren().removeIf(node -> !node.isVisible());
     canvas.getChildren().clear(); // Clear the canvas of any existing game elements
     resetDone = true;
@@ -145,7 +149,7 @@ public class FinalBossController implements Initializable {
     canvas.getChildren().add(startGameButton);
     canvas.getChildren().add(pauseButton);
     canvas.getChildren().add(resumeButton);
-    monkeySoup.setHealth(2000);
+    monkeySoup.setHealth(2);
     
     startGameButton.requestFocus();
 
@@ -159,7 +163,7 @@ public class FinalBossController implements Initializable {
         timer.setLaughPlayed(false);
         timer.setStartingAnimationCounter(0);
         timer.setTextShown(false);
-        timer.setBossHealth(2000);
+        timer.setBossHealth(2);
         timer.setResetDone(resetDone);     
         timer.initializeBoss(); // Reinitialize aliens
     }

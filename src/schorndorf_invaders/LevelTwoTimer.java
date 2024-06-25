@@ -108,7 +108,6 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
         {     
             if(resetDone == false)
             {
-                //System.out.println(alienLaserCounter);
                 laserCounter++;          
                 spaceship.moveShip(spaceship, canvas);
                 spaceship.updateLasers(canvas);
@@ -152,6 +151,7 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
     {
         if((dead || deadLaser) && !deathScreenAdded)
         {
+            stop();
             explosionImageView.setFitHeight(150); // Set size as needed
             explosionImageView.setFitWidth(195);  // Set size as needed
             explosionImageView.setX(spaceship.getX()); // Position at spaceship's location

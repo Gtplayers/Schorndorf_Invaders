@@ -60,6 +60,8 @@ public class Spaceship extends ImageView
             lasers[i].setFitHeight(15.4);
             lasers[i].setFitWidth(7);
             lasers[i].setSmooth(true);
+            lasers[i].setX(-1000);
+            lasers[i].setY(-1000);
         } 
     }
 

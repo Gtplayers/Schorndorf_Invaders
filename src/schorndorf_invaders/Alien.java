@@ -83,6 +83,8 @@ public class Alien extends ImageView
                 lasers[i].setFitHeight(15.4);   //14.3
                 lasers[i].setFitWidth(7);     //6.5
                 lasers[i].setSmooth(true);
+                lasers[i].setX(-1000);
+                lasers[i].setY(-1000);
             }
             else if(currentFxmlFile.equals("LevelThree.fxml"))
             {
@@ -90,6 +92,8 @@ public class Alien extends ImageView
                 lasers[i].setFitHeight(23.8);   //22.1
                 lasers[i].setFitWidth(7);     //6.5
                 lasers[i].setSmooth(true);
+                lasers[i].setX(-1000);
+                lasers[i].setY(-1000);
             }
         } 
     }

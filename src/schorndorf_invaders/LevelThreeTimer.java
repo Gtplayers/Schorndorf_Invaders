@@ -152,6 +152,7 @@ public class LevelThreeTimer extends AnimationTimer implements EventHandler<KeyE
     {
         if((dead || deadLaser) && !deathScreenAdded)
         {
+            stop();
             explosionImageView.setFitHeight(150); // Set size as needed
             explosionImageView.setFitWidth(195);  // Set size as needed
             explosionImageView.setX(spaceship.getX()); // Position at spaceship's location

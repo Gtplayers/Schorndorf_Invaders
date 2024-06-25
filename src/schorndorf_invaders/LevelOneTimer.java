@@ -150,6 +150,7 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
     {
         if((dead || deadLaser) && !deathScreenAdded)
         {
+            stop();
             explosionImageView.setFitHeight(150); // Set size as needed
             explosionImageView.setFitWidth(195);  // Set size as needed
             explosionImageView.setX(spaceship.getX()); // Position at spaceship's location

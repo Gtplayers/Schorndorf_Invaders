@@ -5,14 +5,22 @@
 package schorndorf_invaders;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -28,6 +36,8 @@ public class StartScreenController implements Initializable {
     private AnchorPane canvas;
      
     ImageView image = new ImageView("/res/startText1.png");
+    
+    private MediaPlayer mediaPlayer;
 
     public AnchorPane getCanvas() {
         return canvas;
@@ -36,6 +46,7 @@ public class StartScreenController implements Initializable {
      public void handlePlay(ActionEvent event) throws IOException
     {
         Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
+        fadeOutMusic();
     }
      
       public void handleControls(ActionEvent event)
@@ -48,12 +59,38 @@ public class StartScreenController implements Initializable {
         
     }
        
+       public void playMusic(String musicFile) {
+    try {
+        URL musicFileUrl = getClass().getResource(musicFile);
+        if (musicFileUrl != null) {
+            Media media = new Media(musicFileUrl.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(0.3);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music indefinitely
+            mediaPlayer.play();
+        } else {
+            System.out.println("File not found: " + musicFile);
+        }
+    } catch (URISyntaxException | MediaException e) {
+        e.printStackTrace();
+    }
+}
+       
+       public void fadeOutMusic() {
+    if (mediaPlayer != null) {
+        final double startVolume = mediaPlayer.getVolume();
+        Timeline fadeOut = new Timeline(
+            new KeyFrame(Duration.ZERO, new KeyValue(mediaPlayer.volumeProperty(), startVolume)),
+            new KeyFrame(Duration.seconds(3), new KeyValue(mediaPlayer.volumeProperty(), 0))
+        );
+        fadeOut.setOnFinished(event -> mediaPlayer.stop());
+        fadeOut.play();
+    }
+}
+       
     @Override
-    public void initialize(URL url, ResourceBundle rb) {       
-        /*image.setFitWidth(canvas.getWidth());
-        System.out.println(canvas.getWidth());
-        image.setY(100);      
-        canvas.getChildren().add(image);*/
+    public void initialize(URL url, ResourceBundle rb) {   
+        playMusic("/res/sounds/musicSounds/menuTheme.mp3");
         // TODO
     }  
 }

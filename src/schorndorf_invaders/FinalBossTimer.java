@@ -53,7 +53,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private static final int MOVEMENT_CHANGE_DELAY = 100;
     private int movementCounter;
     
-    private static final int STARTING_ANIMATION_LENGTH = 200;                   // 200 on fast PC
+    private static final int STARTING_ANIMATION_LENGTH = 250;                   // 250 on fast PC
     private int startingAnimationCounter;
     
     private static final int ALIEN_SHOT_DELAY = 25;
@@ -62,7 +62,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private static final int LASER_SHOT_DELAY = 25;
     private int laserCounter;
     
-    private int bossHealth = 2000;
+    private int bossHealth = 2;
+    private boolean bossDead;
        
     private Text resetText = new Text();
     private Text bossHealthText = new Text();
@@ -81,6 +82,10 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     URL explosionGifResource = getClass().getResource("/res/gif/playerExplosion.gif");
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
+    
+    URL bossExplosionGifResource = getClass().getResource("/res/gif/bossExplosion.gif");
+    Image bossExplosionGif = new Image(bossExplosionGifResource.toString());
+    ImageView bossExplosionImageView = new ImageView(bossExplosionGif);
     
     
     FinalBossController controller;
@@ -118,7 +123,6 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
             {
                 if(startingAnimationCounter == STARTING_ANIMATION_LENGTH)
                 {
-                    //System.out.println(alienLaserCounter);
                     laserCounter++;          
                     spaceship.moveShip(spaceship, canvas);
                     spaceship.updateLasers(canvas);
@@ -128,7 +132,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
                     checkAlienStatus();
                     canvas.getChildren().removeIf(node -> !node.isVisible());
                     checkDeath();
-                    try 
+                    /*try 
                     {
                         checkWin();     
                     } catch (IOException e) 
@@ -136,8 +140,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
                         // Handle the IOException
                         System.err.println("IOException occurred in checkScore: " + e.getMessage());
                         e.printStackTrace();
-                    }
-                    System.out.println("TIMER 3 RUNNING");
+                    }*/
+                    System.out.println("BOSS TIMER RUNNING");
                     lastCall = now;
                 }
                 else
@@ -171,6 +175,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     {
         if((dead || deadLaser) && !deathScreenAdded)
         {
+            stop();
             controller.fadeOutMusic();
             explosionImageView.setFitHeight(150); // Set size as needed
             explosionImageView.setFitWidth(195);  // Set size as needed
@@ -219,7 +224,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
         textShown = true;
     }
-    
+
     public void updateBossHealthText()
     {
         bossHealthText.setText("Boss Health: " +  bossHealth);
@@ -256,13 +261,17 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
             deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
             dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
         }
+        if(bossHealth == 0 && bossDead == false)
+        {
+            monkeySoup.bossDeath();
+            bossDead = true;
+        }
     }
     
     public void checkWin() throws IOException
     {
         if(bossHealth == 0)
         {
-            bossHealth = 1;
             Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
             controller.stopTimer();
             System.out.println("SWITCHED SCENES");
