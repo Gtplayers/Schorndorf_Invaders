@@ -224,6 +224,4 @@ public class MonkeySoup  extends ImageView{
     public void setHealth(int health) {
         this.health = health;
     }
-    
-    
 }

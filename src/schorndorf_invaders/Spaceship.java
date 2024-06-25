@@ -34,7 +34,7 @@ public class Spaceship extends ImageView
     
     private static final int MAX_LASERS = 1000;
     
-    private static final int MOVEMENT_SPEED = 5;
+    private static final int MOVEMENT_SPEED = 12;
     
     private int laserCount = 0;
     

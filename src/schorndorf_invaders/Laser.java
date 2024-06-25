@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
  */
 public class Laser extends ImageView{
     
-    private static final int MOVEMENT_SPEED = 10;
+    private static final int MOVEMENT_SPEED = 15;
     private boolean processed = false;
     
     public boolean isProcessed() {

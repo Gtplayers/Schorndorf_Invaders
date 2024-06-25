@@ -50,13 +50,13 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     ImageView deathScreen = new ImageView(image);
     
     private int movement;
-    private static final int MOVEMENT_CHANGE_DELAY = 1000;
+    private static final int MOVEMENT_CHANGE_DELAY = 100;
     private int movementCounter;
     
-    private static final int STARTING_ANIMATION_LENGTH = 200;
+    private static final int STARTING_ANIMATION_LENGTH = 200;                   // 200 on fast PC
     private int startingAnimationCounter;
     
-    private static final int ALIEN_SHOT_DELAY = 50;
+    private static final int ALIEN_SHOT_DELAY = 25;
     private int alienLaserCounter;
     
     private static final int LASER_SHOT_DELAY = 25;
@@ -171,6 +171,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     {
         if((dead || deadLaser) && !deathScreenAdded)
         {
+            controller.fadeOutMusic();
             explosionImageView.setFitHeight(150); // Set size as needed
             explosionImageView.setFitWidth(195);  // Set size as needed
             explosionImageView.setX(spaceship.getX()); // Position at spaceship's location
@@ -304,8 +305,5 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
 
     public void setBossHealth(int bossHealth) {
         this.bossHealth = bossHealth;
-    }
-    
-    
-    
+    } 
 }
