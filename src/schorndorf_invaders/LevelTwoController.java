@@ -6,10 +6,13 @@ package schorndorf_invaders;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -36,6 +40,9 @@ public class LevelTwoController implements Initializable {
     @FXML
     private Button resumeButton;
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
+    
+    Image black = new Image("/res/blackScreen.jpg");
+    ImageView blackScreen = new ImageView(black);
     
     
     private LevelTwoTimer timer = null;
@@ -180,6 +187,19 @@ public class LevelTwoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
+        blackScreen.setOpacity(1.0);
+
+    // Bind blackScreen size to canvas size
+    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+
+    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+    fadeInTransition.setFromValue(1.0);
+    fadeInTransition.setToValue(0.0);
+    fadeInTransition.play();
+
+    canvas.getChildren().add(blackScreen);
+    blackScreen.setMouseTransparent(true);
         resetDone = true;
         // TODO
     } 

@@ -59,7 +59,7 @@ public class Alien extends ImageView
     
     private static final int MAX_LASERS = 2000;
     
-    private static final int MOVEMENT_SPEED = 10;
+    private static final int MOVEMENT_SPEED = 5;
     
     private static int laserCount = 0; // Make laserCount static
     

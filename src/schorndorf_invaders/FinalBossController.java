@@ -7,6 +7,7 @@ package schorndorf_invaders;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -14,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -46,7 +49,8 @@ public class FinalBossController implements Initializable {
     private Button resumeButton;
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
-    
+    Image black = new Image("/res/blackScreen.jpg");
+    ImageView blackScreen = new ImageView(black);
     
     private FinalBossTimer timer = null;
     
@@ -208,6 +212,19 @@ public class FinalBossController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
+        blackScreen.setOpacity(1.0);
+
+    // Bind blackScreen size to canvas size
+    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+
+    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+    fadeInTransition.setFromValue(1.0);
+    fadeInTransition.setToValue(0.0);
+    fadeInTransition.play();
+
+    canvas.getChildren().add(blackScreen);
+    blackScreen.setMouseTransparent(true);
         resetDone = true;
         // TODO
     } 

@@ -48,8 +48,9 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     
     Spaceship spaceship;
     
-    Image image = new Image("/res/youDied.jpg");
-    ImageView deathScreen = new ImageView(image);
+    Image death = new Image("/res/youDied.jpg");
+    ImageView deathScreen = new ImageView(death);
+   
     
     private int movement;
     private static final int MOVEMENT_CHANGE_DELAY = 100;
@@ -261,8 +262,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         bossHealth = monkeySoup.checkCollision(monkeySoup, lasers);
         if(dead == false && deadLaser == false)
         {
-            //deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
-            //dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
+            deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
+            dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
         }
         if(bossHealth == 0 && bossDead == false)
         {

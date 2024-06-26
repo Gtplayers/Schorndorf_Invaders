@@ -8,10 +8,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -36,6 +41,9 @@ public class StartScreenController implements Initializable {
     private AnchorPane canvas;
     
     private MediaPlayer mediaPlayer;
+    
+    Image black = new Image("/res/blackScreen.jpg");
+    ImageView blackScreen = new ImageView(black);
 
     public AnchorPane getCanvas() {
         return canvas;
@@ -43,7 +51,27 @@ public class StartScreenController implements Initializable {
 
      public void handlePlay(ActionEvent event) throws IOException
     {
-        Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
+        blackScreen.setOpacity(0.0);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+            blackScreen.setFitHeight(canvas.getHeight());
+            blackScreen.setFitWidth(canvas.getWidth());
+            canvas.getChildren().add(blackScreen);
+            PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
+            pause.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent events) {
+                try {
+                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
+                    System.out.println("SWITCHED SCENES");
+                } catch (IOException ex) {
+                    Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        pause.play();
         fadeOutMusic();
     }
      

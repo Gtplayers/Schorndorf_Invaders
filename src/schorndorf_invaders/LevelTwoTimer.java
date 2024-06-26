@@ -6,6 +6,8 @@ package schorndorf_invaders;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -51,6 +53,9 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
     
     Image image = new Image("/res/youDied.jpg");
     ImageView deathScreen = new ImageView(image);
+    
+    Image black = new Image("/res/blackScreen.jpg");
+    ImageView blackScreen = new ImageView(black);
     
     private int movement;
     private static final int MOVEMENT_CHANGE_DELAY = 1000;
@@ -233,10 +238,27 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
     {
         if(score == 10)
         {
+            blackScreen.setOpacity(0.0);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+            blackScreen.setFitHeight(canvas.getHeight());
+            blackScreen.setFitWidth(canvas.getWidth());
+            canvas.getChildren().add(blackScreen);
             score = 0;
-            Schorndorf_Invaders.getApplication().setScene("LevelThree.fxml");
-            controller.stopTimer();
-            System.out.println("SWITCHED SCENES");
+            PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
+            pause.setOnFinished(event -> {
+            try {
+                Schorndorf_Invaders.getApplication().setScene("LevelThree.fxml");
+                controller.stopTimer();
+                System.out.println("SWITCHED SCENES");
+            } catch (IOException ex) {
+                Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        pause.play();
+  
         }
     }
     
