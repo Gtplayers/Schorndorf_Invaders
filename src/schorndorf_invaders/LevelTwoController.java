@@ -187,6 +187,8 @@ public class LevelTwoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
+        pauseButton.getStyleClass().add("button_control");
+        resumeButton.getStyleClass().add("button_control");
         blackScreen.setOpacity(1.0);
 
     // Bind blackScreen size to canvas size

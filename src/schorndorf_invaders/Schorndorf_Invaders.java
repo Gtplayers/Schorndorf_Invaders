@@ -36,6 +36,7 @@ public class Schorndorf_Invaders extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         Parent root = loader.load();
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("/schorndorf_invaders/myCss.css");
         Object controller = loader.getController();
         
         this.currentFxml = fxml;

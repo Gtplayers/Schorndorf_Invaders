@@ -37,9 +37,9 @@
                   <Insets top="-250.0" />
                </StackPane.margin>
             </Button>
-            <Button fx:id="controlsButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleControls" prefHeight="85.0" prefWidth="527.0" text="Controls" textAlignment="CENTER" StackPane.alignment="CENTER">
+            <Button fx:id="controlsButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleControls" prefHeight="85.0" prefWidth="527.0" text="CONTROLS" textAlignment="CENTER" StackPane.alignment="CENTER">
                <StackPane.margin>
-                  <Insets top="150.0" />
+                  <Insets top="200.0" />
                </StackPane.margin>
                <textFill>
                   <LinearGradient endX="0.4844156060900006" endY="0.6268398286460282" startX="0.5040043362291344" startY="0.05714285714285714">
@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="43.0" />
                </font>
             </Button>
-            <Button fx:id="aboutButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleAbout" prefHeight="85.0" prefWidth="527.0" text="About" textAlignment="CENTER" StackPane.alignment="CENTER">
+            <Button fx:id="aboutButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleAbout" prefHeight="85.0" prefWidth="527.0" text="ABOUT" textAlignment="CENTER" StackPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="43.0" />
                </font>
@@ -66,7 +66,7 @@
                   </LinearGradient>
                </textFill>
                <StackPane.margin>
-                  <Insets top="400.0" />
+                  <Insets top="550.0" />
                </StackPane.margin>
             </Button>
          </children>

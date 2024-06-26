@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +40,15 @@ public class StartScreenController implements Initializable {
      */
     @FXML
     private AnchorPane canvas;
+    
+    @FXML
+    private Button startButton;
+    
+    @FXML
+    private Button controlsButton;
+     
+    @FXML
+    private Button aboutButton;
     
     private MediaPlayer mediaPlayer;
     
@@ -64,7 +74,7 @@ public class StartScreenController implements Initializable {
             @Override
             public void handle(ActionEvent events) {
                 try {
-                    Schorndorf_Invaders.getApplication().setScene("EndScreen.fxml");
+                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
                     System.out.println("SWITCHED SCENES");
                 } catch (IOException ex) {
                     Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,6 +168,9 @@ public class StartScreenController implements Initializable {
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
+        startButton.getStyleClass().add("button_start");
+        controlsButton.getStyleClass().add("button_controls");
+        aboutButton.getStyleClass().add("button_about");
         playMusic("/res/sounds/musicSounds/menuTheme2.mp3");
         // TODO
     }  

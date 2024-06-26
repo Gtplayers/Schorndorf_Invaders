@@ -1,0 +1,85 @@
+.button_start {
+   -fx-background-color: linear-gradient(to bottom, #B6BDC4, #1B1B1B);
+    -fx-background-radius: 25;
+    -fx-border-radius: 20;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 65;
+    -fx-font-weight: 500;
+    -fx-padding: 50;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 1, 1);
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-alignment: center;
+}
+
+.button_start:hover {
+   -fx-background-color: linear-gradient(to bottom, #242527, #D8D8D8);
+   -fx-border-color: black;
+   -fx-border-width: 1;
+}
+
+.button_control {
+   -fx-background-color: linear-gradient(to bottom, #B6BDC4, #1B1B1B);
+    -fx-background-radius: 25;
+    -fx-border-radius: 20;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 15;
+    -fx-font-weight: 500;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 1, 1);
+    -fx-text-fill: white;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-text-alignment: center;
+}
+
+.button_control:hover {
+   -fx-background-color: linear-gradient(to bottom, #242527, #D8D8D8);
+   -fx-border-color: black;
+   -fx-border-width: 1;
+}
+
+.button_controls {
+    -fx-background-color: linear-gradient(to bottom, #FD3434, #1B1B1B);
+    -fx-background-radius: 25;
+    -fx-border-radius: 20;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 50px;
+    -fx-font-weight: 700;
+    -fx-padding: 50;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 1, 1);
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-text-alignment: center;
+}
+
+.button_controls:hover {
+    -fx-background-color: linear-gradient(to bottom, #242527, #ED1618);
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
+
+.button_about {
+    -fx-background-color: linear-gradient(to bottom, #3044FF, #161617);
+    -fx-background-radius: 25;
+    -fx-border-radius: 20;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 50px;
+    -fx-font-weight: 700;
+    -fx-padding: 50;
+    -fx-effect: dropshadow(three-pass-box, black, 20, 0, 1, 1);
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-text-alignment: center;
+}
+
+.button_about:hover {
+    -fx-background-color: linear-gradient(to bottom, #161617, #3044FF);
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}

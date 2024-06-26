@@ -54,7 +54,7 @@
                   <Insets bottom="600.0" />
                </StackPane.margin>
             </Text>
-            <Text fill="#3633bd" strokeType="OUTSIDE" strokeWidth="0.0" text="DEVELOPER: LEON TROGLIĆ" textAlignment="CENTER" wrappingWidth="1000.0">
+            <Text fill="#3633bd" strokeType="OUTSIDE" strokeWidth="0.0" text="DEVELOPMENT: LEON TROGLIĆ" textAlignment="CENTER" wrappingWidth="1000.0">
                <font>
                   <Font name="Times New Roman Bold" size="50.0" />
                </font>

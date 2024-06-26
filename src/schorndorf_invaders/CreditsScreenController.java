@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +40,9 @@ public class CreditsScreenController implements Initializable {
      */
     @FXML
     private AnchorPane canvas;
+    
+    @FXML
+    private Button menuButton;
     
     private MediaPlayer mediaPlayer;
     
@@ -106,7 +110,8 @@ public class CreditsScreenController implements Initializable {
 }
        
     @Override
-    public void initialize(URL url, ResourceBundle rb) {   
+    public void initialize(URL url, ResourceBundle rb) { 
+        menuButton.getStyleClass().add("button_start");
         playMusic("/res/sounds/musicSounds/menuTheme.mp3");
         blackScreen.setOpacity(1.0);
 
