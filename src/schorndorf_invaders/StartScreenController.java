@@ -64,7 +64,7 @@ public class StartScreenController implements Initializable {
             @Override
             public void handle(ActionEvent events) {
                 try {
-                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
+                    Schorndorf_Invaders.getApplication().setScene("EndScreen.fxml");
                     System.out.println("SWITCHED SCENES");
                 } catch (IOException ex) {
                     Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,12 +77,54 @@ public class StartScreenController implements Initializable {
      
       public void handleControls(ActionEvent event)
     {
-        
+        blackScreen.setOpacity(0.0);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+            blackScreen.setFitHeight(canvas.getHeight());
+            blackScreen.setFitWidth(canvas.getWidth());
+            canvas.getChildren().add(blackScreen);
+            PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
+            pause.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent events) {
+                try {
+                    Schorndorf_Invaders.getApplication().setScene("ControlsScreen.fxml");
+                    System.out.println("SWITCHED SCENES");
+                } catch (IOException ex) {
+                    Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        pause.play();
+        fadeOutMusic();
     }
       
        public void handleAbout(ActionEvent event)
     {
-        
+        blackScreen.setOpacity(0.0);
+            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+            fadeInTransition.setFromValue(0.0);
+            fadeInTransition.setToValue(1.0);
+            fadeInTransition.play();
+            blackScreen.setFitHeight(canvas.getHeight());
+            blackScreen.setFitWidth(canvas.getWidth());
+            canvas.getChildren().add(blackScreen);
+            PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
+            pause.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent events) {
+                try {
+                    Schorndorf_Invaders.getApplication().setScene("CreditsScreen.fxml");
+                    System.out.println("SWITCHED SCENES");
+                } catch (IOException ex) {
+                    Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        pause.play();
+        fadeOutMusic();
     }
        
        public void playMusic(String musicFile) {

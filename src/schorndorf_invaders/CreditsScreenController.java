@@ -32,7 +32,7 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
-public class EndScreenController implements Initializable {
+public class CreditsScreenController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -44,6 +44,9 @@ public class EndScreenController implements Initializable {
     
     Image black = new Image("/res/blackScreen.jpg");
     ImageView blackScreen = new ImageView(black);
+    
+    Image monkey = new Image("/res/sprites/monkeySoupSmallBackground2.jpg");
+    ImageView monkeySoup = new ImageView(monkey);
 
     public AnchorPane getCanvas() {
         return canvas;
@@ -52,6 +55,7 @@ public class EndScreenController implements Initializable {
      public void handlePlay(ActionEvent event) throws IOException
     {
         blackScreen.setOpacity(0.0);
+        blackScreen.toFront();
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
             fadeInTransition.setFromValue(0.0);
             fadeInTransition.setToValue(1.0);
@@ -116,8 +120,21 @@ public class EndScreenController implements Initializable {
     fadeInTransition.play();
 
     canvas.getChildren().add(blackScreen);
+    blackScreen.toFront();
     blackScreen.setMouseTransparent(true);
+    
+    // Add keysImage to canvas and set initial position
+    canvas.getChildren().add(monkeySoup);
+    monkeySoup.setPreserveRatio(true);
+    monkeySoup.setFitWidth(300); 
+
+    // Use listeners to dynamically position keysImage at the top middle of the canvas
+    canvas.widthProperty().addListener((obs, oldVal, newVal) -> {
+    monkeySoup.setX(((newVal.doubleValue() - monkeySoup.getFitWidth()) / 2));
+    });
+    // Set initial Y position or use a listener if the Y position needs to be dynamic based on canvas height
+    monkeySoup.setY(10); 
         // TODO
-    }     
+    }        
     
 }

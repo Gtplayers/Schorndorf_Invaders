@@ -32,7 +32,7 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
-public class EndScreenController implements Initializable {
+public class ControlsScreenController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -44,7 +44,13 @@ public class EndScreenController implements Initializable {
     
     Image black = new Image("/res/blackScreen.jpg");
     ImageView blackScreen = new ImageView(black);
+    
+    Image keys = new Image("/res/keys.png");
+    ImageView keysImage = new ImageView(keys);
 
+    Image mouse = new Image("/res/mouseClick.png");
+    ImageView mouseImage = new ImageView(mouse);
+    
     public AnchorPane getCanvas() {
         return canvas;
     }
@@ -52,6 +58,8 @@ public class EndScreenController implements Initializable {
      public void handlePlay(ActionEvent event) throws IOException
     {
         blackScreen.setOpacity(0.0);
+        blackScreen.toFront();
+        blackScreen.setMouseTransparent(true);
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
             fadeInTransition.setFromValue(0.0);
             fadeInTransition.setToValue(1.0);
@@ -103,8 +111,8 @@ public class EndScreenController implements Initializable {
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
-        playMusic("/res/sounds/musicSounds/menuTheme.mp3");
-        blackScreen.setOpacity(1.0);
+        playMusic("/res/sounds/musicSounds/menuTheme2.mp3");
+    blackScreen.setOpacity(1.0);
 
     // Bind blackScreen size to canvas size
     blackScreen.fitWidthProperty().bind(canvas.widthProperty());
@@ -116,8 +124,34 @@ public class EndScreenController implements Initializable {
     fadeInTransition.play();
 
     canvas.getChildren().add(blackScreen);
+    blackScreen.toFront();
     blackScreen.setMouseTransparent(true);
-        // TODO
-    }     
+
+    // Add keysImage to canvas and set initial position
+    canvas.getChildren().add(keysImage);
+    keysImage.setPreserveRatio(true);
+    keysImage.setFitWidth(500); // Set this to your desired width or use binding if the size should be dynamic
+
+    // Use listeners to dynamically position keysImage at the top middle of the canvas
+    canvas.widthProperty().addListener((obs, oldVal, newVal) -> {
+    keysImage.setX(((newVal.doubleValue() - keysImage.getFitWidth()) / 2) - (newVal.doubleValue() * 0.2));
+    });
+    // Set initial Y position or use a listener if the Y position needs to be dynamic based on canvas height
+    keysImage.setY(530); 
+    
+    // Add keysImage to canvas and set initial position
+    canvas.getChildren().add(mouseImage);
+    mouseImage.setPreserveRatio(true);
+    mouseImage.setFitWidth(500); 
+
+    // Use listeners to dynamically position keysImage at the top middle of the canvas
+    canvas.widthProperty().addListener((obs, oldVal, newVal) -> {
+    mouseImage.setX(((newVal.doubleValue() - mouseImage.getFitWidth()) / 2) + (newVal.doubleValue() * 0.2));
+    });
+    // Set initial Y position or use a listener if the Y position needs to be dynamic based on canvas height
+    mouseImage.setY(500); 
+
+    // TODO
+    }       
     
 }
