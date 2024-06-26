@@ -58,7 +58,7 @@ public class MonkeySoup  extends ImageView{
     
     Laser[] lasers = new Laser[MAX_LASERS];
     
-    private int health = 2;
+    private int health = 20;
     
     Schorndorf_Invaders app = Schorndorf_Invaders.getApplication();
     String currentFxmlFile = app.getCurrentFxml();

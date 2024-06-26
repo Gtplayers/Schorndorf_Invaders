@@ -64,7 +64,7 @@ public class StartScreenController implements Initializable {
             @Override
             public void handle(ActionEvent events) {
                 try {
-                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
+                    Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
                     System.out.println("SWITCHED SCENES");
                 } catch (IOException ex) {
                     Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);

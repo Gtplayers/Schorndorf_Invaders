@@ -59,7 +59,7 @@ public class FinalBossController implements Initializable {
     private static final int MAX_ALIENS = 10;
     MonkeySoup monkeySoup;
     
-    private int health;
+    private int health = 20;
     
     private boolean resetDone = true;
     
@@ -153,7 +153,7 @@ public class FinalBossController implements Initializable {
     canvas.getChildren().add(startGameButton);
     canvas.getChildren().add(pauseButton);
     canvas.getChildren().add(resumeButton);
-    monkeySoup.setHealth(2);
+    monkeySoup.setHealth(20);
     
     startGameButton.requestFocus();
 
@@ -167,7 +167,7 @@ public class FinalBossController implements Initializable {
         timer.setLaughPlayed(false);
         timer.setStartingAnimationCounter(0);
         timer.setTextShown(false);
-        timer.setBossHealth(2);
+        timer.setBossHealth(20);
         timer.setResetDone(resetDone);     
         timer.initializeBoss(); // Reinitialize aliens
     }

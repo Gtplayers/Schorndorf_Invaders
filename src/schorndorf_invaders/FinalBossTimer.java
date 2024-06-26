@@ -65,7 +65,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private static final int LASER_SHOT_DELAY = 25;
     private int laserCounter;
     
-    private int bossHealth = 2;
+    private int bossHealth = 20;
     private boolean bossDead;
        
     private Text resetText = new Text();
