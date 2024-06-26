@@ -120,7 +120,7 @@ public class FinalBossController implements Initializable {
         final double startVolume = mediaPlayer.getVolume();
         Timeline fadeOut = new Timeline(
             new KeyFrame(Duration.ZERO, new KeyValue(mediaPlayer.volumeProperty(), startVolume)),
-            new KeyFrame(Duration.seconds(3), new KeyValue(mediaPlayer.volumeProperty(), 0))
+            new KeyFrame(Duration.seconds(4), new KeyValue(mediaPlayer.volumeProperty(), 0))
         );
         fadeOut.setOnFinished(event -> mediaPlayer.stop());
         fadeOut.play();
@@ -130,7 +130,7 @@ public class FinalBossController implements Initializable {
     public void showBoss()
     { 
         monkeySoup = timer.getMonkeySoup();
-        monkeySoup.setX(canvas.getWidth()/2.1);
+        monkeySoup.setX(canvas.getWidth()/2.05);
         monkeySoup.setY(-200);
         monkeySoup.setSmooth(true);
         health = monkeySoup.getHealth();
@@ -178,7 +178,7 @@ public class FinalBossController implements Initializable {
         //spaceship.setFitWidth(1600);          TITLE SIZE
         //spaceship.setFitHeight(89);           TITLE SIZE
         spaceship.setY(canvas.getHeight() - 130);
-        spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
+        spaceship.setX(canvas.getWidth() - canvas.getWidth() / 2.05);
         spaceship.setSmooth(true);
         canvas.getChildren().add(spaceship);
 

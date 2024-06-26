@@ -14,7 +14,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -25,9 +24,9 @@ import javafx.util.Duration;
 /**
  * FXML Controller class
  *
- * @author TrogrlicLeon
+ * @author Leon
  */
-public class StartScreenController implements Initializable {
+public class EndScreenController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -43,18 +42,8 @@ public class StartScreenController implements Initializable {
 
      public void handlePlay(ActionEvent event) throws IOException
     {
-        Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
+        Schorndorf_Invaders.getApplication().setScene("StartScreen.fxml");
         fadeOutMusic();
-    }
-     
-      public void handleControls(ActionEvent event)
-    {
-        
-    }
-      
-       public void handleAbout(ActionEvent event)
-    {
-        
     }
        
        public void playMusic(String musicFile) {
@@ -88,7 +77,8 @@ public class StartScreenController implements Initializable {
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
-        playMusic("/res/sounds/musicSounds/menuTheme2.mp3");
+        playMusic("/res/sounds/musicSounds/menuTheme.mp3");
         // TODO
-    }  
+    }     
+    
 }

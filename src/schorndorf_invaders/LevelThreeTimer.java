@@ -108,7 +108,6 @@ public class LevelThreeTimer extends AnimationTimer implements EventHandler<KeyE
         {     
             if(resetDone == false)
             {
-                //System.out.println(alienLaserCounter);
                 laserCounter++;          
                 spaceship.moveShip(spaceship, canvas);
                 spaceship.updateLasers(canvas);
@@ -127,7 +126,6 @@ public class LevelThreeTimer extends AnimationTimer implements EventHandler<KeyE
                     System.err.println("IOException occurred in checkScore: " + e.getMessage());
                     e.printStackTrace();
                 }
-                System.out.println("TIMER 3 RUNNING");
                 lastCall = now;
             }
         }

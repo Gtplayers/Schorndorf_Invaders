@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -35,6 +36,8 @@ public class LevelThreeController implements Initializable {
     private Button pauseButton;
     @FXML
     private Button resumeButton;
+    @FXML
+    private Rectangle backgroundRectangle; // Ensure this matches the fx:id in your FXML
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
     
@@ -133,9 +136,19 @@ public class LevelThreeController implements Initializable {
 
     score = 0; // Reset the score
     scoreText.setText("Score: 0"); // Update the score display
+    backgroundRectangle.widthProperty().bind(canvas.widthProperty());
+    backgroundRectangle.heightProperty().bind(canvas.heightProperty());
+    if (!canvas.getChildren().contains(backgroundRectangle)) 
+        {
+            canvas.getChildren().add(backgroundRectangle);
+        }
+        backgroundRectangle.toFront();
+        backgroundRectangle.setMouseTransparent(true);
 }
     public void startGame()
     {
+        backgroundRectangle.widthProperty().bind(canvas.widthProperty());
+        backgroundRectangle.heightProperty().bind(canvas.heightProperty());
         resetDone = false;
         canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
@@ -161,6 +174,14 @@ public class LevelThreeController implements Initializable {
         scoreText.setText("Score: 0");
 
         showAliens();
+        if (!canvas.getChildren().contains(backgroundRectangle)) 
+        {
+            canvas.getChildren().add(backgroundRectangle);
+        }
+        backgroundRectangle.toFront();
+        backgroundRectangle.setMouseTransparent(true);
+
+    // Set the Rectangle's opacity to create the underwater effect
         
         startGameButton.setVisible(false);
         if (canvas != null) {
@@ -180,6 +201,11 @@ public class LevelThreeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
+        // Bind the rectangle's width and height properties to the AnchorPane's width and height properties
+        backgroundRectangle.widthProperty().bind(canvas.widthProperty());
+        backgroundRectangle.heightProperty().bind(canvas.heightProperty());
+        backgroundRectangle.toFront();
+        backgroundRectangle.setMouseTransparent(true);
         resetDone = true;
         // TODO
     } 

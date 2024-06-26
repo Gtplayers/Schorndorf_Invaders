@@ -31,8 +31,11 @@ public class MonkeySoup  extends ImageView{
     @FXML
     private Button pauseButton;
     
-    URL explosionResource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
-    AudioClip alienExplosion = new AudioClip(explosionResource.toString());
+    URL damageResource = getClass().getResource("/res/sounds/explosionSounds/explosion4.wav");
+    AudioClip alienDamage = new AudioClip(damageResource.toString());
+    
+    URL explosionResource = getClass().getResource("/res/sounds/bossSounds/bossExplosion7.mp3");
+    AudioClip bossExplosion = new AudioClip(explosionResource.toString());
     
     URL laserResource = getClass().getResource("/res/sounds/laserSounds/alienShot1.wav");
     AudioClip laserShot = new AudioClip(laserResource.toString());
@@ -41,19 +44,19 @@ public class MonkeySoup  extends ImageView{
     Image explosionGif = new Image(explosionGifResource.toString());
     ImageView explosionImageView = new ImageView(explosionGif);
     
-     URL bossExplosionGifResource = getClass().getResource("/res/gif/bossExplosion6.gif");
+     URL bossExplosionGifResource = getClass().getResource("/res/gif/bossExplosion.gif");
     Image bossExplosionGif = new Image(bossExplosionGifResource.toString());
     ImageView bossExplosionImageView = new ImageView(bossExplosionGif);
        
     PauseTransition pause = new PauseTransition(Duration.seconds(1)); 
     
-    private static final int MAX_LASERS = 1000;
+    private static final int MAX_LASERS = 3000;
     
     private static final int MOVEMENT_SPEED = 5;
     
     private int laserCount = 0;
     
-    Laser[] lasers1 = new Laser[MAX_LASERS];
+    Laser[] lasers = new Laser[MAX_LASERS];
     
     private int health = 2;
     
@@ -63,14 +66,34 @@ public class MonkeySoup  extends ImageView{
     public MonkeySoup(String url)
     { 
         super(new Image(url));
-        alienExplosion.setVolume(0.2);
+        alienDamage.setVolume(0.2);
         laserShot.setVolume(0.1);
-        for (int i = 0; i < MAX_LASERS; i++) 
+        for (int i = 0; i <= 1000; i++) 
         {
-            lasers1[i] = new Laser("/res/lasers/laserRed.png");
-            lasers1[i].setFitHeight(15.4);   //14.3
-            lasers1[i].setFitWidth(7);     //6.5
-            lasers1[i].setSmooth(true);
+            lasers[i] = new Laser("/res/lasers/laserRed.png");
+            lasers[i].setFitHeight(15.4);   //14.3
+            lasers[i].setFitWidth(7);     //6.5
+            lasers[i].setSmooth(true);
+            lasers[i].setX(-1000);
+            lasers[i].setY(-1000);
+        } 
+        for (int i = 1001; i <= 2000; i++) 
+        {
+            lasers[i] = new Laser("/res/lasers/laserGreen.png");
+            lasers[i].setFitHeight(15.4);   //14.3
+            lasers[i].setFitWidth(7);     //6.5
+            lasers[i].setSmooth(true);
+            lasers[i].setX(-1000);
+            lasers[i].setY(-1000);
+        } 
+        for (int i = 2001; i < MAX_LASERS; i++) 
+        {
+            lasers[i] = new Laser("/res/lasers/lightning.png");
+            lasers[i].setFitHeight(15.4);   //14.3
+            lasers[i].setFitWidth(7);     //6.5
+            lasers[i].setSmooth(true);
+            lasers[i].setX(-1000);
+            lasers[i].setY(-1000);
         } 
     }
 
@@ -164,7 +187,7 @@ public class MonkeySoup  extends ImageView{
                 laser.setVisible(false);
                 laser.setProcessed(true); // Mark the laser as processed
                 currentParent.getChildren().remove(laser);  
-                alienExplosion.play();
+                alienDamage.play();
                 explosionImageView.setFitHeight(150); // Set size as needed
                 explosionImageView.setFitWidth(150);  // Set size as needed
                 explosionImageView.setX(this.getX()); // Position at spaceship's location
@@ -189,10 +212,17 @@ public class MonkeySoup  extends ImageView{
     
     public void shootLaser(AnchorPane canvas) {
         if (health != 0){ // Only shoot if the boss is alive
-            if (laserCount < MAX_LASERS) {
-                lasers1[laserCount].setY(getY() + 100);
-                lasers1[laserCount].setX(getX() + 100);
-                lasers1[laserCount].setSmooth(true);
+            if (laserCount+2000 < MAX_LASERS) {
+                System.out.println("LASER SHOT");
+                lasers[laserCount].setY(getY() + 100);
+                lasers[laserCount].setX(getX() + 100);
+                lasers[laserCount].setSmooth(true);
+                lasers[laserCount+1000].setY(getY() + 100);
+                lasers[laserCount+1000].setX(getX() + 150);
+                lasers[laserCount+1000].setSmooth(true);
+                lasers[laserCount+2000].setY(getY() + 100);
+                lasers[laserCount+2000].setX(getX() + 50);
+                lasers[laserCount+2000].setSmooth(true);
                 laserCount++;
                 laserShot.play();
             }
@@ -202,14 +232,36 @@ public class MonkeySoup  extends ImageView{
     public void updateLasers(AnchorPane canvas) {
         if (health != 0){ // Only update lasers if the boss is alive
             this.canvas = canvas;
-            for (int i = 0; i < laserCount; i++) {
-                if (lasers1[i] != null) {
-                    if (!canvas.getChildren().contains(lasers1[i])) {
-                        canvas.getChildren().add(lasers1[i]);
+            for (int i = 0; i <= 1000; i++) {
+                if (lasers[i] != null) {
+                    if (!canvas.getChildren().contains(lasers[i])) {
+                        canvas.getChildren().add(lasers[i]);
                     }
-                    lasers1[i].alienMoveLaser();
-                    if (lasers1[i].getY() > canvas.getHeight()) {
-                        canvas.getChildren().remove(lasers1[i]);
+                    lasers[i].alienMoveLaser();
+                    if (lasers[i].getY() > canvas.getHeight()) {
+                        canvas.getChildren().remove(lasers[i]);
+                    }
+                }
+            }
+            for (int i = 1001; i <= 2000; i++) {
+                if (lasers[i] != null) {
+                    if (!canvas.getChildren().contains(lasers[i])) {
+                        canvas.getChildren().add(lasers[i]);
+                    }
+                    lasers[i].bossMoveLeftLaser();
+                    if (lasers[i].getY() > canvas.getHeight()) {
+                        canvas.getChildren().remove(lasers[i]);
+                    }
+                }
+            }
+            for (int i = 2001; i < MAX_LASERS; i++) {
+                if (lasers[i] != null) {
+                    if (!canvas.getChildren().contains(lasers[i])) {
+                        canvas.getChildren().add(lasers[i]);
+                    }
+                    lasers[i].bossMoveRightLaser();
+                    if (lasers[i].getY() > canvas.getHeight()) {
+                        canvas.getChildren().remove(lasers[i]);
                     }
                 }
             }
@@ -218,17 +270,18 @@ public class MonkeySoup  extends ImageView{
     
     public void bossDeath()
     {
+        playExplosionSound();
         System.out.println("BOSS DEAD");
-        //bossExplosionImageView.setFitHeight(150); // Set size as needed
-        //bossExplosionImageView.setFitWidth(150);  // Set size as needed
-        bossExplosionImageView.setX(this.getX()); // Position at spaceship's location
-        bossExplosionImageView.setY(this.getY()); // Position at spaceship's location
+        bossExplosionImageView.setFitHeight(500); // Set size
+        bossExplosionImageView.setFitWidth(500);  // Set size
+        bossExplosionImageView.setX(this.getX()); // Position at bosses location
+        bossExplosionImageView.setY(this.getY()); // Position at bosses location
         bossExplosionImageView.setSmooth(true);
         if (!canvas.getChildren().contains(bossExplosionImageView)) 
         {
             canvas.getChildren().add(bossExplosionImageView);
         }            
-        PauseTransition pause = new PauseTransition(Duration.seconds(4)); // Duration of the explosion 
+        PauseTransition pause = new PauseTransition(Duration.seconds(3.1)); // Duration of the explosion 
         pause.setOnFinished(event -> 
         {
             canvas.getChildren().remove(bossExplosionImageView);
@@ -239,10 +292,20 @@ public class MonkeySoup  extends ImageView{
         canvas.getChildren().remove(this);
         canvas.getChildren().removeIf(node -> !node.isVisible());
     }
+    
+    public void playExplosionSound()
+    {
+        bossExplosion.play();
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.1));
+        pause.setOnFinished(event -> 
+        {
+            
+        });
+    }
 
     public Laser[] getLasers() 
     {
-        return lasers1;
+        return lasers;
     }
 
     public int getHealth() {

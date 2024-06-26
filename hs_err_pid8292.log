@@ -1,0 +1,1349 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000007139ef23, pid=8292, tid=0x0000000000001640
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_341-b10) (build 1.8.0_341-b10)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.341-b10 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0xbef23]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000155af2d9000):  JavaThread "JavaFX Application Thread" [_thread_in_vm, id=5696, stack(0x0000003f44f00000,0x0000003f45000000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000000000000008
+
+Registers:
+RAX=0x0000000000000000, RBX=0x0000003f44f92018, RCX=0x0000003f44f92048, RDX=0x0000003f44f92018
+RSP=0x0000003f44f91fa0, RBP=0x0000003f44f920d0, RSI=0x0000000000000000, RDI=0x0000003f44f92048
+R8 =0x00000155b74fc978, R9 =0x0000000000000001, R10=0x0000000000000000, R11=0x0000000000000246
+R12=0x00000155aeaea9f0, R13=0x0000003f44f921a0, R14=0x00000155af2d9000, R15=0x00000155af2b9c60
+RIP=0x000000007139ef23, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x0000003f44f91fa0)
+0x0000003f44f91fa0:   0000000000000070 ffffffffffffffff
+0x0000003f44f91fb0:   00007fff70c51740 00007fff9827ec40
+0x0000003f44f91fc0:   0000000000000000 0000000071441ef8
+0x0000003f44f91fd0:   00000000718ac678 0000000000000000
+0x0000003f44f91fe0:   0000000000000048 ffffffff00000001
+0x0000003f44f91ff0:   0000000000000000 0000000000000000
+0x0000003f44f92000:   0000000000000002 ffffffffffffffff
+0x0000003f44f92010:   0000003f44f921d0 0000000000000000
+0x0000003f44f92020:   0000000000000000 00000155af2d9200
+0x0000003f44f92030:   00000000000003d8 00000155aeaeaa00
+0x0000003f44f92040:   00000155aeaeadd8 0000000000000000
+0x0000003f44f92050:   0000000040000000 00007fff9827e8cc
+0x0000003f44f92060:   00000000c0000388 00007fff98f0d390
+0x0000003f44f92070:   0000000080000000 00007fff00000001
+0x0000003f44f92080:   0000000000000006 0000000000000000
+0x0000003f44f92090:   0000000000000000 00000155b73b0318 
+
+Instructions: (pc=0x000000007139ef23)
+0x000000007139ef03:   48 8d 0d 96 60 70 00 48 89 14 c1 c3 cc 48 89 5c
+0x000000007139ef13:   24 08 57 48 83 ec 20 48 8b 02 48 8b da 48 8b f9
+0x000000007139ef23:   48 8b 50 08 0f b7 42 24 48 8b 52 08 48 8b 54 c2
+0x000000007139ef33:   50 e8 07 fd 16 00 48 8d 4f 30 48 8b d3 48 8d 05 
+
+
+Register to memory mapping:
+
+RAX=0x0000000000000000 is an unknown value
+RBX=0x0000003f44f92018 is pointing into the stack for thread: 0x00000155af2d9000
+RCX=0x0000003f44f92048 is pointing into the stack for thread: 0x00000155af2d9000
+RDX=0x0000003f44f92018 is pointing into the stack for thread: 0x00000155af2d9000
+RSP=0x0000003f44f91fa0 is pointing into the stack for thread: 0x00000155af2d9000
+RBP=0x0000003f44f920d0 is pointing into the stack for thread: 0x00000155af2d9000
+RSI=0x0000000000000000 is an unknown value
+RDI=0x0000003f44f92048 is pointing into the stack for thread: 0x00000155af2d9000
+R8 =0x00000155b74fc978 is a global jni handle
+R9 =0x0000000000000001 is an unknown value
+R10=0x0000000000000000 is an unknown value
+R11=0x0000000000000246 is an unknown value
+R12=0x00000155aeaea9f0 is an unknown value
+R13=0x0000003f44f921a0 is pointing into the stack for thread: 0x00000155af2d9000
+R14=0x00000155af2d9000 is a thread
+R15=0x00000155af2b9c60 is an unknown value
+
+
+Stack: [0x0000003f44f00000,0x0000003f45000000],  sp=0x0000003f44f91fa0,  free space=583k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0xbef23]
+V  [jvm.dll+0x161ef8]
+V  [jvm.dll+0x14febb]
+C  [glass.dll+0x508c]
+C  [glass.dll+0x19670]
+C  [glass.dll+0xa2b5]
+C  [glass.dll+0x17bb]
+C  [USER32.dll+0xef5c]
+C  [USER32.dll+0xdfbb]
+C  [USER32.dll+0xd814]
+C  [glass.dll+0x19d10]
+C  0x0000015592a699ee
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._enterFullscreen(JZZZ)Z+0
+j  com.sun.glass.ui.View.enterFullscreen(ZZZ)Z+15
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+77
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  javafx.stage.Stage.setFullScreen(Z)V+26
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+156
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinWindow._setBounds(JIIZZIIIIFF)V+0
+j  com.sun.glass.ui.win.WinWindow.setBounds(FFZZFFFFFF)V+543
+j  com.sun.javafx.tk.quantum.WindowStage.setBounds(FFZZFFFFFFFF)V+141
+J 2897 C1 javafx.stage.Window$TKBoundsConfigurator.apply()V (160 bytes) @ 0x00000155935424cc [0x0000015593541f40+0x58c]
+j  javafx.stage.Window.applyBounds()V+4
+j  javafx.stage.Window.adjustSize(Z)V+198
+j  javafx.stage.Window.access$1200(Ljavafx/stage/Window;Z)V+2
+j  javafx.stage.Window$SceneModel.invalidated()V+149
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+j  com.sun.javafx.tk.quantum.PaintCollector.liveRepaintRenderJob(Lcom/sun/javafx/tk/quantum/ViewScene;)V+14
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Void;+370
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$ViewEventNotification.run()Ljava/lang/Object;+1
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleViewEvent$15()Ljava/lang/Void;+11
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler$$Lambda$97.get()Ljava/lang/Object;+4
+J 1555 C1 com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(Ljava/util/function/Supplier;)Ljava/lang/Object; (49 bytes) @ 0x00000155930c6364 [0x00000155930c5e20+0x544]
+j  com.sun.javafx.tk.quantum.GlassViewEventHandler.handleViewEvent(Lcom/sun/glass/ui/View;JI)V+63
+j  com.sun.glass.ui.View.handleViewEvent(JI)V+14
+j  com.sun.glass.ui.View.notifyResize(II)V+34
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinView._exitFullscreen(JZ)V+0
+j  com.sun.glass.ui.View.exitFullscreen(Z)V+13
+j  com.sun.javafx.tk.quantum.WindowStage.applyFullScreen()V+322
+j  com.sun.javafx.tk.quantum.WindowStage.setFullScreen(Z)V+50
+j  com.sun.javafx.tk.quantum.WindowStage.exitFullScreen()V+2
+j  com.sun.javafx.tk.quantum.WindowStage.setScene(Lcom/sun/javafx/tk/TKScene;)V+12
+j  javafx.stage.Window$SceneModel.updatePeerScene(Lcom/sun/javafx/tk/TKScene;)V+18
+j  javafx.stage.Window$SceneModel.invalidated()V+35
+J 2418 C2 javafx.beans.property.ObjectPropertyBase.set(Ljava/lang/Object;)V (110 bytes) @ 0x00000155933d9728 [0x00000155933d96a0+0x88]
+j  javafx.stage.Window.setScene(Ljavafx/scene/Scene;)V+5
+j  javafx.stage.Stage.setScene(Ljavafx/scene/Scene;)V+8
+j  schorndorf_invaders.Schorndorf_Invaders.setScene(Ljava/lang/String;)V+148
+J 3673 C1 schorndorf_invaders.FinalBossTimer.handle(J)V (179 bytes) @ 0x000001559380aa0c [0x0000015593809a00+0x100c]
+J 3671 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver$$Lambda$206.run()Ljava/lang/Object; (12 bytes) @ 0x00000155937bb3a4 [0x00000155937bb240+0x164]
+v  ~StubRoutines::call_stub
+J 1468  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; (0 bytes) @ 0x00000155930a80e6 [0x00000155930a8080+0x66]
+J 3155 C1 javafx.animation.AnimationTimer$AnimationTimerReceiver.handle(J)V (39 bytes) @ 0x000001559361573c [0x00000155936153a0+0x39c]
+J 2934 C1 com.sun.scenario.animation.AbstractPrimaryTimer.timePulseImpl(J)V (157 bytes) @ 0x0000015593569164 [0x0000015593568d80+0x3e4]
+J 2931 C1 com.sun.scenario.animation.AbstractPrimaryTimer$MainLoop.run()V (61 bytes) @ 0x00000155935672ac [0x0000015593566fa0+0x30c]
+J 2908 C1 com.sun.javafx.tk.quantum.QuantumToolkit.pulse(Z)V (152 bytes) @ 0x0000015593546cd4 [0x0000015593545de0+0xef4]
+J 2948 C1 com.sun.javafx.tk.quantum.QuantumToolkit$$Lambda$42.run()V (8 bytes) @ 0x000001559356fa04 [0x000001559356f720+0x2e4]
+J 2616 C1 com.sun.glass.ui.InvokeLaterDispatcher$Future.run()V (91 bytes) @ 0x0000015593474d94 [0x0000015593474c80+0x114]
+v  ~StubRoutines::call_stub
+j  com.sun.glass.ui.win.WinApplication._runLoop(Ljava/lang/Runnable;)V+0
+j  com.sun.glass.ui.win.WinApplication.lambda$null$4(ILjava/lang/Runnable;)V+8
+j  com.sun.glass.ui.win.WinApplication$$Lambda$38.run()V+12
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00000155be0cb000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=6056, stack(0x0000003f50bc0000,0x0000003f50cc0000)]
+  0x00000155be0c3800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=6136, stack(0x0000003f506c0000,0x0000003f507c0000)]
+  0x00000155be0ca000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=15436, stack(0x0000003f501c0000,0x0000003f502c0000)]
+  0x00000155be0c2800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=13300, stack(0x0000003f4fcc0000,0x0000003f4fdc0000)]
+  0x00000155be0c9800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=1264, stack(0x0000003f4f7c0000,0x0000003f4f8c0000)]
+  0x00000155be0c5800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=1284, stack(0x0000003f4f2c0000,0x0000003f4f3c0000)]
+  0x00000155be0c8800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=12168, stack(0x0000003f4edc0000,0x0000003f4eec0000)]
+  0x00000155be0c6800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=9404, stack(0x0000003f4e8c0000,0x0000003f4e9c0000)]
+  0x00000155be0b2000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=11920, stack(0x0000003f4e3c0000,0x0000003f4e4c0000)]
+  0x00000155be0c1000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=14772, stack(0x0000003f470c0000,0x0000003f471c0000)]
+  0x00000155be0c8000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=11424, stack(0x0000003f4ddc0000,0x0000003f4dec0000)]
+  0x00000155be0bf000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=17944, stack(0x0000003f4d8c0000,0x0000003f4d9c0000)]
+  0x00000155be0c2000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=18956, stack(0x0000003f4d3c0000,0x0000003f4d4c0000)]
+  0x00000155be0c0800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=7796, stack(0x0000003f4cec0000,0x0000003f4cfc0000)]
+  0x00000155be0b8800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=1948, stack(0x0000003f4c9c0000,0x0000003f4cac0000)]
+  0x00000155be0bf800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=11796, stack(0x0000003f4c4c0000,0x0000003f4c5c0000)]
+  0x00000155be0bc800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=17356, stack(0x0000003f4bfc0000,0x0000003f4c0c0000)]
+  0x00000155be0b4000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=6660, stack(0x0000003f4bac0000,0x0000003f4bbc0000)]
+  0x00000155be0bd000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=16720, stack(0x0000003f4b5c0000,0x0000003f4b6c0000)]
+  0x00000155be0be000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=3776, stack(0x0000003f4b0c0000,0x0000003f4b1c0000)]
+  0x00000155be0b8000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=10336, stack(0x0000003f4abc0000,0x0000003f4acc0000)]
+  0x00000155be0bb000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=17660, stack(0x0000003f4a6c0000,0x0000003f4a7c0000)]
+  0x00000155be0b5000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=12728, stack(0x0000003f4a1c0000,0x0000003f4a2c0000)]
+  0x00000155be0b7000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=8344, stack(0x0000003f49cc0000,0x0000003f49dc0000)]
+  0x00000155be0ba000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=18644, stack(0x0000003f497c0000,0x0000003f498c0000)]
+  0x00000155be0b6800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=15044, stack(0x0000003f492c0000,0x0000003f493c0000)]
+  0x00000155be0b2800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=3140, stack(0x0000003f48dc0000,0x0000003f48ec0000)]
+  0x00000155be0b5800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=10168, stack(0x0000003f488c0000,0x0000003f489c0000)]
+  0x00000155be0b9800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=13180, stack(0x0000003f483c0000,0x0000003f484c0000)]
+  0x00000155be0ac800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=9096, stack(0x0000003f47ec0000,0x0000003f47fc0000)]
+  0x00000155be0b3800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=19184, stack(0x0000003f479c0000,0x0000003f47ac0000)]
+  0x00000155be0a7800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=3456, stack(0x0000003f473c0000,0x0000003f474c0000)]
+  0x00000155be0ac000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=2196, stack(0x0000003f46530000,0x0000003f46630000)]
+  0x00000155b6e2c000 JavaThread "Timer-1" daemon [_thread_blocked, id=1884, stack(0x0000003f471c0000,0x0000003f472c0000)]
+  0x00000155b79d7000 JavaThread "Thread-119" daemon [_thread_blocked, id=17916, stack(0x0000003f46bc0000,0x0000003f46cc0000)]
+  0x00000155b79cb800 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=5764, stack(0x0000003f467c0000,0x0000003f468c0000)]
+  0x00000155b6e33800 JavaThread "Media Resource Disposer" daemon [_thread_blocked, id=896, stack(0x0000003f46430000,0x0000003f46530000)]
+  0x00000155af7a4000 JavaThread "Prism Font Disposer" daemon [_thread_blocked, id=6024, stack(0x0000003f45f20000,0x0000003f46020000)]
+  0x00000155af79e000 JavaThread "JFXMedia Player EventQueueThread" daemon [_thread_blocked, id=5956, stack(0x0000003f45520000,0x0000003f45620000)]
+  0x00000155af79f800 JavaThread "Thread-3" daemon [_thread_in_native, id=19204, stack(0x0000003f45120000,0x0000003f45220000)]
+  0x00000155af79d000 JavaThread "JavaFX-Launcher" [_thread_blocked, id=16936, stack(0x0000003f45220000,0x0000003f45320000)]
+=>0x00000155af2d9000 JavaThread "JavaFX Application Thread" [_thread_in_vm, id=5696, stack(0x0000003f44f00000,0x0000003f45000000)]
+  0x00000155af285800 JavaThread "Thread-1" daemon [_thread_blocked, id=3080, stack(0x0000003f44e00000,0x0000003f44f00000)]
+  0x00000155af1bb000 JavaThread "QuantumRenderer-0" daemon [_thread_blocked, id=1132, stack(0x0000003f44c00000,0x0000003f44d00000)]
+  0x00000155aebcf800 JavaThread "Service Thread" daemon [_thread_blocked, id=5820, stack(0x0000003f44a00000,0x0000003f44b00000)]
+  0x00000155aeb6a800 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=6568, stack(0x0000003f44900000,0x0000003f44a00000)]
+  0x00000155aeb58000 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=17324, stack(0x0000003f44800000,0x0000003f44900000)]
+  0x00000155aeb38800 JavaThread "C1 CompilerThread9" daemon [_thread_blocked, id=6724, stack(0x0000003f44700000,0x0000003f44800000)]
+  0x00000155aeb28000 JavaThread "C1 CompilerThread8" daemon [_thread_blocked, id=12036, stack(0x0000003f44600000,0x0000003f44700000)]
+  0x00000155aeafd000 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=1720, stack(0x0000003f44500000,0x0000003f44600000)]
+  0x00000155aeafc000 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=19436, stack(0x0000003f44400000,0x0000003f44500000)]
+  0x00000155aeaf0800 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=12108, stack(0x0000003f44300000,0x0000003f44400000)]
+  0x00000155aeae9800 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=17508, stack(0x0000003f44200000,0x0000003f44300000)]
+  0x00000155aeae2800 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=12788, stack(0x0000003f44100000,0x0000003f44200000)]
+  0x00000155aeae0800 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=9116, stack(0x0000003f44000000,0x0000003f44100000)]
+  0x00000155aeadf000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=18496, stack(0x0000003f43f00000,0x0000003f44000000)]
+  0x00000155aeadd000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=2664, stack(0x0000003f43e00000,0x0000003f43f00000)]
+  0x00000155aeada000 JavaThread "Attach Listener" daemon [_thread_blocked, id=3900, stack(0x0000003f43d00000,0x0000003f43e00000)]
+  0x00000155abdae000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=6480, stack(0x0000003f43c00000,0x0000003f43d00000)]
+  0x00000155aeac1800 JavaThread "Finalizer" daemon [_thread_blocked, id=5192, stack(0x0000003f43b00000,0x0000003f43c00000)]
+  0x00000155aeac0800 JavaThread "Reference Handler" daemon [_thread_blocked, id=18584, stack(0x0000003f43a00000,0x0000003f43b00000)]
+  0x000001559107b000 JavaThread "main" [_thread_blocked, id=16536, stack(0x0000003f42b00000,0x0000003f42c00000)]
+
+Other Threads:
+  0x00000155abd86000 VMThread [stack: 0x0000003f43900000,0x0000003f43a00000] [id=6116]
+  0x00000155aec03800 WatcherThread [stack: 0x0000003f44b00000,0x0000003f44c00000] [id=12656]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000006c1600000, size: 4074 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ PSYoungGen      total 428544K, used 294705K [0x000000076b200000, 0x0000000792080000, 0x00000007c0000000)
+  eden space 427008K, 68% used [0x000000076b200000,0x000000077d0ac560,0x0000000785300000)
+  from space 1536K, 75% used [0x0000000791f00000,0x0000000792020000,0x0000000792080000)
+  to   space 41472K, 0% used [0x000000078cf80000,0x000000078cf80000,0x000000078f800000)
+ ParOldGen       total 269824K, used 137977K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbe520,0x00000006d1d80000)
+ Metaspace       used 18841K, capacity 19630K, committed 19712K, reserved 1067008K
+  class space    used 2332K, capacity 2555K, committed 2560K, reserved 1048576K
+
+Card table byte_map: [0x00000155a1e10000,0x00000155a2610000] byte_map_base: 0x000001559e805000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000071ac9030
+ Begin Bits: [0x00000155a2b60000, 0x00000155a6b08000)
+ End Bits:   [0x00000155a6b08000, 0x00000155aaab0000)
+
+Polling page: 0x0000015591220000
+
+CodeCache: size=245760Kb used=15609Kb max_used=15861Kb free=230150Kb
+ bounds [0x0000015592a50000, 0x0000015593a10000, 0x00000155a1a50000]
+ total_blobs=4790 nmethods=4129 adapters=571
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 18.451 Thread 0x00000155aeb38800 nmethod 5060 0x000001559387d510 code [0x000001559387d660, 0x000001559387d758]
+Event: 18.451 Thread 0x00000155aeb6a800 5062       1       javafx.scene.layout.Region::access$5000 (5 bytes)
+Event: 18.451 Thread 0x00000155aeb28000 nmethod 5061 0x000001559387d250 code [0x000001559387d3a0, 0x000001559387d498]
+Event: 18.451 Thread 0x00000155aeb6a800 nmethod 5062 0x000001559387cf90 code [0x000001559387d0e0, 0x000001559387d1d8]
+Event: 18.452 Thread 0x00000155aeb38800 5063       3       javafx.scene.Node::impl_processCSS (55 bytes)
+Event: 18.452 Thread 0x00000155aeb38800 nmethod 5063 0x0000015593426190 code [0x0000015593426340, 0x0000015593426ad0]
+Event: 18.452 Thread 0x00000155aeb58000 5064       3       javafx.scene.layout.CornerRadii::<init> (313 bytes)
+Event: 18.452 Thread 0x00000155aeb28000 5065       3       javafx.scene.layout.CornerRadii::preComputeHash (420 bytes)
+Event: 18.452 Thread 0x00000155aeb58000 nmethod 5064 0x0000015593424fd0 code [0x00000155934251a0, 0x0000015593425f00]
+Event: 18.453 Thread 0x00000155aeb28000 nmethod 5065 0x0000015593423910 code [0x0000015593423b20, 0x0000015593424dd8]
+
+GC Heap History (10 events):
+Event: 15.451 GC heap before
+{Heap before GC invocations=19 (full 1):
+ PSYoungGen      total 587264K, used 529760K [0x000000076b200000, 0x000000079af80000, 0x00000007c0000000)
+  eden space 529408K, 100% used [0x000000076b200000,0x000000078b700000,0x000000078b700000)
+  from space 57856K, 0% used [0x0000000793e80000,0x0000000793ed8000,0x0000000797700000)
+  to   space 55296K, 0% used [0x0000000797980000,0x0000000797980000,0x000000079af80000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+Event: 15.452 GC heap after
+Heap after GC invocations=19 (full 1):
+ PSYoungGen      total 507392K, used 416K [0x000000076b200000, 0x0000000797a00000, 0x00000007c0000000)
+  eden space 506880K, 0% used [0x000000076b200000,0x000000076b200000,0x000000078a100000)
+  from space 512K, 81% used [0x0000000797980000,0x00000007979e8000,0x0000000797a00000)
+  to   space 52224K, 0% used [0x0000000791400000,0x0000000791400000,0x0000000794700000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+}
+Event: 16.193 GC heap before
+{Heap before GC invocations=20 (full 1):
+ PSYoungGen      total 507392K, used 507296K [0x000000076b200000, 0x0000000797a00000, 0x00000007c0000000)
+  eden space 506880K, 100% used [0x000000076b200000,0x000000078a100000,0x000000078a100000)
+  from space 512K, 81% used [0x0000000797980000,0x00000007979e8000,0x0000000797a00000)
+  to   space 52224K, 0% used [0x0000000791400000,0x0000000791400000,0x0000000794700000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+Event: 16.194 GC heap after
+Heap after GC invocations=20 (full 1):
+ PSYoungGen      total 537600K, used 352K [0x000000076b200000, 0x0000000797a00000, 0x00000007c0000000)
+  eden space 485376K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000788c00000)
+  from space 52224K, 0% used [0x0000000791400000,0x0000000791458000,0x0000000794700000)
+  to   space 49664K, 0% used [0x0000000794980000,0x0000000794980000,0x0000000797a00000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+}
+Event: 17.005 GC heap before
+{Heap before GC invocations=21 (full 1):
+ PSYoungGen      total 537600K, used 485728K [0x000000076b200000, 0x0000000797a00000, 0x00000007c0000000)
+  eden space 485376K, 100% used [0x000000076b200000,0x0000000788c00000,0x0000000788c00000)
+  from space 52224K, 0% used [0x0000000791400000,0x0000000791458000,0x0000000794700000)
+  to   space 49664K, 0% used [0x0000000794980000,0x0000000794980000,0x0000000797a00000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+Event: 17.006 GC heap after
+Heap after GC invocations=21 (full 1):
+ PSYoungGen      total 465408K, used 384K [0x000000076b200000, 0x0000000794a00000, 0x00000007c0000000)
+  eden space 464896K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000787800000)
+  from space 512K, 75% used [0x0000000794980000,0x00000007949e0000,0x0000000794a00000)
+  to   space 46592K, 0% used [0x000000078ef00000,0x000000078ef00000,0x0000000791c80000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17973K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+}
+Event: 17.668 GC heap before
+{Heap before GC invocations=22 (full 1):
+ PSYoungGen      total 465408K, used 465280K [0x000000076b200000, 0x0000000794a00000, 0x00000007c0000000)
+  eden space 464896K, 100% used [0x000000076b200000,0x0000000787800000,0x0000000787800000)
+  from space 512K, 75% used [0x0000000794980000,0x00000007949e0000,0x0000000794a00000)
+  to   space 46592K, 0% used [0x000000078ef00000,0x000000078ef00000,0x0000000791c80000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17975K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+Event: 17.669 GC heap after
+Heap after GC invocations=22 (full 1):
+ PSYoungGen      total 492032K, used 416K [0x000000076b200000, 0x0000000794a00000, 0x00000007c0000000)
+  eden space 445440K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000786500000)
+  from space 46592K, 0% used [0x000000078ef00000,0x000000078ef68000,0x0000000791c80000)
+  to   space 44032K, 0% used [0x0000000791f00000,0x0000000791f00000,0x0000000794a00000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 17975K, capacity 18722K, committed 18944K, reserved 1064960K
+  class space    used 2293K, capacity 2511K, committed 2560K, reserved 1048576K
+}
+Event: 18.149 GC heap before
+{Heap before GC invocations=23 (full 1):
+ PSYoungGen      total 492032K, used 445856K [0x000000076b200000, 0x0000000794a00000, 0x00000007c0000000)
+  eden space 445440K, 100% used [0x000000076b200000,0x0000000786500000,0x0000000786500000)
+  from space 46592K, 0% used [0x000000078ef00000,0x000000078ef68000,0x0000000791c80000)
+  to   space 44032K, 0% used [0x0000000791f00000,0x0000000791f00000,0x0000000794a00000)
+ ParOldGen       total 269824K, used 137969K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbc520,0x00000006d1d80000)
+ Metaspace       used 18350K, capacity 19056K, committed 19200K, reserved 1067008K
+  class space    used 2315K, capacity 2524K, committed 2560K, reserved 1048576K
+Event: 18.151 GC heap after
+Heap after GC invocations=23 (full 1):
+ PSYoungGen      total 428544K, used 1152K [0x000000076b200000, 0x0000000792080000, 0x00000007c0000000)
+  eden space 427008K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000785300000)
+  from space 1536K, 75% used [0x0000000791f00000,0x0000000792020000,0x0000000792080000)
+  to   space 41472K, 0% used [0x000000078cf80000,0x000000078cf80000,0x000000078f800000)
+ ParOldGen       total 269824K, used 137977K [0x00000006c1600000, 0x00000006d1d80000, 0x000000076b200000)
+  object space 269824K, 51% used [0x00000006c1600000,0x00000006c9cbe520,0x00000006d1d80000)
+ Metaspace       used 18350K, capacity 19056K, committed 19200K, reserved 1067008K
+  class space    used 2315K, capacity 2524K, committed 2560K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000155930b61c4 method=com.sun.javafx.sg.prism.NGRegion.hasVisuals()Z @ 17
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000015593919838 method=com.sun.javafx.sg.prism.NGRegion.hasVisuals()Z @ 17
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000155938b3458 method=com.sun.javafx.sg.prism.NGRegion.hasVisuals()Z @ 17
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x0000015593796534 method=com.sun.javafx.geom.transform.Identity.equals(Ljava/lang/Object;)Z @ 11
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x0000015593796534 method=com.sun.javafx.geom.transform.Identity.equals(Ljava/lang/Object;)Z @ 11
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x0000015593796534 method=com.sun.javafx.geom.transform.Identity.equals(Ljava/lang/Object;)Z @ 11
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001559385bb78 method=javafx.scene.Node.processCSS()V @ 44
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x0000015593796534 method=com.sun.javafx.geom.transform.Identity.equals(Ljava/lang/Object;)Z @ 11
+Event: 18.448 Thread 0x00000155af2d9000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001559385bb78 method=javafx.scene.Node.processCSS()V @ 44
+Event: 18.448 Thread 0x00000155af2d9000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001559385bb78 method=javafx.scene.Node.processCSS()V @ 44
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 7.475 Thread 0x00000155af2d9000 Implicit null exception at 0x00000155939252e5 to 0x000001559392693d
+Event: 12.822 Thread 0x00000155af2d9000 Implicit null exception at 0x0000015593986cd7 to 0x0000015593989be9
+Event: 18.061 Thread 0x00000155af2d9000 Implicit null exception at 0x000001559397361b to 0x0000015593975e49
+Event: 18.066 Thread 0x00000155af2d9000 Implicit null exception at 0x0000015592e0c1c4 to 0x0000015592e0ebf1
+Event: 18.066 Thread 0x00000155af2d9000 Implicit null exception at 0x000001559397a662 to 0x000001559397a7d8
+Event: 18.069 Thread 0x00000155be0b2800 Implicit null exception at 0x00000155933f2587 to 0x00000155933f28a9
+Event: 18.070 Thread 0x00000155be0b2800 Implicit null exception at 0x0000015593421f26 to 0x0000015593423bdd
+Event: 18.070 Thread 0x00000155be0b2800 Implicit null exception at 0x00000155932562fc to 0x0000015593256389
+Event: 18.073 Thread 0x00000155af2d9000 Implicit null exception at 0x0000015593419696 to 0x000001559341b199
+Event: 18.081 Thread 0x00000155af2d9000 Implicit null exception at 0x00000155937bf4c2 to 0x00000155937c00f9
+
+Events (10 events):
+Event: 18.447 Thread 0x00000155af2d9000 DEOPT UNPACKING pc=0x0000015592a958c3 sp=0x0000003f44f8b060 mode 2
+Event: 18.447 Thread 0x00000155af2d9000 Uncommon trap: trap_request=0xffffffc6 fr.pc=0x0000015593796534
+Event: 18.447 Thread 0x00000155af2d9000 DEOPT PACKING pc=0x0000015593796534 sp=0x0000003f44f8ac00
+Event: 18.447 Thread 0x00000155af2d9000 DEOPT UNPACKING pc=0x0000015592a958c3 sp=0x0000003f44f8ab98 mode 2
+Event: 18.448 Thread 0x00000155af2d9000 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001559385bb78
+Event: 18.448 Thread 0x00000155af2d9000 DEOPT PACKING pc=0x000001559385bb78 sp=0x0000003f44f8b0c0
+Event: 18.448 Thread 0x00000155af2d9000 DEOPT UNPACKING pc=0x0000015592a958c3 sp=0x0000003f44f8b060 mode 2
+Event: 18.448 Thread 0x00000155af2d9000 Uncommon trap: trap_request=0xffffffde fr.pc=0x000001559385bb78
+Event: 18.448 Thread 0x00000155af2d9000 DEOPT PACKING pc=0x000001559385bb78 sp=0x0000003f44f8b0c0
+Event: 18.448 Thread 0x00000155af2d9000 DEOPT UNPACKING pc=0x0000015592a958c3 sp=0x0000003f44f8b060 mode 2
+
+
+Dynamic libraries:
+0x00007ff608bb0000 - 0x00007ff608bf7000 	C:\Java\jdk1.8.0_341\bin\java.exe
+0x00007fff98e70000 - 0x00007fff99068000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007fff98c00000 - 0x00007fff98cbd000 	C:\Windows\System32\KERNEL32.DLL
+0x00007fff96a60000 - 0x00007fff96d56000 	C:\Windows\System32\KERNELBASE.dll
+0x00007fff98aa0000 - 0x00007fff98b50000 	C:\Windows\System32\ADVAPI32.dll
+0x00007fff98a00000 - 0x00007fff98a9e000 	C:\Windows\System32\msvcrt.dll
+0x00007fff98b50000 - 0x00007fff98bf0000 	C:\Windows\System32\sechost.dll
+0x00007fff97050000 - 0x00007fff97173000 	C:\Windows\System32\RPCRT4.dll
+0x00007fff966e0000 - 0x00007fff96707000 	C:\Windows\System32\bcrypt.dll
+0x00007fff98270000 - 0x00007fff9840f000 	C:\Windows\System32\USER32.dll
+0x00007fff96910000 - 0x00007fff96932000 	C:\Windows\System32\win32u.dll
+0x00007fff98d20000 - 0x00007fff98d4b000 	C:\Windows\System32\GDI32.dll
+0x00007fff96940000 - 0x00007fff96a57000 	C:\Windows\System32\gdi32full.dll
+0x00007fff96710000 - 0x00007fff967ad000 	C:\Windows\System32\msvcp_win.dll
+0x00007fff96530000 - 0x00007fff96630000 	C:\Windows\System32\ucrtbase.dll
+0x00007fff8c970000 - 0x00007fff8cc0a000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16\COMCTL32.dll
+0x00007fff972b0000 - 0x00007fff972df000 	C:\Windows\System32\IMM32.DLL
+0x00007fff8c7f0000 - 0x00007fff8c805000 	C:\Java\jdk1.8.0_341\jre\bin\vcruntime140.dll
+0x00007fff74850000 - 0x00007fff748eb000 	C:\Java\jdk1.8.0_341\jre\bin\msvcp140.dll
+0x00000000712e0000 - 0x0000000071b41000 	C:\Java\jdk1.8.0_341\jre\bin\server\jvm.dll
+0x00007fff96fe0000 - 0x00007fff96fe8000 	C:\Windows\System32\PSAPI.DLL
+0x00007fff70560000 - 0x00007fff70569000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007fff8fe20000 - 0x00007fff8fe2a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007fff984a0000 - 0x00007fff9850b000 	C:\Windows\System32\WS2_32.dll
+0x00007fff8de30000 - 0x00007fff8de57000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fff943d0000 - 0x00007fff943e2000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007fff93bb0000 - 0x00007fff93bc0000 	C:\Java\jdk1.8.0_341\jre\bin\verify.dll
+0x00007fff87330000 - 0x00007fff8735b000 	C:\Java\jdk1.8.0_341\jre\bin\java.dll
+0x00007fff87310000 - 0x00007fff87328000 	C:\Java\jdk1.8.0_341\jre\bin\zip.dll
+0x00007fff97540000 - 0x00007fff97cac000 	C:\Windows\System32\SHELL32.dll
+0x00007fff945d0000 - 0x00007fff94d6d000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007fff97f10000 - 0x00007fff98263000 	C:\Windows\System32\combase.dll
+0x00007fff95f50000 - 0x00007fff95f7e000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007fff96eb0000 - 0x00007fff96f7d000 	C:\Windows\System32\OLEAUT32.dll
+0x00007fff98d80000 - 0x00007fff98e2d000 	C:\Windows\System32\SHCORE.dll
+0x00007fff97eb0000 - 0x00007fff97f05000 	C:\Windows\System32\shlwapi.dll
+0x00007fff96460000 - 0x00007fff96484000 	C:\Windows\SYSTEM32\profapi.dll
+0x00000155af8d0000 - 0x00000155af8d3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-console-l1-1-0.dll
+0x00000155af8e0000 - 0x00000155af8e3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-console-l1-2-0.dll
+0x00000155af8f0000 - 0x00000155af8f3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-datetime-l1-1-0.dll
+0x00000155af900000 - 0x00000155af903000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-debug-l1-1-0.dll
+0x00000155af910000 - 0x00000155af913000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-errorhandling-l1-1-0.dll
+0x00000155af920000 - 0x00000155af924000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-file-l1-1-0.dll
+0x00000155af930000 - 0x00000155af933000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-file-l1-2-0.dll
+0x00000155af940000 - 0x00000155af943000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-file-l2-1-0.dll
+0x00000155af950000 - 0x00000155af953000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-handle-l1-1-0.dll
+0x00000155af960000 - 0x00000155af963000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-heap-l1-1-0.dll
+0x00000155af970000 - 0x00000155af973000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-interlocked-l1-1-0.dll
+0x00000155af980000 - 0x00000155af983000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-libraryloader-l1-1-0.dll
+0x00000155af990000 - 0x00000155af993000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-localization-l1-2-0.dll
+0x00000155af9a0000 - 0x00000155af9a3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-memory-l1-1-0.dll
+0x00000155af9b0000 - 0x00000155af9b3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-namedpipe-l1-1-0.dll
+0x00000155af9c0000 - 0x00000155af9c3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-processenvironment-l1-1-0.dll
+0x00000155af9d0000 - 0x00000155af9d3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-processthreads-l1-1-0.dll
+0x00000155af9e0000 - 0x00000155af9e3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-processthreads-l1-1-1.dll
+0x00000155af9f0000 - 0x00000155af9f3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-profile-l1-1-0.dll
+0x00000155afa00000 - 0x00000155afa03000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-rtlsupport-l1-1-0.dll
+0x00000155afa10000 - 0x00000155afa13000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-string-l1-1-0.dll
+0x00000155afa20000 - 0x00000155afa23000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-synch-l1-1-0.dll
+0x00000155afa30000 - 0x00000155afa33000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-synch-l1-2-0.dll
+0x00000155afa40000 - 0x00000155afa43000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-sysinfo-l1-1-0.dll
+0x00000155afa50000 - 0x00000155afa53000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-timezone-l1-1-0.dll
+0x00000155afa60000 - 0x00000155afa63000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-core-util-l1-1-0.dll
+0x00000155afa70000 - 0x00000155afa73000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-conio-l1-1-0.dll
+0x00000155afa80000 - 0x00000155afa84000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-convert-l1-1-0.dll
+0x00000155afa90000 - 0x00000155afa93000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-environment-l1-1-0.dll
+0x00000155afaa0000 - 0x00000155afaa3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-filesystem-l1-1-0.dll
+0x00000155afab0000 - 0x00000155afab3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-heap-l1-1-0.dll
+0x00000155afac0000 - 0x00000155afac3000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-locale-l1-1-0.dll
+0x00000155afad0000 - 0x00000155afad5000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-math-l1-1-0.dll
+0x00000155afae0000 - 0x00000155afae5000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-multibyte-l1-1-0.dll
+0x00000155afaf0000 - 0x00000155afb00000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-private-l1-1-0.dll
+0x00000155afb00000 - 0x00000155afb03000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-process-l1-1-0.dll
+0x00000155afb10000 - 0x00000155afb14000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-runtime-l1-1-0.dll
+0x00000155afb20000 - 0x00000155afb24000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-stdio-l1-1-0.dll
+0x00000155afb30000 - 0x00000155afb34000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-string-l1-1-0.dll
+0x00000155afb40000 - 0x00000155afb43000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-time-l1-1-0.dll
+0x00000155afb50000 - 0x00000155afb53000 	C:\Java\jdk1.8.0_341\jre\bin\api-ms-win-crt-utility-l1-1-0.dll
+0x00007fff5b4a0000 - 0x00007fff5b59a000 	C:\Java\jdk1.8.0_341\jre\bin\ucrtbase.dll
+0x00007fff932a0000 - 0x00007fff932ac000 	C:\Java\jdk1.8.0_341\jre\bin\vcruntime140_1.dll
+0x00007fff78d60000 - 0x00007fff78d83000 	C:\Java\jdk1.8.0_341\jre\bin\prism_d3d.dll
+0x00007fff6ed80000 - 0x00007fff6ef4e000 	C:\Windows\system32\d3d9.dll
+0x00007fff940e0000 - 0x00007fff9410f000 	C:\Windows\SYSTEM32\dwmapi.dll
+0x00007fff93e70000 - 0x00007fff93f0e000 	C:\Windows\system32\uxtheme.dll
+0x00007fff8e750000 - 0x00007fff8e80c000 	C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_866484083fc526af\nvldumdx.dll
+0x00007fff960e0000 - 0x00007fff960f2000 	C:\Windows\SYSTEM32\msasn1.dll
+0x00007fff8fee0000 - 0x00007fff8ff11000 	C:\Windows\SYSTEM32\cryptnet.dll
+0x00007fff967b0000 - 0x00007fff9690e000 	C:\Windows\System32\CRYPT32.dll
+0x00007fff8fcd0000 - 0x00007fff8fe17000 	C:\Windows\SYSTEM32\drvstore.dll
+0x00007fff962b0000 - 0x00007fff962e3000 	C:\Windows\SYSTEM32\devobj.dll
+0x00007fff96e60000 - 0x00007fff96eae000 	C:\Windows\System32\cfgmgr32.dll
+0x00007fff95ea0000 - 0x00007fff95eac000 	C:\Windows\SYSTEM32\cryptbase.dll
+0x00007fff96df0000 - 0x00007fff96e59000 	C:\Windows\System32\wintrust.dll
+0x00007fff98d60000 - 0x00007fff98d7d000 	C:\Windows\System32\imagehlp.dll
+0x00007fff95eb0000 - 0x00007fff95ec8000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x00007fff95560000 - 0x00007fff95594000 	C:\Windows\system32\rsaenh.dll
+0x00007fff96d60000 - 0x00007fff96de2000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007fff87c70000 - 0x00007fff89e5e000 	C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_866484083fc526af\nvgpucomp64.dll
+0x00007fff1b7c0000 - 0x00007fff1e185000 	C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_866484083fc526af\nvd3dumx.dll
+0x00007fff70c50000 - 0x00007fff70c92000 	C:\Java\jdk1.8.0_341\jre\bin\glass.dll
+0x00007fff97cb0000 - 0x00007fff97d8a000 	C:\Windows\System32\COMDLG32.dll
+0x00007fff97180000 - 0x00007fff972ab000 	C:\Windows\System32\ole32.dll
+0x00007fff97d90000 - 0x00007fff97ea4000 	C:\Windows\System32\MSCTF.dll
+0x00007fff40a10000 - 0x00007fff40ce0000 	C:\Windows\system32\nvspcap64.dll
+0x00007fff95680000 - 0x00007fff956b3000 	C:\Windows\SYSTEM32\ntmarta.dll
+0x00007fff94d80000 - 0x00007fff94da3000 	C:\Windows\SYSTEM32\gpapi.dll
+0x00007fff8ea70000 - 0x00007fff8eaab000 	C:\Windows\SYSTEM32\dxcore.dll
+0x00007fff75740000 - 0x00007fff75754000 	C:\Java\jdk1.8.0_341\jre\bin\javafx_font.dll
+0x00007fff7ae10000 - 0x00007fff7b08f000 	C:\Windows\SYSTEM32\dwrite.dll
+0x00007fff3aa40000 - 0x00007fff3aadf000 	C:\Java\jdk1.8.0_341\jre\bin\glib-lite.dll
+0x00007fff30a50000 - 0x00007fff30b3e000 	C:\Java\jdk1.8.0_341\jre\bin\gstreamer-lite.dll
+0x00007fff30f00000 - 0x00007fff30f9c000 	C:\Windows\SYSTEM32\DSOUND.dll
+0x00007fff70570000 - 0x00007fff70596000 	C:\Windows\SYSTEM32\winmmbase.dll
+0x00007fff95bb0000 - 0x00007fff95bfb000 	C:\Windows\SYSTEM32\powrprof.dll
+0x00007fff95a40000 - 0x00007fff95a52000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007fff74720000 - 0x00007fff74744000 	C:\Java\jdk1.8.0_341\jre\bin\jfxmedia.dll
+0x00007fff70c20000 - 0x00007fff70c50000 	C:\Java\jdk1.8.0_341\jre\bin\fxplugins.dll
+0x00007fff97490000 - 0x00007fff97539000 	C:\Windows\System32\clbcatq.dll
+0x00007fff908a0000 - 0x00007fff90925000 	C:\Windows\System32\MMDevApi.dll
+0x00007fff90930000 - 0x00007fff90ab1000 	C:\Windows\SYSTEM32\AUDIOSES.DLL
+0x00007fff93fe0000 - 0x00007fff93ff4000 	C:\Windows\SYSTEM32\resourcepolicyclient.dll
+0x00007fff6ddd0000 - 0x00007fff6ddfb000 	C:\Windows\System32\qasf.dll
+0x00007fff67250000 - 0x00007fff6725b000 	C:\Windows\System32\msdmo.dll
+0x00007fff2a7f0000 - 0x00007fff2aa49000 	C:\Windows\System32\WMVCore.DLL
+0x00007fff689f0000 - 0x00007fff68a45000 	C:\Windows\System32\WMASF.DLL
+0x00007fff4a5c0000 - 0x00007fff4a6ed000 	C:\Windows\System32\mfperfhelper.dll
+0x00007fff75590000 - 0x00007fff755ac000 	C:\Windows\System32\mp3dmod.dll
+0x00007fff58e00000 - 0x00007fff58fbc000 	C:\Windows\SYSTEM32\mfplat.DLL
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: C:\Users\Leon\OneDrive - Grafenbergschule Schorndorf\Dokumente\NetBeansProjects\Schorndorf_Invaders\dist\run147884777\Schorndorf_Invaders.jar
+java_class_path (initial): C:\Users\Leon\OneDrive - Grafenbergschule Schorndorf\Dokumente\NetBeansProjects\Schorndorf_Invaders\dist\run147884777\Schorndorf_Invaders.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Users\Leon\AppData\Local\Microsoft\WindowsApps;C:\Users\Leon\AppData\Local\Programs\Microsoft VS Code\bin;C:\intelFPGA_lite\20.1\modelsim_ase\win32aloem;C:\Program Files\Git\bin;C:\Program Files\Git\cmd;
+USERNAME=Leon
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 19041 (10.0.19041.3636)
+
+CPU:total 16 (initial active 16) (16 cores per cpu, 1 threads per core) family 23 model 113 stepping 0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 16683396k(8855720k free), swap 27693444k(16324960k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.341-b10) for windows-amd64 JRE (1.8.0_341-b10), built on Jun 16 2022 15:51:07 by "java_re" with MS VC++ 15.9 (VS2017)
+
+time: Wed Jun 26 18:14:27 2024
+timezone: Central European Summer Time
+elapsed time: 18.488887 seconds (0d 0h 0m 18s)
+

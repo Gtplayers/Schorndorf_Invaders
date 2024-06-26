@@ -112,7 +112,6 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
         {     
             if(resetDone == false)
             {
-                //System.out.println(alienLaserCounter);
                 laserCounter++;          
                 spaceship.moveShip(spaceship, canvas);
                 spaceship.updateLasers(canvas);
@@ -131,7 +130,6 @@ public class LevelOneTimer extends AnimationTimer implements EventHandler<KeyEve
                     System.err.println("IOException occurred in checkScore: " + e.getMessage());
                     e.printStackTrace();
                 }
-                System.out.println("TIMER 1 RUNNING");
                 lastCall = now;
             }
         }

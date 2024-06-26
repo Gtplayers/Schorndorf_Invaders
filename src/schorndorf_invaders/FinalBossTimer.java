@@ -6,6 +6,8 @@ package schorndorf_invaders;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
@@ -56,7 +58,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private static final int STARTING_ANIMATION_LENGTH = 250;                   // 250 on fast PC
     private int startingAnimationCounter;
     
-    private static final int ALIEN_SHOT_DELAY = 25;
+    private static final int ALIEN_SHOT_DELAY = 50;
     private int alienLaserCounter;
     
     private static final int LASER_SHOT_DELAY = 25;
@@ -89,6 +91,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     
     
     FinalBossController controller;
+    
+    private boolean winHandled = false;
     
     
     public FinalBossTimer(AnchorPane canvas, Spaceship spaceship, FinalBossController controller)
@@ -132,7 +136,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
                     checkAlienStatus();
                     canvas.getChildren().removeIf(node -> !node.isVisible());
                     checkDeath();
-                    /*try 
+                    try 
                     {
                         checkWin();     
                     } catch (IOException e) 
@@ -140,8 +144,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
                         // Handle the IOException
                         System.err.println("IOException occurred in checkScore: " + e.getMessage());
                         e.printStackTrace();
-                    }*/
-                    System.out.println("BOSS TIMER RUNNING");
+                    }
                     lastCall = now;
                 }
                 else
@@ -215,7 +218,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     { 
         if(textShown == false)
         {
-            bossHealthText.setX(canvas.getWidth()/2.1); 
+            bossHealthText.setX(canvas.getWidth()/2.05); 
             bossHealthText.setY(100); 
             bossHealthText.setFill(Color.RED); // Set the text color
             bossHealthText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
@@ -258,8 +261,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         bossHealth = monkeySoup.checkCollision(monkeySoup, lasers);
         if(dead == false && deadLaser == false)
         {
-            deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
-            dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
+            //deadLaser = spaceship.checkLaserCollision(alienLasers, spaceship);
+            //dead = spaceship.checkBossCollision(monkeySoup, spaceship);    
         }
         if(bossHealth == 0 && bossDead == false)
         {
@@ -268,16 +271,23 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
     }
     
-    public void checkWin() throws IOException
-    {
-        if(bossHealth == 0)
-        {
-            Schorndorf_Invaders.getApplication().setScene("FinalBoss.fxml");
-            controller.stopTimer();
-            System.out.println("SWITCHED SCENES");
-        }
+    public void checkWin() throws IOException {
+    if(bossHealth == 0 && !winHandled) {
+        winHandled = true; // Prevent further scene switches
+        controller.fadeOutMusic();
+        PauseTransition pause = new PauseTransition(Duration.seconds(3.1)); // Duration of the explosion 
+        pause.setOnFinished(event -> {
+            try {
+                Schorndorf_Invaders.getApplication().setScene("EndScreen.fxml");
+                controller.stopTimer();
+                System.out.println("SWITCHED SCENES");
+            } catch (IOException ex) {
+                Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        pause.play();
     }
-
+}
     public MonkeySoup getMonkeySoup() {
         return monkeySoup;
     }

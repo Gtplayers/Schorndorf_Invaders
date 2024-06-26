@@ -61,6 +61,10 @@ public class Schorndorf_Invaders extends Application {
         {
             setFinalBossBackground((FinalBossController) controller);
         }
+        else if (controller instanceof EndScreenController)     
+        {
+            setEndScreenBackground((EndScreenController) controller);
+        }
     stage.setScene(scene);
     stage.setFullScreen(true);
     stage.show();
@@ -132,6 +136,20 @@ public class Schorndorf_Invaders extends Application {
     }
      
       private void setFinalBossBackground(FinalBossController controller) {
+        // Load the image
+        Image image = new Image("/res/backgrounds/spaceBackground.png");
+
+        // Create a BackgroundSize object
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+
+        // Create a BackgroundImage object
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+
+        // Set the background of the pane
+        controller.getCanvas().setBackground(new Background(backgroundImage));
+    }
+      
+      private void setEndScreenBackground(EndScreenController controller) {
         // Load the image
         Image image = new Image("/res/backgrounds/spaceBackground.png");
 

@@ -126,7 +126,6 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
                     System.err.println("IOException occurred in checkScore: " + e.getMessage());
                     e.printStackTrace();
                 }
-                System.out.println("TIMER 2 RUNNING");
                 lastCall = now;
             }
         }
