@@ -30,67 +30,84 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
+/*
+ * This class serves as the controller for the Level Three scene of a space-invader-style game.
+ * It manages game initialization, user interactions, and game state updates.
+ */
 public class LevelThreeController implements Initializable {
 
+    // FXML annotations link these variables to their respective components in the FXML file.
     @FXML
-    private AnchorPane canvas;
+    private AnchorPane canvas; // The main game area where game elements are displayed.
     @FXML
-    private Button startGameButton;
+    private Button startGameButton; // Button to start the game.
     @FXML
-    private Button pauseButton;
+    private Button pauseButton; // Button to pause the game.
     @FXML
-    private Button resumeButton;
+    private Button resumeButton; // Button to resume the game.
     @FXML
-    private Rectangle backgroundRectangle; // Ensure this matches the fx:id in your FXML
+    private Rectangle backgroundRectangle; // Background for the game area, used for visual effects.
+
+    // Spaceship object for the player's character.
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
+    // Black screen for transition effects.
     Image black = new Image("/res/blackScreen.jpg");
     ImageView blackScreen = new ImageView(black);
     
-    
+    // Timer object to manage game updates and timing.
     private LevelThreeTimer timer = null;
     
+    // Array to hold alien objects, with a maximum defined by MAX_ALIENS.
     private static final int MAX_ALIENS = 10;
     Alien[] aliens = new Alien[MAX_ALIENS];
     
+    // Text object to display the score, and an integer to keep track of the score.
     private Text scoreText = new Text();
     private int score = 0;
     
+    // Flag to indicate whether the game has been reset.
     private boolean resetDone = true;
     
+    // Returns the main game canvas.
     public Pane getCanvas() {
         return canvas;
     }
     
+    // Starts the game when the move action is triggered.
     public void handleMoveAction(ActionEvent event)
     {
         startGame();
     }
     
+    // Stops the game timer, effectively pausing the game.
     public void handleStoppAction(ActionEvent event)
     {
         timer.stop();
     }
     
+    // Resumes the game by starting the timer again.
     public void handleResumeAction(ActionEvent event)
     {      
         timer.start();
     }
 
+    // Handles laser shot actions triggered by mouse events.
     public void handleLaserShot(MouseEvent event)
     {
         if(timer != null)
         {
             timer.handle(event); 
-        }
-               
+        }               
     }
     
+    // Stops the game timer.
     public void stopTimer()
     {
         timer.stop();
     }
     
+    // Updates the score, displays it, and manages game progression based on the score.
     public void updateScore() 
     {
         score++;
@@ -106,6 +123,7 @@ public class LevelThreeController implements Initializable {
         }
     }
     
+    // Displays aliens on the canvas.
     public void showAliens()
     {
         aliens = timer.getAliens();
@@ -120,38 +138,41 @@ public class LevelThreeController implements Initializable {
         System.out.println("GENERATED ALIENS");
     }
     
+    // Resets the game to its initial state.
     public void resetGame() {
-    canvas.getChildren().removeIf(node -> !node.isVisible());
-    canvas.getChildren().clear(); // Clear the canvas of any existing game elements
-    resetDone = true;
-    startGameButton.setVisible(true); // Show the start button again
-    canvas.getChildren().add(startGameButton);
-    canvas.getChildren().add(pauseButton);
-    canvas.getChildren().add(resumeButton);
-    startGameButton.requestFocus();
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+        canvas.getChildren().clear(); // Clear the canvas of any existing game elements
+        resetDone = true;
+        startGameButton.setVisible(true); // Show the start button again
+        canvas.getChildren().add(startGameButton);
+        canvas.getChildren().add(pauseButton);
+        canvas.getChildren().add(resumeButton);
+        startGameButton.requestFocus();
 
-    spaceship.reset(); // Reset spaceship state
+        spaceship.reset(); // Reset spaceship state
 
-    if (timer != null) {
-        timer.stop(); // Stop the animation timer if it's running
-        timer.setDead(false); // Reset dead flag in animation timer
-        timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
-        timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
-        timer.setResetDone(resetDone); 
-        timer.initializeAliens(); // Reinitialize aliens
+        if (timer != null) {
+            timer.stop(); // Stop the animation timer if it's running
+            timer.setDead(false); // Reset dead flag in animation timer
+            timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+            timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+            timer.setResetDone(resetDone); 
+            timer.initializeAliens(); // Reinitialize aliens
+        }
+
+        score = 0; // Reset the score
+        scoreText.setText("Score: 0"); // Update the score display
+        backgroundRectangle.widthProperty().bind(canvas.widthProperty());
+        backgroundRectangle.heightProperty().bind(canvas.heightProperty());
+        if (!canvas.getChildren().contains(backgroundRectangle)) 
+            {
+                canvas.getChildren().add(backgroundRectangle);
+            }
+            backgroundRectangle.toFront();
+            backgroundRectangle.setMouseTransparent(true);
     }
 
-    score = 0; // Reset the score
-    scoreText.setText("Score: 0"); // Update the score display
-    backgroundRectangle.widthProperty().bind(canvas.widthProperty());
-    backgroundRectangle.heightProperty().bind(canvas.heightProperty());
-    if (!canvas.getChildren().contains(backgroundRectangle)) 
-        {
-            canvas.getChildren().add(backgroundRectangle);
-        }
-        backgroundRectangle.toFront();
-        backgroundRectangle.setMouseTransparent(true);
-}
+    // Initializes and starts the game.
     public void startGame()
     {
         backgroundRectangle.widthProperty().bind(canvas.widthProperty());
@@ -160,8 +181,6 @@ public class LevelThreeController implements Initializable {
         canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
         spaceship.setFitWidth(88.5);
-        //spaceship.setFitWidth(1600);          TITLE SIZE
-        //spaceship.setFitHeight(89);           TITLE SIZE
         spaceship.setY(canvas.getHeight() - 130);
         spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
         spaceship.setSmooth(true);
@@ -187,8 +206,6 @@ public class LevelThreeController implements Initializable {
         }
         backgroundRectangle.toFront();
         backgroundRectangle.setMouseTransparent(true);
-
-    // Set the Rectangle's opacity to create the underwater effect
         
         startGameButton.setVisible(false);
         if (canvas != null) {
@@ -197,6 +214,8 @@ public class LevelThreeController implements Initializable {
         timer.setResetDone(resetDone);
         timer.start();
     }
+
+    // Handles key press events for resetting the game.
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
     {
@@ -205,35 +224,36 @@ public class LevelThreeController implements Initializable {
         }     
     } 
     
+    // Initializes the controller and sets up the game environment.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
         pauseButton.getStyleClass().add("button_control");
         resumeButton.getStyleClass().add("button_control");
-    blackScreen.setOpacity(1.0);
+        blackScreen.setOpacity(1.0);
 
-    // Bind blackScreen size to canvas size
-    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
-    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+        // Bind blackScreen size to canvas size
+        blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+        blackScreen.fitHeightProperty().bind(canvas.heightProperty());
 
-    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
-    fadeInTransition.setFromValue(1.0);
-    fadeInTransition.setToValue(0.0);
-    fadeInTransition.play();
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+        fadeInTransition.setFromValue(1.0);
+        fadeInTransition.setToValue(0.0);
+        fadeInTransition.play();
 
-    canvas.getChildren().add(blackScreen);
-    blackScreen.setMouseTransparent(true);
+        canvas.getChildren().add(blackScreen);
+        blackScreen.setMouseTransparent(true);
 
-    // Bind the rectangle's width and height properties to the AnchorPane's width and height properties
-    backgroundRectangle.widthProperty().bind(canvas.widthProperty());
-    backgroundRectangle.heightProperty().bind(canvas.heightProperty());
-    backgroundRectangle.toFront();
-    backgroundRectangle.setMouseTransparent(true);
-    resetDone = true;
-        
+        // Bind the rectangle's width and height properties to the AnchorPane's width and height properties
+        backgroundRectangle.widthProperty().bind(canvas.widthProperty());
+        backgroundRectangle.heightProperty().bind(canvas.heightProperty());
+        backgroundRectangle.toFront();
+        backgroundRectangle.setMouseTransparent(true);
+        resetDone = true;
         // TODO
     } 
 
+    // Getter and setter for the score.
     public int getScore() {
         return score;
     }

@@ -14,34 +14,47 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
+/**
+ *
+ * @author TrogrlicLeon
+ */
+/**
+ * Main class for the Schorndorf Invaders game, extending the JavaFX Application class.
+ * This class is responsible for setting up the game's stages and scenes, including backgrounds and controllers.
+ */
 public class Schorndorf_Invaders extends Application {
 
-    private static Schorndorf_Invaders application;
-    private Stage stage;
+    private static Schorndorf_Invaders application;// Singleton instance of the game application
+    private Stage stage; // Primary stage for the game
     
-    ImageView title = new ImageView("/res/startText1.png");
-    private String currentFxml;
+    
+    ImageView title = new ImageView("/res/startText1.png");// Title image view
+    private String currentFxml; // Tracks the current FXML file being displayed
 
     @Override
     public void start(Stage stage) throws Exception {
-        application = this;
-        this.stage = stage;
+        application = this; // Initialize the singleton instance
+        this.stage = stage; // Set the primary stage
 
-        // Set the initial scene
+        // Set the initial scene to the start screen
         setScene("StartScreen.fxml");
     }
 
+    /**
+     * Sets the scene for the given FXML file.
+     * This method loads the FXML, sets the scene, and applies the appropriate background based on the controller type.
+     */
     public void setScene(String fxml) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/schorndorf_invaders/myCss.css");
-        Object controller = loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml)); // Load the FXML file
+        Parent root = loader.load(); // Load the root node from FXML
+        Scene scene = new Scene(root); // Create a new scene with the loaded root
+        scene.getStylesheets().add("/schorndorf_invaders/myCss.css"); // Add CSS stylesheet
+        Object controller = loader.getController(); // Get the controller associated with the FXML
         
-        this.currentFxml = fxml;
+        this.currentFxml = fxml; // Update the current FXML file
 
-        // Check the actual type of the controller and set the background accordingly
+        // Set the background based on the controller type
         if (controller instanceof StartScreenController) 
         {
             setStartScreenBackground((StartScreenController) controller);
@@ -74,32 +87,34 @@ public class Schorndorf_Invaders extends Application {
         {
             setCreditsBackground((CreditsScreenController) controller);
         }
-    stage.setScene(scene);
-    stage.setFullScreen(true);
-    stage.show();
+        stage.setScene(scene); // Set the scene on the stage
+        stage.setFullScreen(true); // Enable fullscreen mode
+        stage.show(); // Show the stage
     }
 
+    // Methods below are responsible for setting the background of different scenes based on the controller type.
+    // Each method loads an image, creates a BackgroundSize and BackgroundImage, and sets it as the background of the controller's canvas.
     private void setStartScreenBackground(StartScreenController controller) {
-    // Load the image
-    Image image = new Image("/res/backgrounds/spaceBackground.png");
+        // Load the image
+        Image image = new Image("/res/backgrounds/spaceBackground.png");
 
-    // Create a BackgroundSize object
-    BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+        // Create a BackgroundSize object
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
 
-    // Create a BackgroundImage object
-    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
-    // Set the background of the pane
-    controller.getCanvas().setBackground(new Background(backgroundImage));  
+        // Create a BackgroundImage object
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
+        // Set the background of the pane
+        controller.getCanvas().setBackground(new Background(backgroundImage));  
 
-    // Add a listener to the width property
-    controller.getCanvas().widthProperty().addListener((obs, oldVal, newVal) -> {
-        // This code will be executed when the width of the canvas changes
-        title.setFitWidth(newVal.doubleValue());
-        System.out.println(newVal);
-    });
+        // Add a listener to the width property
+        controller.getCanvas().widthProperty().addListener((obs, oldVal, newVal) -> {
+            // This code will be executed when the width of the canvas changes
+            title.setFitWidth(newVal.doubleValue());
+            System.out.println(newVal);
+        });
 
-    title.setY(100);      
-    controller.getCanvas().getChildren().add(title);
+        title.setY(100);      
+        controller.getCanvas().getChildren().add(title);
 }
     
     private void setLevelOneBackground(LevelOneController controller) {
@@ -200,15 +215,17 @@ public class Schorndorf_Invaders extends Application {
         controller.getCanvas().setBackground(new Background(backgroundImage));
     }
 
+     // Getter for the singleton instance of the application
     public static Schorndorf_Invaders getApplication() {
         return application;
     }
 
+    // Getter for the current FXML file being displayed
     public String getCurrentFxml() {
         return currentFxml;
     }
 
-    
+    // Main method to launch the application
     public static void main(String[] args) {
         launch(args);
     }

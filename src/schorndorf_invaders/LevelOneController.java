@@ -35,65 +35,69 @@ import javafx.util.Duration;
  *
  * @author TrogrlicLeon
  */
+/**
+ * Controller class for the Level One scene of the game.
+ * Implements Initializable to allow initialization logic after the FXML fields are injected.
+ */
 public class LevelOneController implements Initializable  {
     
+    // FXML injected fields
     @FXML
-    private AnchorPane canvas;
+    private AnchorPane canvas; // The main pane that holds other UI elements
     @FXML
-    private Button startGameButton;
+    private Button startGameButton; // Button to start the game
     @FXML
-    private Button pauseButton;
+    private Button pauseButton; // Button to pause the game
     @FXML
-    private Button resumeButton;
-    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
+    private Button resumeButton; // Button to resume the game
+    Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png"); // Player's spaceship
     
-    Image black = new Image("/res/blackScreen.jpg");
-    ImageView blackScreen = new ImageView(black);
+    Image black = new Image("/res/blackScreen.jpg"); // Background image for transitions
+    ImageView blackScreen = new ImageView(black); // ImageView for the background image
     
+    private LevelOneTimer timer = null; // Timer for game events and updates
     
-    private LevelOneTimer timer = null;
+    private static final int MAX_ALIENS = 10; // Maximum number of aliens
+    Alien[] aliens = new Alien[MAX_ALIENS]; // Array to store alien instances
     
-    private static final int MAX_ALIENS = 10;
-    Alien[] aliens = new Alien[MAX_ALIENS];
+    private Text scoreText = new Text(); // Text to display the score
+    private int score = 0; // Player's score
     
-    private Text scoreText = new Text();
-    private int score = 0;
+    private boolean resetDone = true; // Flag to check if the game was reset
     
-    private boolean resetDone = true;
-    
+    // Getter for the canvas
     public Pane getCanvas() {
         return canvas;
     }
     
-    public void handleMoveAction(ActionEvent event)
-    {
+    // Handles the action to move the spaceship
+    public void handleMoveAction(ActionEvent event) {
         startGame();
     }
     
-    public void handleStoppAction(ActionEvent event)
-    {
+    // Handles the action to stop the game
+    public void handleStoppAction(ActionEvent event) {
         timer.stop();
     }
     
-    public void handleResumeAction(ActionEvent event)
-    {      
+    // Handles the action to resume the game
+    public void handleResumeAction(ActionEvent event) {
         timer.start();
     }
 
-    public void handleLaserShot(MouseEvent event)
-    {
-        if(timer != null)
-        {
+    // Handles the action when a laser shot is fired
+    public void handleLaserShot(MouseEvent event) {
+        if(timer != null) {
             timer.handle(event); 
         }
-               
     }
     
-    public void stopTimer()
-    {
+    // Stops the game timer
+    public void stopTimer() {
         timer.stop();
     }
     
+    // Updates the score and displays it
     public void updateScore() 
     {
         score++;
@@ -109,6 +113,7 @@ public class LevelOneController implements Initializable  {
         }
     }
     
+    // Shows the aliens on the screen
     public void showAliens()
     {
         aliens = timer.getAliens();
@@ -123,38 +128,39 @@ public class LevelOneController implements Initializable  {
         System.out.println("GENERATED ALIENS");
     }
     
+    // Resets the game to its initial state
     public void resetGame() {
-    canvas.getChildren().removeIf(node -> !node.isVisible());
-    canvas.getChildren().clear(); // Clear the canvas of any existing game elements
-    resetDone = true;
-    startGameButton.setVisible(true); // Show the start button again
-    canvas.getChildren().add(startGameButton);
-    canvas.getChildren().add(pauseButton);
-    canvas.getChildren().add(resumeButton);
-    startGameButton.requestFocus();
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+        canvas.getChildren().clear(); // Clear the canvas of any existing game elements
+        resetDone = true;
+        startGameButton.setVisible(true); // Show the start button again
+        canvas.getChildren().add(startGameButton);
+        canvas.getChildren().add(pauseButton);
+        canvas.getChildren().add(resumeButton);
+        startGameButton.requestFocus();
 
-    spaceship.reset(); // Reset spaceship state
+        spaceship.reset(); // Reset spaceship state
 
-    if (timer != null) {
-        timer.stop(); // Stop the animation timer if it's running
-        timer.setDead(false); // Reset dead flag in animation timer
-        timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
-        timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
-        timer.setResetDone(resetDone); 
-        timer.initializeAliens(); // Reinitialize aliens
+        if (timer != null) {
+            timer.stop(); // Stop the animation timer if it's running
+            timer.setDead(false); // Reset dead flag in animation timer
+            timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+            timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+            timer.setResetDone(resetDone); 
+            timer.initializeAliens(); // Reinitialize aliens
+        }
+
+        score = 0; // Reset the score
+        scoreText.setText("Score: 0"); // Update the score display
     }
 
-    score = 0; // Reset the score
-    scoreText.setText("Score: 0"); // Update the score display
-}
+    // Starts the game
     public void startGame()
     {
         resetDone = false;
         canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
         spaceship.setFitWidth(88.5);
-        //spaceship.setFitWidth(1600);          TITLE SIZE
-        //spaceship.setFitHeight(89);           TITLE SIZE
         spaceship.setY(canvas.getHeight() - 130);
         spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
         spaceship.setSmooth(true);
@@ -182,6 +188,8 @@ public class LevelOneController implements Initializable  {
         timer.setResetDone(resetDone);
         timer.start();
     }
+
+    // Handles the key press for resetting the game
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
     {
@@ -190,6 +198,7 @@ public class LevelOneController implements Initializable  {
         }     
     } 
     
+    // Initializes the controller class
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         startGameButton.requestFocus();
@@ -197,25 +206,27 @@ public class LevelOneController implements Initializable  {
         resumeButton.getStyleClass().add("button_control");
         blackScreen.setOpacity(1.0);
 
-    // Bind blackScreen size to canvas size
-    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
-    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+        // Bind blackScreen size to canvas size
+        blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+        blackScreen.fitHeightProperty().bind(canvas.heightProperty());
 
-    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
-    fadeInTransition.setFromValue(1.0);
-    fadeInTransition.setToValue(0.0);
-    fadeInTransition.play();
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+        fadeInTransition.setFromValue(1.0);
+        fadeInTransition.setToValue(0.0);
+        fadeInTransition.play();
 
-    canvas.getChildren().add(blackScreen);
-    blackScreen.setMouseTransparent(true);
+        canvas.getChildren().add(blackScreen);
+        blackScreen.setMouseTransparent(true);
         resetDone = true;
         // TODO
     } 
 
+    // Getter for score
     public int getScore() {
         return score;
     }
 
+    // Setter for score
     public void setScore(int score) {
         this.score = score;
     }

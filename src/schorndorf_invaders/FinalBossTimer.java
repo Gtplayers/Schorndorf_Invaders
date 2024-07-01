@@ -28,35 +28,49 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
+/*
+ * This class represents the animation timer for the final boss battle in a game. It handles the game logic for the final boss encounter, including movement, shooting, health management, and win/loss conditions.
+ */
 public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEvent>{
     
     private static final long INTERVAL = 1l;
-//                                       1l; -> schellste Bewegung
-//                                       10_000_000l;    -> 1/100 Sekunde
-//                                       100_000_000l;   -> 1/10  Sekunde
-//                                       1_000_a000_000l; -> 1     Sekunde
+//                                       1l; -> fastest refresh rate
+//                                       10_000_000l;    -> 1/100 second
+//                                       100_000_000l;   -> 1/10  second
+//                                       1_000_a000_000l; -> 1     second
+
+    // The main canvas where the game is drawn
     private AnchorPane canvas = null;
 
+    // Timestamp of the last call to handle()
     private long lastCall = 0;
     
+    // Flags to track the death state of the player and the laser
     private boolean dead = false;
     private boolean deadLaser = false;
+    
+    // Flag to check if the death screen has been added
     private boolean deathScreenAdded = false;
+    
+    // Flag to check if the game has been reset
     private boolean resetDone = true;
     
+    // Array of lasers in the game
     Laser[] lasers;
     
+    // The player's spaceship
     Spaceship spaceship;
     
+    // Image and ImageView for the death screen
     Image death = new Image("/res/youDied.jpg");
     ImageView deathScreen = new ImageView(death);
-   
     
+    // Variables for managing movement and timing
     private int movement;
     private static final int MOVEMENT_CHANGE_DELAY = 100;
     private int movementCounter;
     
-    private static final int STARTING_ANIMATION_LENGTH = 250;                   // 250 on fast PC
+    private static final int STARTING_ANIMATION_LENGTH = 250;           //NOTE: Value is 250 only on faster Computers, otherwise decrease
     private int startingAnimationCounter;
     
     private static final int ALIEN_SHOT_DELAY = 50;
@@ -65,20 +79,26 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private static final int LASER_SHOT_DELAY = 25;
     private int laserCounter;
     
+    // Boss health management
     private int bossHealth = 20;
     private boolean bossDead;
        
+    // Text elements for displaying reset information and boss health
     private Text resetText = new Text();
     private Text bossHealthText = new Text();
     
+    // Flag to check if the boss health text is shown
     boolean textShown;
     
+    // Flag and resources for playing the evil laugh sound
     private boolean laughPlayed;
     URL laughResource = getClass().getResource("/res/sounds/laughSounds/evilLaugh2.mp3");
     AudioClip evilLaugh = new AudioClip(laughResource.toString());
     
+    // The final boss character
     MonkeySoup monkeySoup = new MonkeySoup("/res/sprites/monkeySoupBoss.png");  
     
+    // Resources for playing the death sound and displaying explosion animations
     URL resource = getClass().getResource("/res/sounds/explosionSounds/explosion3.wav");
     AudioClip deathSound = new AudioClip(resource.toString());
     
@@ -91,11 +111,13 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     ImageView bossExplosionImageView = new ImageView(bossExplosionGif);
     
     
+    // Reference to the final boss controller
     FinalBossController controller;
     
+    // Flag to check if the win condition has been handled
     private boolean winHandled = false;
     
-    
+    // Constructor initializes the game state for the final boss battle
     public FinalBossTimer(AnchorPane canvas, Spaceship spaceship, FinalBossController controller)
     {
         this.canvas = canvas;
@@ -105,12 +127,14 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         initializeBoss();
     }
 
+    // Handles keyboard input for controlling the spaceship
     @Override
     public void handle(KeyEvent event)
     {
         spaceship.checkDirection(event);       
     }
 
+    // Handles mouse input for shooting lasers
     public void handle(MouseEvent event)
     {
         if (laserCounter >= LASER_SHOT_DELAY)
@@ -119,6 +143,8 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
             laserCounter = 0;
         }
     }
+
+    // Main game loop, called at each frame
     @Override
     public void handle(long now)
     {  
@@ -159,6 +185,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
     }
 
+    // Plays the evil laugh sound once
     public void playEvilLaugh()
     {
         if(laughPlayed == false)
@@ -168,6 +195,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
     }
     
+    // Initializes the boss character
     public void initializeBoss() { 
         if(monkeySoup == null)
         {
@@ -175,6 +203,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }       
     }
     
+    // Checks and handles the player's death
     public void checkDeath()
     {
         if((dead || deadLaser) && !deathScreenAdded)
@@ -215,6 +244,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
     }
     
+    // Displays the boss health text
     public void showBossHealthText()
     { 
         if(textShown == false)
@@ -229,11 +259,13 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         textShown = true;
     }
 
+    // Updates the boss health text
     public void updateBossHealthText()
     {
         bossHealthText.setText("Boss Health: " +  bossHealth);
     }
     
+    // Checks the status of aliens and handles collisions
     public void checkAlienStatus()
     {
         Laser[] alienLasers = monkeySoup.getLasers();
@@ -272,23 +304,26 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
         }
     }
     
+    // Checks if the player has won and handles the win condition
     public void checkWin() throws IOException {
-    if(bossHealth == 0 && !winHandled) {
-        winHandled = true; // Prevent further scene switches
-        controller.fadeOutMusic();
-        PauseTransition pause = new PauseTransition(Duration.seconds(3.1)); // Duration of the explosion 
-        pause.setOnFinished(event -> {
-            try {
-                Schorndorf_Invaders.getApplication().setScene("EndScreen.fxml");
-                controller.stopTimer();
-                System.out.println("SWITCHED SCENES");
-            } catch (IOException ex) {
-                Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        pause.play();
+        if(bossHealth == 0 && !winHandled) {
+            winHandled = true; // Prevent further scene switches
+            controller.fadeOutMusic();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3.1)); // Duration of the explosion 
+            pause.setOnFinished(event -> {
+                try {
+                    Schorndorf_Invaders.getApplication().setScene("EndScreen.fxml");
+                    controller.stopTimer();
+                    System.out.println("SWITCHED SCENES");
+                } catch (IOException ex) {
+                    Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            pause.play();
+        }
     }
-}
+
+    // Getter and setter methods
     public MonkeySoup getMonkeySoup() {
         return monkeySoup;
     }

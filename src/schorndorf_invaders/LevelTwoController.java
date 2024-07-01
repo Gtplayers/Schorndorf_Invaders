@@ -29,8 +29,10 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
+// Implements Initializable for FXML loading.
 public class LevelTwoController implements Initializable {
 
+    // UI components from the FXML file.
     @FXML
     private AnchorPane canvas;
     @FXML
@@ -39,55 +41,60 @@ public class LevelTwoController implements Initializable {
     private Button pauseButton;
     @FXML
     private Button resumeButton;
+    // Player's spaceship object.
     Spaceship spaceship = new Spaceship("/res/sprites/spaceship.png");
     
+    // Background image for transition effects.
     Image black = new Image("/res/blackScreen.jpg");
     ImageView blackScreen = new ImageView(black);
     
-    
+    // Timer for game logic updates.
     private LevelTwoTimer timer = null;
     
+    // Alien array to manage alien objects in the game.
     private static final int MAX_ALIENS = 10;
     Alien[] aliens = new Alien[MAX_ALIENS];
     
+    // Text object to display the score.
     private Text scoreText = new Text();
     private int score = 0;
     
+    // Flag to track if the game has been reset.
     private boolean resetDone = true;
     
+    // Returns the main game canvas.
     public Pane getCanvas() {
         return canvas;
     }
     
-    public void handleMoveAction(ActionEvent event)
-    {
+    // Starts the game when the move action is triggered.
+    public void handleMoveAction(ActionEvent event) {
         startGame();
     }
     
-    public void handleStoppAction(ActionEvent event)
-    {
+    // Stops the game timer.
+    public void handleStoppAction(ActionEvent event) {
         timer.stop();
     }
     
-    public void handleResumeAction(ActionEvent event)
-    {      
+    // Resumes the game timer.
+    public void handleResumeAction(ActionEvent event) {
         timer.start();
     }
 
-    public void handleLaserShot(MouseEvent event)
-    {
-        if(timer != null)
-        {
+    // Handles laser shooting actions.
+    public void handleLaserShot(MouseEvent event) {
+        if(timer != null) {
             timer.handle(event); 
-        }
-               
+        }               
     }
     
-    public void stopTimer()
-    {
+    // Stops the game timer.
+    public void stopTimer() {
         timer.stop();
     }
     
+    // Updates the score and manages game state based on score.
     public void updateScore() 
     {
         score++;
@@ -103,6 +110,7 @@ public class LevelTwoController implements Initializable {
         }
     }
     
+    // Displays aliens on the canvas.
     public void showAliens()
     {
         aliens = timer.getAliens();
@@ -117,38 +125,39 @@ public class LevelTwoController implements Initializable {
         System.out.println("GENERATED ALIENS");
     }
     
+    // Resets the game to its initial state.
     public void resetGame() {
-    canvas.getChildren().removeIf(node -> !node.isVisible());
-    canvas.getChildren().clear(); // Clear the canvas of any existing game elements
-    resetDone = true;
-    startGameButton.setVisible(true); // Show the start button again
-    canvas.getChildren().add(startGameButton);
-    canvas.getChildren().add(pauseButton);
-    canvas.getChildren().add(resumeButton);
-    startGameButton.requestFocus();
+        canvas.getChildren().removeIf(node -> !node.isVisible());
+        canvas.getChildren().clear(); // Clear the canvas of any existing game elements
+        resetDone = true;
+        startGameButton.setVisible(true); // Show the start button again
+        canvas.getChildren().add(startGameButton);
+        canvas.getChildren().add(pauseButton);
+        canvas.getChildren().add(resumeButton);
+        startGameButton.requestFocus();
 
-    spaceship.reset(); // Reset spaceship state
+        spaceship.reset(); // Reset spaceship state
+        
+        if (timer != null) {
+            timer.stop(); // Stop the animation timer if it's running
+            timer.setDead(false); // Reset dead flag in animation timer
+            timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
+            timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
+            timer.setResetDone(resetDone); 
+            timer.initializeAliens(); // Reinitialize aliens
+        }
 
-    if (timer != null) {
-        timer.stop(); // Stop the animation timer if it's running
-        timer.setDead(false); // Reset dead flag in animation timer
-        timer.setDeadLaser(false); // Reset deadLaser flag in animation timer
-        timer.setDeathScreenAdded(false); // Reset deathScreenAdded flag in animation timer
-        timer.setResetDone(resetDone); 
-        timer.initializeAliens(); // Reinitialize aliens
+        score = 0; // Reset the score
+        scoreText.setText("Score: 0"); // Update the score display
     }
 
-    score = 0; // Reset the score
-    scoreText.setText("Score: 0"); // Update the score display
-}
+    // Initializes and starts the game.
     public void startGame()
     {
         resetDone = false;
         canvas.getChildren().removeIf(node -> !node.isVisible());
         spaceship.setFitHeight(112.5);
         spaceship.setFitWidth(88.5);
-        //spaceship.setFitWidth(1600);          TITLE SIZE
-        //spaceship.setFitHeight(89);           TITLE SIZE
         spaceship.setY(canvas.getHeight() - 130);
         spaceship.setX(canvas.getWidth() - canvas.getWidth() / 1.87);
         spaceship.setSmooth(true);
@@ -176,6 +185,8 @@ public class LevelTwoController implements Initializable {
         timer.setResetDone(resetDone);
         timer.start();
     }
+
+    // Handles key press for resetting the game.
     @FXML
     public void handleResetKeyPressed(KeyEvent event) 
     {
@@ -184,28 +195,32 @@ public class LevelTwoController implements Initializable {
         }     
     } 
     
+    // Initializes UI components and sets up the game environment.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        canvas.getChildren().removeIf(node -> !node.isVisible());
         startGameButton.requestFocus();
         pauseButton.getStyleClass().add("button_control");
         resumeButton.getStyleClass().add("button_control");
         blackScreen.setOpacity(1.0);
 
-    // Bind blackScreen size to canvas size
-    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
-    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+        // Bind blackScreen size to canvas size
+        blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+        blackScreen.fitHeightProperty().bind(canvas.heightProperty());
 
-    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
-    fadeInTransition.setFromValue(1.0);
-    fadeInTransition.setToValue(0.0);
-    fadeInTransition.play();
+        // Fade transition for blackScreen
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+        fadeInTransition.setFromValue(1.0);
+        fadeInTransition.setToValue(0.0);
+        fadeInTransition.play();
 
-    canvas.getChildren().add(blackScreen);
-    blackScreen.setMouseTransparent(true);
+        canvas.getChildren().add(blackScreen);
+        blackScreen.setMouseTransparent(true);
         resetDone = true;
         // TODO
     } 
 
+    // Getters and setters for score.
     public int getScore() {
         return score;
     }

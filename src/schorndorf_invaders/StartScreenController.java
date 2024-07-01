@@ -33,48 +33,53 @@ import javafx.util.Duration;
  *
  * @author TrogrlicLeon
  */
+// Controller class for the start screen of the game
 public class StartScreenController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    // FXML annotations to inject JavaFX components defined in FXML file
     @FXML
-    private AnchorPane canvas;
+    private AnchorPane canvas; // The main pane that holds other UI elements
     
     @FXML
-    private Button startButton;
+    private Button startButton; // Button to start the game
     
     @FXML
-    private Button controlsButton;
-     
+    private Button controlsButton; // Button to show game controls
+    
     @FXML
-    private Button aboutButton;
+    private Button aboutButton; // Button to show about information
     
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer; // MediaPlayer to play background music
     
+    // Image for transition effect
     Image black = new Image("/res/blackScreen.jpg");
-    ImageView blackScreen = new ImageView(black);
+    ImageView blackScreen = new ImageView(black); // ImageView to display the black image
 
+    // Getter method for canvas
     public AnchorPane getCanvas() {
         return canvas;
     }
 
-     public void handlePlay(ActionEvent event) throws IOException
+    // Handles the action when the play button is clicked
+    public void handlePlay(ActionEvent event) throws IOException
     {
-        blackScreen.setOpacity(0.0);
+        blackScreen.setOpacity(0.0);    // Set initial opacity to 0 for fade in effect
+        // Create a fade in transition for the black screen
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
             fadeInTransition.setFromValue(0.0);
             fadeInTransition.setToValue(1.0);
             fadeInTransition.play();
+            // Adjust the size of the black screen to match the canvas
             blackScreen.setFitHeight(canvas.getHeight());
             blackScreen.setFitWidth(canvas.getWidth());
-            canvas.getChildren().add(blackScreen);
+            canvas.getChildren().add(blackScreen);  // Add the black screen to the canvas
+            // Pause transition to delay the scene switch
             PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
             pause.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent events) {
                 try {
-                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");
+                    Schorndorf_Invaders.getApplication().setScene("LevelOne.fxml");         // Switch to LevelOne scene
                     System.out.println("SWITCHED SCENES");
                 } catch (IOException ex) {
                     Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,10 +87,11 @@ public class StartScreenController implements Initializable {
             }
         });
         pause.play();
-        fadeOutMusic();
+        fadeOutMusic();             // Fade out the music before switching scenes
     }
      
-      public void handleControls(ActionEvent event)
+    // Similar methods for handling controls and about button actions with different scene switches
+    public void handleControls(ActionEvent event)
     {
         blackScreen.setOpacity(0.0);
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
@@ -136,14 +142,14 @@ public class StartScreenController implements Initializable {
         pause.play();
         fadeOutMusic();
     }
-       
+       // Method to play background music
        public void playMusic(String musicFile) {
     try {
         URL musicFileUrl = getClass().getResource(musicFile);
         if (musicFileUrl != null) {
             Media media = new Media(musicFileUrl.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setVolume(0.3);
+            mediaPlayer.setVolume(0.3); // Set volume to 30%
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music indefinitely
             mediaPlayer.play();
         } else {
@@ -153,7 +159,7 @@ public class StartScreenController implements Initializable {
         e.printStackTrace();
     }
 }
-       
+       // Method to fade out the music with a timeline animation 
        public void fadeOutMusic() {
     if (mediaPlayer != null) {
         final double startVolume = mediaPlayer.getVolume();
@@ -165,13 +171,14 @@ public class StartScreenController implements Initializable {
         fadeOut.play();
     }
 }
-       
+    // Initialize method called after all @FXML annotated members have been injected   
     @Override
-    public void initialize(URL url, ResourceBundle rb) {   
+    public void initialize(URL url, ResourceBundle rb) {  
+        // Set CSS classes for buttons 
         startButton.getStyleClass().add("button_start");
         controlsButton.getStyleClass().add("button_controls");
         aboutButton.getStyleClass().add("button_about");
-        playMusic("/res/sounds/musicSounds/menuTheme2.mp3");
+        playMusic("/res/sounds/musicSounds/menuTheme2.mp3");    // Play background music
         // TODO
     }  
 }

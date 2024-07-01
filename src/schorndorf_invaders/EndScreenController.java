@@ -33,39 +33,49 @@ import javafx.util.Duration;
  *
  * @author Leon
  */
+/**
+ * Controller class for the end screen of the game.
+ * Implements Initializable to allow initialization logic after the FXML fields are injected.
+ */
 public class EndScreenController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+ // FXML injected fields
     @FXML
-    private AnchorPane canvas;
+    private AnchorPane canvas; // The main pane that holds other UI elements
     
     @FXML
-    private Button menuButton;
+    private Button menuButton; // Button to navigate back to the menu
     
+    // MediaPlayer for playing background music
     private MediaPlayer mediaPlayer;
     
-    Image black = new Image("/res/blackScreen.jpg");
-    ImageView blackScreen = new ImageView(black);
+    // Images for the end screen
+    Image black = new Image("/res/blackScreen.jpg"); // Background image
+    ImageView blackScreen = new ImageView(black); // ImageView for the background image
 
+    // Getter for the canvas
     public AnchorPane getCanvas() {
         return canvas;
     }
 
-     public void handlePlay(ActionEvent event) throws IOException
+    /**
+     * Handles the action when the menu button is clicked.
+     * Initiates a fade transition effect and switches to the StartScreen scene.
+     */
+    public void handlePlay(ActionEvent event) throws IOException
     {
-        blackScreen.setOpacity(0.0);
+        blackScreen.setOpacity(0.0);    // Set initial opacity for fade in effect
+        // Create and play a fade in transition for the black screen
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
             fadeInTransition.setFromValue(0.0);
             fadeInTransition.setToValue(1.0);
             fadeInTransition.play();
+            // Pause transition to delay the scene switch
             PauseTransition pause = new PauseTransition(Duration.seconds(3.1));
             pause.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent events) {
                 try {
-                    Schorndorf_Invaders.getApplication().setScene("StartScreen.fxml");
+                    Schorndorf_Invaders.getApplication().setScene("StartScreen.fxml");      // Switch to StartScreen scene
                     System.out.println("SWITCHED SCENES");
                 } catch (IOException ex) {
                     Logger.getLogger(FinalBossTimer.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,10 +83,14 @@ public class EndScreenController implements Initializable {
             }
         });
         pause.play();
-        fadeOutMusic();
+        fadeOutMusic();     // Fade out the music before switching scenes
     }
        
-       public void playMusic(String musicFile) {
+    /**
+     * Plays the background music for the end screen.
+     * @param musicFile The path to the music file to be played
+     */
+    public void playMusic(String musicFile) {
     try {
         URL musicFileUrl = getClass().getResource(musicFile);
         if (musicFileUrl != null) {
@@ -92,8 +106,11 @@ public class EndScreenController implements Initializable {
         e.printStackTrace();
     }
 }
-       
-       public void fadeOutMusic() {
+
+    /**
+     * Fades out the currently playing music.
+     */   
+    public void fadeOutMusic() {
     if (mediaPlayer != null) {
         final double startVolume = mediaPlayer.getVolume();
         Timeline fadeOut = new Timeline(
@@ -104,24 +121,29 @@ public class EndScreenController implements Initializable {
         fadeOut.play();
     }
 }
-       
+    
+    /**
+     * Initializes the controller class.
+     * This method is called after all @FXML annotated members have been injected.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {   
-        menuButton.getStyleClass().add("button_start");
-        playMusic("/res/sounds/musicSounds/menuTheme.mp3");
-        blackScreen.setOpacity(1.0);
+        menuButton.getStyleClass().add("button_start"); // Set CSS class for the menu button
+        playMusic("/res/sounds/musicSounds/menuTheme.mp3"); // Play background music
+        blackScreen.setOpacity(1.0); // Set initial opacity for fade in effect
 
-    // Bind blackScreen size to canvas size
-    blackScreen.fitWidthProperty().bind(canvas.widthProperty());
-    blackScreen.fitHeightProperty().bind(canvas.heightProperty());
+        // Bind blackScreen size to canvas size
+        blackScreen.fitWidthProperty().bind(canvas.widthProperty());
+        blackScreen.fitHeightProperty().bind(canvas.heightProperty());
 
-    FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
-    fadeInTransition.setFromValue(1.0);
-    fadeInTransition.setToValue(0.0);
-    fadeInTransition.play();
+        // Create and play fade in transition for black screen
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
+        fadeInTransition.setFromValue(1.0);
+        fadeInTransition.setToValue(0.0);
+        fadeInTransition.play();
 
-    canvas.getChildren().add(blackScreen);
-    blackScreen.setMouseTransparent(true);
+        canvas.getChildren().add(blackScreen);// Add the black screen to the canvas
+        blackScreen.setMouseTransparent(true); // Make black screen transparent to mouse events
         // TODO
     }     
     
