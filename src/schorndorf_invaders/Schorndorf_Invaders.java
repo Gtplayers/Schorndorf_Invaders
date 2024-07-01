@@ -118,7 +118,7 @@ public class Schorndorf_Invaders extends Application {
     
      private void setLevelTwoBackground(LevelTwoController controller) {
         // Load the image
-        Image image = new Image("/res/backgrounds/moonBackground.png");
+        Image image = new Image("/res/backgrounds/moonBackgroundDark.png");
 
         // Create a BackgroundSize object
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);

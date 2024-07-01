@@ -229,9 +229,18 @@ public class Alien extends ImageView
         if (laserCount < MAX_LASERS) {
             laserCount++;
             System.out.println(laserCount);
-            lasers[laserCount - 1].setY(getY() + 10);
-            lasers[laserCount - 1].setX(getX() + 42);
-            lasers[laserCount - 1].setSmooth(true);
+            if(currentFxmlFile.equals("LevelThree.fxml"))
+            {
+                lasers[laserCount - 1].setY(getY() + 10);
+                lasers[laserCount - 1].setX(getX());
+                lasers[laserCount - 1].setSmooth(true);
+            }
+            else
+            {
+                lasers[laserCount - 1].setY(getY() + 10);
+                lasers[laserCount - 1].setX(getX() + 42);
+                lasers[laserCount - 1].setSmooth(true);
+            }
             if (!canvas.getChildren().contains(lasers[laserCount - 1])) {
                 canvas.getChildren().add(lasers[laserCount - 1]);
             }
