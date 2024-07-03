@@ -249,7 +249,7 @@ public class LevelThreeTimer extends AnimationTimer implements EventHandler<KeyE
     // Checks the player's score and updates the game state.
     public void checkScore() throws IOException
     {
-        if(score == 10)
+        if(score >= 10)
         {
             blackScreen.setOpacity(0.0);
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);

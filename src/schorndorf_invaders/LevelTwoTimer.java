@@ -252,7 +252,7 @@ public class LevelTwoTimer extends AnimationTimer implements EventHandler<KeyEve
     // Checks the player's score and handles level completion.
     public void checkScore() throws IOException
     {
-        if(score == 10)
+        if(score >= 10)
         {
             blackScreen.setOpacity(0.0);
             FadeTransition fadeInTransition = new FadeTransition(Duration.millis(3100), blackScreen);
