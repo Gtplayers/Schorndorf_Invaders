@@ -83,8 +83,7 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
     private int bossHealth = 20;
     private boolean bossDead;
        
-    // Text elements for displaying reset information and boss health
-    private Text resetText = new Text();
+    // Text element for displaying and boss health
     private Text bossHealthText = new Text();
     
     // Flag to check if the boss health text is shown
@@ -234,13 +233,6 @@ public class FinalBossTimer extends AnimationTimer implements EventHandler<KeyEv
             deathScreen.setFitWidth(canvas.getWidth());
             canvas.getChildren().add(deathScreen);
             deathScreenAdded = true;
-                
-            resetText.setX(canvas.getWidth() -  150); 
-            resetText.setY(60); 
-            resetText.setFill(Color.WHITE); // Set the text color
-            resetText.setFont(Font.font("Arial", FontWeight.BOLD, 20)); // Set the font
-            canvas.getChildren().add(resetText);
-            resetText.setText("Score: 0");
         }
     }
     
